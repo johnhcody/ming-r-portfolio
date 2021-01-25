@@ -39,16 +39,18 @@ const Article = ({ article }) => {
         <BaseLayout data={data} loading={loading}>
             <div className="article-container">
                 <h1>{article.title}</h1>
-                <img src={article.img == "" ? 'https://ming-portfolio-uploads.s3.ap-northeast-2.amazonaws.com/Mingkwan-Alt.png' : article.img} alt="" />
+                <img src={article.mainPhoto == "" ? 'https://ming-portfolio-uploads.s3.ap-northeast-2.amazonaws.com/Mingkwan-Alt.png' : article.img} alt="" />
                 <h2>{article.intro}</h2>
-                <a href={`${article.link}`}>Check Out the Original</a>
+                <a href={`${article.linkUrl}`}>{article.linkDescription}</a>
                 <p>{article.description}</p>
-                <div className="idx-itm-btn-wrapper">
-                    <Link href={`/${article._id}/edit`}>
-                        <button>Edit</button>
-                    </Link>
-                    <button onClick={handleDelete}>Delete</button>
-                </div>
+                { data && data.name == "john.haner.cody@gmail.com" ? 
+                    <div className="idx-itm-btn-wrapper">
+                        <Link href={`/${article._id}/edit`}>
+                            <button>Edit</button>
+                        </Link>
+                        <button onClick={handleDelete}>Delete</button>
+                    </div> : null
+                }
             </div>
         </BaseLayout>
         <Footer />

@@ -8,7 +8,23 @@ import { useGetUser } from '../actions/user'
 
 
 const NewArticle = () => {
-    const [form, setForm] = useState({ title: '', intro: '', description: '', img: '', link: '' });
+    const [form, setForm] = useState({ 
+        title: '', 
+        intro: '', 
+        description: '', 
+        body1: '', 
+        body2: '', 
+        body3: '', 
+        body4: '', 
+        body5: '', 
+        mainPhoto: '',
+        photo2: '',
+        photo3: '',
+        photo4: '',
+        photo5: '',
+        linkUrl: '',
+        linkDescription: ''
+    });
 
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [errors, setErrors] = useState({});
@@ -54,8 +70,9 @@ const NewArticle = () => {
             title: form.title,
             intro: form.intro,
             description: form.description,
-            img: form.img,
-            link: form.link
+            mainPhoto: form.mainPhoto,
+            linkUrl: form.linkUrl,
+            linkDescription: form.linkDescription
         })
             .then(function (response) {
                 console.log(response);
@@ -81,12 +98,12 @@ const NewArticle = () => {
         if (awsLink) {
             setForm({
                 ...form,
-                img: awsLink.innerText
+                mainPhoto: awsLink.innerText
             });
         } else {
             setForm({
                 ...form,
-                img: 'https://ming-portfolio-uploads.s3.ap-northeast-2.amazonaws.com/Mingkwan-Alt.png'
+                mainPhoto: 'https://ming-portfolio-uploads.s3.ap-northeast-2.amazonaws.com/Mingkwan-Alt.png'
             });
         }
         
@@ -107,7 +124,8 @@ const NewArticle = () => {
                         <label htmlFor="description">Description</label>
                         <textarea placeholder="Go into more detail about the project.  This will appear when people view the specific project." name="description" onChange={handleChange} />
                         <label htmlFor="link">Source Link</label>
-                        <input type="text" placeholder="Paste the URl of the original article" name="link" onChange={handleChange} />
+                        <input type="text" placeholder="Paste the URL of the original article" name="linkUrl" onChange={handleChange} />
+                        <input type="text" placeholder="How do you want the link text to appear?" name="linkDescription" onChange={handleChange} />
                         <button>Post</button>
                     </form>
                 </div>
