@@ -32,35 +32,23 @@ const NewArticle = (props: Props) => {
 
         const [isSubmitting, setIsSubmitting] = useState(false);
         const [errors, setErrors] = useState({});
-        const router = useRouter();  
-    
 
-
-    // const photo = usePhoto();
-    // const updatePhoto = usePhotoUpdate();
-
-    // const [isSubmitting, setIsSubmitting] = useState(false);
-    // const [errors, setErrors] = useState({});
-    
-    // { loading, data } = useGetUser();
-
-    // useEffect(() => {
-    //     if (isSubmitting) {
-    //         debugger
-    //         if (Object.keys(errors).length === 0) {
-    //             createArticle();
-    //         } else {
-    //             setIsSubmitting(false);
-    //         }
-    //     }
-    // }, [errors])
+    useEffect(() => {
+        if (isSubmitting) {
+            debugger
+            if (Object.keys(errors).length === 0) {
+                createArticle();
+            } else {
+                setIsSubmitting(false);
+            }
+        }
+    }, [errors])
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // let errs = this.validate();
-        // setErrors(errs);
+        let errs = validate();
+        setErrors(errs);
         const awsLink = document.getElementById('aws-link')
-        debugger
         if (awsLink) {
             handleFileUpload();
             debugger
@@ -68,20 +56,19 @@ const NewArticle = (props: Props) => {
         setIsSubmitting(true);
     };
 
-    // validate = () => {
-    //     let err = {};
+    const validate = () => {
+        let err = {};
 
-    //     if (!form.title) {
-    //         err['title'] = "Title is required";
-    //     }
+        if (!form.title) {
+            err['title'] = "Title is required";
+        }
 
-    //     return err;
-    // }
+        return err;
+    }
 
     const createArticle = () => {
         debugger
         let router = useRouter();
-        // const {title, intro, description, mainPhoto, linkUrl, linkDescription } = this.state;
         axios.post('http://localhost:3000/api/articles', {
             title: form.title,
             intro: form.intro,
@@ -134,8 +121,8 @@ const NewArticle = (props: Props) => {
         
     }
 
-    uploadPhoto = async (e) => {
-        this.setState({loading: true});
+    const uploadPhoto = async (e) => {
+        setIsSubmitting(true);
         const file = e.target.files[0];
         const filename = encodeURIComponent(file.name);
         const res = await fetch(`/api/upload-url?file=${filename}`);
@@ -156,11 +143,11 @@ const NewArticle = (props: Props) => {
                 ...form,
                 [e.target.name]: `https://ming-portfolio-uploads.s3.ap-northeast-2.amazonaws.com/${filename}`})
 
-            setLoading(false);
+            setIsSubmitting(false);
         } else {
             console.error('Upload failed.');
             document.getElementById('instructions').innerText = "It looks like there was a problem...try refreshing the page"
-            this.setState({loading: false});
+            setIsSubmitting(false);
         }
     }
 
@@ -170,8 +157,7 @@ const NewArticle = (props: Props) => {
             <BaseLayout data={data} loading={loading}>
                 <div className="form-container">
                     <h1>Create New Article for Your Portfolio</h1>
-                            {/* <Upload /> */}
-                            {/* <MultipleUpload /> */}
+
                     <div className="new-form-wrapper">
                         <form onSubmit={handleSubmit}>
                             <label htmlFor="title">Title</label>
@@ -180,7 +166,10 @@ const NewArticle = (props: Props) => {
                             <textarea placeholder="Tell us a bit about your work!  This will appear on the main page." name="intro" onChange={handleChange} />
                             <label htmlFor="description">Description</label>
                             <textarea placeholder="Go into more detail about the project.  This will appear when people view the specific project." name="description" onChange={handleChange} />
-                            <label htmlFor="link">Source Link</label>
+                            <label htmlFor="linkUrl">Source Link</label>
+                            <input type="text" placeholder="Paste the URL of the original article" name="linkUrl" onChange={handleChange} />
+                            <label htmlFor="linkUrl">Link Text</label>
+                            <input type="text" placeholder="How do you want the link text to appear?" name="linkDescription" onChange={handleChange} />
                             <label htmlFor="body1">First Paragraph</label>
                             <textarea placeholder="First Paragraph" name="body1" onChange={handleChange} />
                             <div className="upload-wrapper">
@@ -190,21 +179,62 @@ const NewArticle = (props: Props) => {
                                     type="file"
                                     title=" "
                                     accept="image/png, image/jpeg"
-                                    name="photo2"
+                                    name="mainPhoto"
                                 />
-                                {/* {link.string !== '' ? <h2 >Image can be found at: <a id="aws-link">{link.string}</a></h2> : null} */}
-                                {loading == false ? <div className="loader"></div> : null}
+                                {loading == true ? <div className="loader"></div> : null}
                             </div>
                             <label htmlFor="body1">Second Paragraph</label>
                             <textarea placeholder="Second Paragraph" name="body2" onChange={handleChange} />
+                            <div className="upload-wrapper">
+                                <p id="instructions">Upload a .png or .jpg image (max 1MB).</p>
+                                <input
+                                    onChange={uploadPhoto}
+                                    type="file"
+                                    title=" "
+                                    accept="image/png, image/jpeg"
+                                    name="photo2"
+                                />
+                                {loading == true ? <div className="loader"></div> : null}
+                            </div>
                             <label htmlFor="body1">Third Paragraph</label>
                             <textarea placeholder="Third Paragraph" name="body3" onChange={handleChange} />
+                            <div className="upload-wrapper">
+                                <p id="instructions">Upload a .png or .jpg image (max 1MB).</p>
+                                <input
+                                    onChange={uploadPhoto}
+                                    type="file"
+                                    title=" "
+                                    accept="image/png, image/jpeg"
+                                    name="photo3"
+                                />
+                                {loading == true ? <div className="loader"></div> : null}
+                            </div>
                             <label htmlFor="body1">Fourth Paragraph</label>
                             <textarea placeholder="Fourth Paragraph" name="body4" onChange={handleChange} />
+                            <div className="upload-wrapper">
+                                <p id="instructions">Upload a .png or .jpg image (max 1MB).</p>
+                                <input
+                                    onChange={uploadPhoto}
+                                    type="file"
+                                    title=" "
+                                    accept="image/png, image/jpeg"
+                                    name="photo4"
+                                />
+                                {loading == true ? <div className="loader"></div> : null}
+                            </div>
                             <label htmlFor="body1">Fifth Paragraph</label>
                             <textarea placeholder="Fifth Paragraph" name="body5" onChange={handleChange} />
-                            <input type="text" placeholder="Paste the URL of the original article" name="linkUrl" onChange={handleChange} />
-                            <input type="text" placeholder="How do you want the link text to appear?" name="linkDescription" onChange={handleChange} />
+                            <div className="upload-wrapper">
+                                <p id="instructions">Upload a .png or .jpg image (max 1MB).</p>
+                                <input
+                                    onChange={uploadPhoto}
+                                    type="file"
+                                    title=" "
+                                    accept="image/png, image/jpeg"
+                                    name="photo5"
+                                />
+                                {loading == true ? <div className="loader"></div> : null}
+                            </div>
                             <button>Post</button>
                         </form>
     
