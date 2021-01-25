@@ -9,11 +9,9 @@ import { useGetUser } from '../actions/user'
 import MultipleUpload from '../components/shared/MultipleUpload'
 import { usePhoto, usePhotoUpdate } from '../context/photoContext'
 
-class NewArticle extends React.Component  {
+const NewArticle = (props: Props) => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
+    const [form, setForm] = useState({
             title: '', 
             intro: '', 
             description: '', 
@@ -29,10 +27,13 @@ class NewArticle extends React.Component  {
             photo5: '',
             linkUrl: '',
             linkDescription: '',
-            isSubmitting: false,
-            errors: {}
-        }
-    }
+
+        });
+
+        const [isSubmitting, setIsSubmitting] = useState(false);
+        const [errors, setErrors] = useState({});
+        const router = useRouter();  
+    
 
 
     // const photo = usePhoto();
@@ -41,7 +42,7 @@ class NewArticle extends React.Component  {
     // const [isSubmitting, setIsSubmitting] = useState(false);
     // const [errors, setErrors] = useState({});
     
-    // const { loading, data } = useGetUser();
+    // { loading, data } = useGetUser();
 
     // useEffect(() => {
     //     if (isSubmitting) {
@@ -54,17 +55,17 @@ class NewArticle extends React.Component  {
     //     }
     // }, [errors])
 
-    handleSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         // let errs = this.validate();
         // setErrors(errs);
         const awsLink = document.getElementById('aws-link')
         debugger
         if (awsLink) {
-            this.handleFileUpload();
+            handleFileUpload();
             debugger
         }
-        this.setState({isSubmitting: true});
+        setIsSubmitting(true);
     };
 
     // validate = () => {
@@ -77,14 +78,24 @@ class NewArticle extends React.Component  {
     //     return err;
     // }
 
-    createArticle = () => {
+    const createArticle = () => {
         debugger
         let router = useRouter();
+        // const {title, intro, description, mainPhoto, linkUrl, linkDescription } = this.state;
         axios.post('http://localhost:3000/api/articles', {
             title: form.title,
             intro: form.intro,
             description: form.description,
             mainPhoto: form.mainPhoto,
+            body1: form.body1,
+            body2: form.body2,
+            body3: form.body3,
+            body4: form.body4,
+            body5: form.body5,
+            photo2: form.photo2,
+            photo3: form.photo3,
+            photo4: form.photo4,
+            photo5: form.photo5,
             linkUrl: form.linkUrl,
             linkDescription: form.linkDescription
         })
@@ -98,12 +109,15 @@ class NewArticle extends React.Component  {
         router.push('/');    
     }
 
-    handleChange = (e) => {
-        this.setState({[e.target.name]: e.target.value})
-       
+    const handleChange = (e) => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value 
+        })
+        
     };
 
-    handleFileUpload = () => {
+    const handleFileUpload = () => {
         // const awsLink = document.getElementById('aws-link')
 
         // if (awsLink) {
@@ -120,34 +134,77 @@ class NewArticle extends React.Component  {
         
     }
 
-    render () {
+    uploadPhoto = async (e) => {
+        this.setState({loading: true});
+        const file = e.target.files[0];
+        const filename = encodeURIComponent(file.name);
+        const res = await fetch(`/api/upload-url?file=${filename}`);
+        const { url, fields } = await res.json();
+        const formData = new FormData();
+
+        Object.entries({ ...fields, file }).forEach(([key, value]) => {
+            formData.append(key, value);
+        });
+        const upload = await fetch(url, {
+            method: 'POST',
+            body: formData,
+        });
+
+        if (upload.ok) {
+            console.log('Uploaded successfully!');
+            setForm({
+                ...form,
+                [e.target.name]: `https://ming-portfolio-uploads.s3.ap-northeast-2.amazonaws.com/${filename}`})
+
+            setLoading(false);
+        } else {
+            console.error('Upload failed.');
+            document.getElementById('instructions').innerText = "It looks like there was a problem...try refreshing the page"
+            this.setState({loading: false});
+        }
+    }
+
+
+        const { loading, data } = useGetUser();
         return (
             <BaseLayout data={data} loading={loading}>
                 <div className="form-container">
                     <h1>Create New Article for Your Portfolio</h1>
-                            <Upload />
+                            {/* <Upload /> */}
                             {/* <MultipleUpload /> */}
                     <div className="new-form-wrapper">
                         <form onSubmit={handleSubmit}>
                             <label htmlFor="title">Title</label>
-                            <input type="text" placeholder="Grab their attention!" name="title" onChange={this.handleChange} />
+                            <input type="text" placeholder="Grab their attention!" name="title" onChange={handleChange} />
                             <label htmlFor="intro">Introduction</label>
-                            <textarea placeholder="Tell us a bit about your work!  This will appear on the main page." name="intro" onChange={this.handleChange} />
+                            <textarea placeholder="Tell us a bit about your work!  This will appear on the main page." name="intro" onChange={handleChange} />
                             <label htmlFor="description">Description</label>
-                            <textarea placeholder="Go into more detail about the project.  This will appear when people view the specific project." name="description" onChange={this.handleChange} />
+                            <textarea placeholder="Go into more detail about the project.  This will appear when people view the specific project." name="description" onChange={handleChange} />
                             <label htmlFor="link">Source Link</label>
                             <label htmlFor="body1">First Paragraph</label>
-                            <textarea placeholder="First Paragraph" name="body1" onChange={this.handleChange} />
+                            <textarea placeholder="First Paragraph" name="body1" onChange={handleChange} />
+                            <div className="upload-wrapper">
+                                <p id="instructions">Upload a .png or .jpg image (max 1MB).</p>
+                                <input
+                                    onChange={uploadPhoto}
+                                    type="file"
+                                    title=" "
+                                    accept="image/png, image/jpeg"
+                                    name="photo2"
+                                />
+                                {/* {link.string !== '' ? <h2 >Image can be found at: <a id="aws-link">{link.string}</a></h2> : null} */}
+                                {loading == false ? <div className="loader"></div> : null}
+                            </div>
                             <label htmlFor="body1">Second Paragraph</label>
-                            <textarea placeholder="Second Paragraph" name="body2" onChange={this.handleChange} />
+                            <textarea placeholder="Second Paragraph" name="body2" onChange={handleChange} />
                             <label htmlFor="body1">Third Paragraph</label>
-                            <textarea placeholder="Third Paragraph" name="body3" onChange={this.handleChange} />
+                            <textarea placeholder="Third Paragraph" name="body3" onChange={handleChange} />
                             <label htmlFor="body1">Fourth Paragraph</label>
-                            <textarea placeholder="Fourth Paragraph" name="body4" onChange={this.handleChange} />
+                            <textarea placeholder="Fourth Paragraph" name="body4" onChange={handleChange} />
                             <label htmlFor="body1">Fifth Paragraph</label>
-                            <textarea placeholder="Fifth Paragraph" name="body5" onChange={this.handleChange} />
-                            <input type="text" placeholder="Paste the URL of the original article" name="linkUrl" onChange={this.handleChange} />
-                            <input type="text" placeholder="How do you want the link text to appear?" name="linkDescription" onChange={this.handleChange} />
+                            <textarea placeholder="Fifth Paragraph" name="body5" onChange={handleChange} />
+                            <input type="text" placeholder="Paste the URL of the original article" name="linkUrl" onChange={handleChange} />
+                            <input type="text" placeholder="How do you want the link text to appear?" name="linkDescription" onChange={handleChange} />
                             <button>Post</button>
                         </form>
     
@@ -155,7 +212,8 @@ class NewArticle extends React.Component  {
                 </div>
             </BaseLayout>
         )
-    }
+    
+
 }
 
 export default NewArticle;
