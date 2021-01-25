@@ -1,0 +1,24 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto+Slab|Open+Sans:400italic,700italic,400,700);
+
+// Font Variables
+$roboto-slab: 'Roboto Slab', serif;   
+$open-sans: 'Open Sans', sans-serif;
+
+// Colors
+$blue: #3f456b;
+
+// Button Mixin
+
+@mixin default-button {
+    margin: 20px 0px 20px 0px;
+    outline: none;
+    border: 1px solid black;
+    padding: 10px 25px 10px 25px;
+    border-radius: 3px;
+    background-color: white;
+    &:hover {
+        background-color: navy;
+        color: white;
+        border: 1px solid navy;
+    }
+}
