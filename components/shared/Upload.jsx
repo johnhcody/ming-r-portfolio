@@ -41,7 +41,7 @@ export default function Upload() {
                 title=" "
                 accept="image/png, image/jpeg"
             />
-            {link.string !== '' ? <h2 >Image can be found at: <a id="aws-link">{link.string}</a></h2> : null}
+            {/* {link.string !== '' ? <h2 >Image can be found at: <a id="aws-link">{link.string}</a></h2> : null} */}
             {loading ? <div className="loader"></div> : null}
         </div>
     );
