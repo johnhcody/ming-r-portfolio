@@ -6,6 +6,7 @@ import BaseLayout from '../../components/layouts/BaseLayout'
 import Article from '../../models/Article'
 import { useGetUser } from '../../actions/user'
 import  Upload  from '../../components/shared/Upload'
+import { Footer } from '../../components/shared/Footer'
 
 const EditArticle = ({ article }) => {
     //debugger
@@ -151,6 +152,7 @@ const EditArticle = ({ article }) => {
                         </form>
                 </div>
             </div>
+            <Footer />
         </BaseLayout>
     )
 }
