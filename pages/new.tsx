@@ -48,11 +48,6 @@ const NewArticle = (props: Props) => {
         e.preventDefault();
         let errs = validate();
         setErrors(errs);
-        const awsLink = document.getElementById('aws-link')
-        if (awsLink) {
-            handleFileUpload();
-            debugger
-        }
         setIsSubmitting(true);
     };
 
@@ -97,6 +92,7 @@ const NewArticle = (props: Props) => {
     }
 
     const handleChange = (e) => {
+        debugger
         setForm({
             ...form,
             [e.target.name]: e.target.value 
@@ -104,55 +100,16 @@ const NewArticle = (props: Props) => {
         
     };
 
-    const handleFileUpload = () => {
-        // const awsLink = document.getElementById('aws-link')
-
-        // if (awsLink) {
-        //     setForm({
-        //         ...form,
-        //         mainPhoto: awsLink.innerText
-        //     });
-        // } else {
-        //     setForm({
-        //         ...form,
-        //         mainPhoto: 'https://ming-portfolio-uploads.s3.ap-northeast-2.amazonaws.com/Mingkwan-Alt.png'
-        //     });
-        // }
+    const handleFileUpload = (key, value) => {
+        setForm({
+            ...form,
+            [key]: value 
+        })
+        debugger
         
     }
-
-    const uploadPhoto = async (e) => {
-        setIsSubmitting(true);
-        const file = e.target.files[0];
-        const filename = encodeURIComponent(file.name);
-        const res = await fetch(`/api/upload-url?file=${filename}`);
-        const { url, fields } = await res.json();
-        const formData = new FormData();
-
-        Object.entries({ ...fields, file }).forEach(([key, value]) => {
-            formData.append(key, value);
-        });
-        const upload = await fetch(url, {
-            method: 'POST',
-            body: formData,
-        });
-
-        if (upload.ok) {
-            console.log('Uploaded successfully!');
-            setForm({
-                ...form,
-                [e.target.name]: `https://ming-portfolio-uploads.s3.ap-northeast-2.amazonaws.com/${filename}`})
-
-            setIsSubmitting(false);
-        } else {
-            console.error('Upload failed.');
-            document.getElementById('instructions').innerText = "It looks like there was a problem...try refreshing the page"
-            setIsSubmitting(false);
-        }
-    }
-
-
         const { loading, data } = useGetUser();
+        const [childData, setChildData] = useState("");
         return (
             <BaseLayout data={data} loading={loading}>
                 <div className="form-container">
@@ -161,80 +118,35 @@ const NewArticle = (props: Props) => {
                     <div className="new-form-wrapper">
                         <form onSubmit={handleSubmit}>
                             <label htmlFor="title">Title</label>
-                            <input type="text" placeholder="Grab their attention!" name="title" onChange={handleChange} />
+                                <input type="text" placeholder="Grab their attention!" name="title" onChange={handleChange} />
                             <label htmlFor="intro">Introduction</label>
-                            <textarea placeholder="Tell us a bit about your work!  This will appear on the main page." name="intro" onChange={handleChange} />
+                                <textarea placeholder="Tell us a bit about your work!  This will appear on the main page." name="intro" onChange={handleChange} />
                             <label htmlFor="description">Description</label>
-                            <textarea placeholder="Go into more detail about the project.  This will appear when people view the specific project." name="description" onChange={handleChange} />
+                                <textarea placeholder="Go into more detail about the project.  This will appear when people view the specific project." name="description" onChange={handleChange} />
                             <label htmlFor="linkUrl">Source Link</label>
-                            <input type="text" placeholder="Paste the URL of the original article" name="linkUrl" onChange={handleChange} />
+                                <input type="text" placeholder="Paste the URL of the original article" name="linkUrl" onChange={handleChange} />
                             <label htmlFor="linkUrl">Link Text</label>
-                            <input type="text" placeholder="How do you want the link text to appear?" name="linkDescription" onChange={handleChange} />
+                                <input type="text" placeholder="How do you want the link text to appear?" name="linkDescription" onChange={handleChange} />
                             <label htmlFor="body1">First Paragraph</label>
-                            <textarea placeholder="First Paragraph" name="body1" onChange={handleChange} />
-                            <div className="upload-wrapper">
-                                <p id="instructions">Upload a .png or .jpg image (max 1MB).</p>
-                                <input
-                                    onChange={uploadPhoto}
-                                    type="file"
-                                    title=" "
-                                    accept="image/png, image/jpeg"
-                                    name="mainPhoto"
-                                />
-                                {loading == true ? <div className="loader"></div> : null}
-                            </div>
+                                <textarea placeholder="First Paragraph" name="body1" onChange={handleChange} />
+                            <Upload name={"mainPhoto"} sendPhotoString={handleFileUpload} title={"Main Photo"}/>
+
                             <label htmlFor="body1">Second Paragraph</label>
-                            <textarea placeholder="Second Paragraph" name="body2" onChange={handleChange} />
-                            <div className="upload-wrapper">
-                                <p id="instructions">Upload a .png or .jpg image (max 1MB).</p>
-                                <input
-                                    onChange={uploadPhoto}
-                                    type="file"
-                                    title=" "
-                                    accept="image/png, image/jpeg"
-                                    name="photo2"
-                                />
-                                {loading == true ? <div className="loader"></div> : null}
-                            </div>
+                                <textarea placeholder="Second Paragraph" name="body2" onChange={handleChange} />
+                            <Upload name={"photo2"} sendPhotoString={handleFileUpload} title={"Second Photo"}/>
+                            
                             <label htmlFor="body1">Third Paragraph</label>
-                            <textarea placeholder="Third Paragraph" name="body3" onChange={handleChange} />
-                            <div className="upload-wrapper">
-                                <p id="instructions">Upload a .png or .jpg image (max 1MB).</p>
-                                <input
-                                    onChange={uploadPhoto}
-                                    type="file"
-                                    title=" "
-                                    accept="image/png, image/jpeg"
-                                    name="photo3"
-                                />
-                                {loading == true ? <div className="loader"></div> : null}
-                            </div>
+                                <textarea placeholder="Third Paragraph" name="body3" onChange={handleChange} />
+                            <Upload name={"photo3"} sendPhotoString={handleFileUpload} title={"Third Photo"}/>
+                            
                             <label htmlFor="body1">Fourth Paragraph</label>
-                            <textarea placeholder="Fourth Paragraph" name="body4" onChange={handleChange} />
-                            <div className="upload-wrapper">
-                                <p id="instructions">Upload a .png or .jpg image (max 1MB).</p>
-                                <input
-                                    onChange={uploadPhoto}
-                                    type="file"
-                                    title=" "
-                                    accept="image/png, image/jpeg"
-                                    name="photo4"
-                                />
-                                {loading == true ? <div className="loader"></div> : null}
-                            </div>
+                                <textarea placeholder="Fourth Paragraph" name="body4" onChange={handleChange} />
+                            <Upload name={"photo4"} sendPhotoString={handleFileUpload} title={"Fourth Photo"}/>
+                            
                             <label htmlFor="body1">Fifth Paragraph</label>
-                            <textarea placeholder="Fifth Paragraph" name="body5" onChange={handleChange} />
-                            <div className="upload-wrapper">
-                                <p id="instructions">Upload a .png or .jpg image (max 1MB).</p>
-                                <input
-                                    onChange={uploadPhoto}
-                                    type="file"
-                                    title=" "
-                                    accept="image/png, image/jpeg"
-                                    name="photo5"
-                                />
-                                {loading == true ? <div className="loader"></div> : null}
-                            </div>
+                                <textarea placeholder="Fifth Paragraph" name="body5" onChange={handleChange} />
+                            <Upload name={"photo5"} sendPhotoString={handleFileUpload} title={"Fifth Photo"}/>
+                            
                             <button>Post</button>
                         </form>
     
