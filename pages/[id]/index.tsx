@@ -39,10 +39,24 @@ const Article = ({ article }) => {
         <BaseLayout data={data} loading={loading}>
             <div className="article-container">
                 <h1>{article.title}</h1>
-                <img src={article.mainPhoto == "" ? 'https://ming-portfolio-uploads.s3.ap-northeast-2.amazonaws.com/Mingkwan-Alt.png' : article.img} alt="" />
+                    <img src={article.mainPhoto == "" ? 'https://ming-portfolio-uploads.s3.ap-northeast-2.amazonaws.com/Mingkwan-Alt.png' : article.mainPhoto} alt="" />
                 <h2>{article.intro}</h2>
-                <a href={`${article.linkUrl}`}>{article.linkDescription}</a>
+                    <a href={`${article.linkUrl}`}>{article.linkDescription}</a>
                 <p>{article.description}</p>
+                
+                <p>{article.body1}</p>
+                <img src={article.photo2}></img>
+                
+                <p>{article.body2}</p>
+                <img src={article.photo3}></img>
+                
+                <p>{article.body3}</p>
+                <img src={article.photo4}></img>
+
+                <p>{article.body4}</p>
+                <img src={article.photo5}></img>
+
+                <p>{article.body5}</p>
                 { data && data.name == "john.haner.cody@gmail.com" ? 
                     <div className="idx-itm-btn-wrapper">
                         <Link href={`/${article._id}/edit`}>

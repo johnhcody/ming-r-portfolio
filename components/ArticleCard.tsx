@@ -19,7 +19,7 @@ export const ArticleCard = (props: Props) => {
                         <div className="img-wrapper" >
                             <Link href={`/${article._id}`}>
                                 <div className="hidden-text-wrapper" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
-                                    <img src={article.img == "" ? 'https://ming-portfolio-uploads.s3.ap-northeast-2.amazonaws.com/Mingkwan-Alt.png' : article.img} alt="" />
+                                    <img src={article.mainPhoto == "" ? 'https://ming-portfolio-uploads.s3.ap-northeast-2.amazonaws.com/Mingkwan-Alt.png' : article.mainPhoto} alt="" />
                                     <div className="inside">
                                         {hover ? <p>View Post</p>: null}
                                     </div>

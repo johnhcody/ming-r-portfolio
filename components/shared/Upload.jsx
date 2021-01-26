@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 
 export default function Upload(props) {
 
-    const [link, setLink] = useState({string: '' });
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
 
@@ -33,21 +32,14 @@ export default function Upload(props) {
             setLoading(false);
         }
     };
-    // const handleUpload = (e) => {
-    //     debugger
-    //     const file = e.target.files[0];
-    //     const filename = encodeURIComponent(file.name);
-    //     props.onChange(filename, file, props.name);
-    //     debugger
-    // }
 
     if (success) {
         return (
             <div className="upload-wrapper">
                 <p>Uploaded Successfully</p>
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
-                <circle class="path circle" fill="none" stroke="#73AF55" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
-                <polyline class="path check" fill="none" stroke="#73AF55" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+                <circle class="path circle" fill="none" stroke="#73AF55" strokeWidth="6" strokeMiterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
+                <polyline class="path check" fill="none" stroke="#73AF55" strokeWidth="6" strokeLinecap="round" strokeMiterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
                 </svg>
             </div>
         )
@@ -63,18 +55,6 @@ export default function Upload(props) {
                     accept="image/png, image/jpeg"
                     name={`${props.name}`}
                 />
-                {/* <div className="upload-wrapper">
-                                    <p id="instructions">Upload a .png or .jpg image (max 1MB).</p>
-                                    <input
-                                        onChange={uploadPhoto}
-                                        type="file"
-                                        title=" "
-                                        accept="image/png, image/jpeg"
-                                        name="mainPhoto"
-                                    />
-                                    {isSubmitting == true ? <div className="loader"></div> : null}
-                                </div> */}
-                {/* {link.string !== '' ? <h2 >Image can be found at: <a id="aws-link">{link.string}</a></h2> : null} */}
                 {loading ? <div className="loader"></div> : null}
             </div>
         );

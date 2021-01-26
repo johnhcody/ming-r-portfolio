@@ -16,7 +16,7 @@ interface State {
 const Cv = (props: Props) => {
     const engLang = useLanguage();
     const toggleLang = useLanguageUpdate();
-
+    const { loading, data } = useGetUser();
         return (
             <>
             <BaseLayout loading={loading} data={data}>

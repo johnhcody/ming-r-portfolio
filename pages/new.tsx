@@ -61,9 +61,9 @@ const NewArticle = (props: Props) => {
         return err;
     }
 
+    let router = useRouter();
     const createArticle = () => {
         debugger
-        let router = useRouter();
         axios.post('http://localhost:3000/api/articles', {
             title: form.title,
             intro: form.intro,
@@ -92,7 +92,7 @@ const NewArticle = (props: Props) => {
     }
 
     const handleChange = (e) => {
-        debugger
+        //debugger
         setForm({
             ...form,
             [e.target.name]: e.target.value 
@@ -108,10 +108,9 @@ const NewArticle = (props: Props) => {
         debugger
         
     }
-        const { loading, data } = useGetUser();
-        const [childData, setChildData] = useState("");
+        //const { loading, data } = useGetUser();
         return (
-            <BaseLayout data={data} loading={loading}>
+            <BaseLayout >
                 <div className="form-container">
                     <h1>Create New Article for Your Portfolio</h1>
 
