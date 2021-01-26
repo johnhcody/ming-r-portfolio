@@ -47,7 +47,7 @@ export default function Upload(props) {
         return (
             <div className="upload-wrapper">
                 <p id="instructions">Upload a .png or .jpg image (max 1MB).</p>
-                <p>This will be your {props.title}</p>
+                <p>{props.title}</p>
                 <input
                     onChange={uploadPhoto}
                     type="file"

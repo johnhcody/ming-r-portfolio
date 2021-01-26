@@ -138,6 +138,9 @@
         flex-direction: column;
         align-items: center;
     }
+    img {
+        margin: 20px 0px 20px 0px;
+    }
 }
 
 .form-container {
@@ -404,11 +407,12 @@
     align-items: center;
     h1 {
         font-size: 30px;
-        padding: 25px 0px 25px 0px;
+        margin: 25px 0px 25px 0px;
     }
     img {
         height: 500px;
         width: auto;
+        
     }
     h2 {
         font-size: 25px;
@@ -422,6 +426,7 @@
         width: 80%;
         line-height: 2em;
         text-align: center;
+        padding: 50px 0px 50px 0px;
     }
     button {
         @include default-button;

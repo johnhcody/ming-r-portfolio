@@ -108,9 +108,9 @@ const NewArticle = (props: Props) => {
         debugger
         
     }
-        //const { loading, data } = useGetUser();
+        const { loading, data } = useGetUser();
         return (
-            <BaseLayout >
+            <BaseLayout data={data} loading={loading} >
                 <div className="form-container">
                     <h1>Create New Article for Your Portfolio</h1>
 

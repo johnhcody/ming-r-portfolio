@@ -40,12 +40,15 @@ const Portfolio = (props: Props) => {
                 })}
 
                 </div>
-
-                <div className="new-note">
-                    <Link href={'/new'}>
-                        <button>Create a new Article</button>
-                    </Link>
-                </div>
+                {
+                    data && data.name == "john.haner.cody@gmail.com" ?
+                    <div className="new-note">
+                        <Link href={'/new'}>
+                            <button>Create a new Article</button>
+                        </Link>
+                    </div> : null
+                }
+                
 
             </div>
 
