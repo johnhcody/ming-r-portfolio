@@ -6,8 +6,7 @@ import { useRouter } from 'next/router'
 import BaseLayout from '../components/layouts/BaseLayout'
 import Upload from '../components/shared/Upload'
 import { useGetUser } from '../actions/user'
-import MultipleUpload from '../components/shared/MultipleUpload'
-import { usePhoto, usePhotoUpdate } from '../context/photoContext'
+
 
 const NewArticle = (props: Props) => {
 
