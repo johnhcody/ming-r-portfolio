@@ -46,6 +46,7 @@ const Cv = (props: Props) => {
                             </div>
                             {engLang == true ? <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae et leo duis ut diam quam. Elementum nibh tellus molestie nunc non. Aliquet porttitor lacus luctus accumsan tortor posuere ac ut consequat. Nam at lectus urna duis convallis convallis tellus. Dictum sit amet justo donec. Ut tortor pretium viverra suspendisse potenti nullam. Vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae. Ligula ullamcorper malesuada proin libero nunc consequat. Pretium lectus quam id leo in vitae turpis.</p> : <p>จากนั้นไม่กี่ปีต่อมา รัฐบาลพม่าเริ่มเปลี่ยนแปลงระบบการศึกษา ส่งผลกระทบต่อมหาวิทยาลัย ทำให้การหยุดชะงักของปีการศึกษาเพิ่มมากขึ้น ดร.ซินเธีย ที่จบชั้นมัธยมปลายในปีนี้ต้องรอเวลาเกือบปี กว่าจะได้เข้าวิทยาลัยประจำภูมิภาค ที่ซึ่งเธอต้องเรียนอีก 2 ปีจึงจะเริ่มการศึกษาที่โรงเรียนแพทย์ได้  “ในช่วงที่เรียนแพทย์ ดิฉันและเพื่อนๆ เดินทางกลับไปเยี่ยมครอบครัวปีละสองครั้ง และทุกครั้งบนรถไฟและเรือที่เราโดยสาร มักมีคนหนุ่มสาวและวัยรุ่นที่ลาออกจากการเรียน ดิฉันมีเพื่อนที่ต้องลาออกจากโรงเรียนตั้งแต่มัธยมและมหาวิทยาลัย เพราะพวกเขาต้องทำงานหนัก เพื่อหารายได้ช่วยเหลือครอบครัว”</p>}
                         </div>
+                        
                 <div className="cv-block-wrapper">
                     <div className="img-and-text-wrapper">
                         <Image

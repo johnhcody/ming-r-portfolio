@@ -23,7 +23,7 @@ const Article = ({ article }) => {
     const deleteArticle = async () => {
         const articleId = router.query.id;
 
-        const deleted = await axios.delete(`http://localhost:3000/api/articles/${articleId}`)
+        const deleted = await axios.delete(`/api/articles/${articleId}`)
         router.push('/');
     }
 
@@ -74,7 +74,7 @@ const Article = ({ article }) => {
 }
 
 Article.getInitialProps = async ({ query: { id }}) => {
-    const res = await axios.get(`http://localhost:3000/api/articles/${id}`)
+    const res = await axios.get(`/api/articles/${id}`)
     const data = res.data['data'];
 
     return { article: data }

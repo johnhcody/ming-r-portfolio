@@ -63,7 +63,7 @@ const NewArticle = (props: Props) => {
     let router = useRouter();
     const createArticle = () => {
         debugger
-        axios.post('http://localhost:3000/api/articles', {
+        axios.post('/api/articles', {
             title: form.title,
             intro: form.intro,
             description: form.description,

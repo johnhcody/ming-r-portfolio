@@ -62,7 +62,7 @@ const EditArticle = ({ article }) => {
 
     const updateArticle = () => {
 
-        axios.put(`http://localhost:3000/api/articles/${router.query.id}`, {
+        axios.put(`/api/articles/${router.query.id}`, {
             title: form.title,
             intro: form.intro,
             description: form.description,
@@ -159,7 +159,7 @@ const EditArticle = ({ article }) => {
 
 EditArticle.getInitialProps = async ({ query: { id } }) => {
     debugger
-    const res = await axios.get(`http://localhost:3000/api/articles/${id}`)
+    const res = await axios.get(`/api/articles/${id}`)
     const article = res.data['data'];
     debugger
     return { article: article }
