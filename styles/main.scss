@@ -8,6 +8,7 @@
     font-size: 20px;
     i {
         padding-right: 20px;
+        margin-top: 7px;
     }
     a {
         padding-left: 20px;
@@ -20,7 +21,7 @@
 
         
        .toggle-wrapper {
-               margin: -1px 14px 0px 0px;
+            margin: 6px 14px 0px 0px;
             input {
                 -webkit-appearance: none;
                 position: relative;
@@ -64,6 +65,10 @@
                 background-color: #ECF0F3;
                 margin-left: 4px;
                 }
+        }
+        a {
+            margin-bottom: 5px;
+            margin-right: 13px;
         }
     }
 }

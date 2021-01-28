@@ -5,6 +5,7 @@ import Modal from 'react-modal';
 import Image from 'next/image'
 import { LanguageToggle } from './LanguageToggle'
 import { useLanguage, useLanguageUpdate } from '../../context/languageContext'
+import { useGetUser } from '../../actions/user'
 
 interface Props {
     
@@ -14,7 +15,7 @@ interface Props {
 export const Header = (props: Props) => {
     const engLang = useLanguage();
     const [modalIsOpen, setModalIsOpen] = useState(false)
-    const {user, loading} = props;
+    const {data, loading} = useGetUser();
     const openModal = () => {
         setModalIsOpen(true);
         document.body.style.overflow = "hidden"; 
@@ -37,7 +38,7 @@ export const Header = (props: Props) => {
             <div className="header-right-wrapper">
                 <i onClick={openModal} className="fas fa-bars"></i>
                 {modalIsOpen ? null : <LanguageToggle />}
-                {user == "john.haner.cody@gmail.com" ?  <LogoutLink /> : null}
+                {data && data.name == "john.haner.cody@gmail.com" ?  <LogoutLink /> : null}
 
             </div>
             <Modal className="modal" ariaHideApp={false} isOpen={modalIsOpen} onRequestClose={closeModal} closeTimeoutMS={1000} style={{
