@@ -21,7 +21,7 @@ export const Header = (props: Props) => {
         document.body.style.height = "100%"; 
     }
 
-    const closeModal = () => {
+    const closeModal = () => { 
         setModalIsOpen(false);
         document.body.style.overflow = "auto"; 
         document.body.style.height = "auto"; 
