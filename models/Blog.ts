@@ -7,6 +7,8 @@ interface IBlog extends Document {
     description: string;
     paragraphs: number[];
     photos: number[];
+    linkUrl: string;
+    linkDescription: string;
 }
 
 const BlogSchema: Schema = new Schema({
@@ -14,7 +16,9 @@ const BlogSchema: Schema = new Schema({
     intro: { type: String, required: [true, 'Please add an intro'] },
     description: { type: String },
     paragraphs: { type: Array },
-    photos: {type: Array }
+    photos: {type: Array },
+    linkUrl: { type: String },
+    linkDescription: { type: String }
 })
 
 module.exports = mongoose.models.Blog || mongoose.model<IBlog>('Blog', BlogSchema)

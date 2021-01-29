@@ -16,9 +16,18 @@ interface State {
 const Blog = (props: Props) => {
     const { loading, data } = useGetUser();
     const [ input, setInput ] = useState([]);
+    const [ photoStrArr, setPhotoStrArr ] = useState([])
     const [ paraCount, setParaCount ] = useState(1);
-    //const [ paraNumber, setParaNumber ] = useState([]);
-    const [ body, setBody ] = useState([])
+    const [ paragraphsArr, setParagraphsArr ] = useState([])
+
+    const [form, setForm] = useState({
+        title: '', 
+        intro: '', 
+        description: '', 
+        paragraphs: [],
+        photos: []
+    })
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -29,20 +38,49 @@ const Blog = (props: Props) => {
     }, [input])
 
     const appendPhoto = () => {
-
         let newInput = `photo-${input.length}`;
         setInput(input.concat(newInput));
-        debugger
+        
     }
 
     const appendParagraph = () => {
         setParaCount(paraCount + 1);
-        //setParaNumber(paraNumber.concat(paraCount))
         let newInput = `para-${paraCount}`;
         setInput(input.concat(newInput));
-        setBody(body.concat([{}]))
     }
-    debugger
+
+    const handleFileUpload = (value) => {
+        setPhotoStrArr(photoStrArr.concat(value))
+    }
+
+    const handleTextInput = (index, text) => {
+        debugger
+        // setForm(form.paragraphs.map((item, j) => {
+        //     if (j === index) {
+        //         return text;
+        //     } else {
+        //         return item;
+        //     }
+        // }))
+        let newArr = [...paragraphsArr];
+        newArr[index] = text;
+        setParagraphsArr(newArr);
+        setForm({
+            ...form,
+            paragraphs: newArr
+        })
+        debugger
+    }
+
+    const handleChange = (e) => {
+        debugger
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value 
+        })
+        
+    };
+    
     return (
         <>
         <BaseLayout data={data} loading={loading}>
@@ -50,22 +88,22 @@ const Blog = (props: Props) => {
                 <form className="flex flex-col items-center" onSubmit={handleSubmit}>
                     <h1>Create an Article</h1>
                     <label className="pt-4 pb-2"htmlFor="title">Title</label>
-                        <input type="text" className="text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" placeholder="Grab their attention!" name="title"  />
+                        <input type="text" onChange={handleChange} className="text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" placeholder="Grab their attention!" name="title"  />
                     <label htmlFor="intro">Introduction</label>
-                        <textarea className="w-72 h-24 p-3 my-3" placeholder="Tell us a bit about your work!  This will appear on the main page." name="intro"  />
+                        <textarea onChange={handleChange} className="w-72 h-24 p-3 my-3" placeholder="Tell us a bit about your work!  This will appear on the main page." name="intro"  />
                     <label htmlFor="description">Description</label>
-                        <textarea className="w-72 h-72 p-3 my-3" placeholder="Go into more detail about the project.  This will appear when people view the specific project." name="description"  />
+                        <textarea onChange={handleChange} className="w-72 h-72 p-3 my-3" placeholder="Go into more detail about the project.  This will appear when people view the specific project." name="description"  />
                     <label className="py-2" htmlFor="linkUrl">Source Link</label>
-                        <input className="text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0" type="text" placeholder="Paste the URL of the original article" name="linkUrl"  />
+                        <input onChange={handleChange} className="text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0" type="text" placeholder="Paste the URL of the original article" name="linkUrl"  />
                     <label className="py-2" htmlFor="linkUrl">Link Text</label>
-                        <input className="text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" type="text" placeholder="How do you want the link text to appear?" name="linkDescription"  />
+                        <input onChange={handleChange} className="text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" type="text" placeholder="How do you want the link text to appear?" name="linkDescription"  />
                     {input.map((ipt, idx) => {
                     let word = ipt.slice(0,5);
  
                     if (word == 'photo') {
-                        return <TestUpload key={idx} />
+                        return <TestUpload key={idx} concatPhotoStr={handleFileUpload}/>
                     } else if (word == 'para-'){
-                        return <TestParagraph key={idx} number={ipt}/>
+                        return <TestParagraph key={idx} number={ipt} addText={handleTextInput}/>
                     }
                     })}
                     <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full" onClick={appendPhoto}>Add Photo</button>
