@@ -4,6 +4,7 @@ import { useGetUser } from '../actions/user'
 import Upload from '../components/shared/Upload'
 import TestUpload from '../components/shared/TestUpload'
 import TestParagraph from '../components/shared/TestParagraph'
+import { Footer } from '../components/shared/Footer'
 
 interface Props {
     
@@ -15,7 +16,9 @@ interface State {
 const Blog = (props: Props) => {
     const { loading, data } = useGetUser();
     const [ input, setInput ] = useState([]);
-    const [ paraNumber, setParaNumber ] = useState(0);
+    const [ paraCount, setParaCount ] = useState(1);
+    const [ paraNumber, setParaNumber ] = useState([]);
+    const [ body, setBody ] = useState([])
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -33,12 +36,15 @@ const Blog = (props: Props) => {
     }
 
     const appendParagraph = () => {
-        let newInput = `para-${input.length}`;
+        setParaCount(paraCount + 1);
+        setParaNumber(paraNumber.concat(paraCount))
+        let newInput = `para-${paraCount}`;
         setInput(input.concat(newInput));
-        setParaNumber(paraNumber + 1);
+        setBody(body.concat([{}]))
     }
     debugger
     return (
+        <>
         <BaseLayout data={data} loading={loading}>
             <div className="flex w-full justify-center">
                 <form className="flex flex-col items-center" onSubmit={handleSubmit}>
@@ -55,12 +61,11 @@ const Blog = (props: Props) => {
                         <input className="text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" type="text" placeholder="How do you want the link text to appear?" name="linkDescription"  />
                     {input.map((ipt, idx) => {
                     let word = ipt.slice(0,5);
-                    
+ 
                     if (word == 'photo') {
-                        return <TestUpload key={ipt} />
+                        return <TestUpload key={idx} />
                     } else if (word == 'para-'){
-                        
-                        return <TestParagraph key={ipt} number={idx + 1}/>
+                        return <TestParagraph key={idx} number={ipt}/>
                     }
                     })}
                     <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full" onClick={appendPhoto}>Add Photo</button>
@@ -69,6 +74,8 @@ const Blog = (props: Props) => {
 
             </div>
         </BaseLayout>
+        <Footer />
+        </>
     )
     
 }
