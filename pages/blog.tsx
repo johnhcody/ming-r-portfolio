@@ -17,7 +17,7 @@ const Blog = (props: Props) => {
     const { loading, data } = useGetUser();
     const [ input, setInput ] = useState([]);
     const [ paraCount, setParaCount ] = useState(1);
-    const [ paraNumber, setParaNumber ] = useState([]);
+    //const [ paraNumber, setParaNumber ] = useState([]);
     const [ body, setBody ] = useState([])
 
     const handleSubmit = (e) => {
@@ -37,7 +37,7 @@ const Blog = (props: Props) => {
 
     const appendParagraph = () => {
         setParaCount(paraCount + 1);
-        setParaNumber(paraNumber.concat(paraCount))
+        //setParaNumber(paraNumber.concat(paraCount))
         let newInput = `para-${paraCount}`;
         setInput(input.concat(newInput));
         setBody(body.concat([{}]))
