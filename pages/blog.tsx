@@ -18,7 +18,7 @@ const Blog = (props: Props) => {
     const toggleLang = useLanguageUpdate();
 
     const { loading, data } = useGetUser();
-
+    debugger
     return (
         <>
             <BaseLayout data={data} loading={loading}>

@@ -10,7 +10,6 @@ interface Props {
 export const IndexFooter = (props: Props) => {
 
     const {data, loading} = useGetUser();
-    debugger
 
     if (!data) {
         return (

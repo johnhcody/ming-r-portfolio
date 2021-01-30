@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import BaseLayout from '../../components/layouts/BaseLayout';
+import BaseLayout from '../../../components/layouts/BaseLayout';
 import Link from 'next/link';
-import { Footer } from '../../components/shared/Footer'
-import { useGetUser } from '../../actions/user'
+import { Footer } from '../../../components/shared/Footer'
+import { useGetUser } from '../../../actions/user'
 
 
 const Blog = ({ blog }) => {
@@ -20,9 +20,9 @@ const Blog = ({ blog }) => {
     }, [isDeleting])
 
     const deleteArticle = async () => {
-        const articleId = router.query.id;
+        const blogId = router.query.id;
 
-        const deleted = await axios.delete(`/api/articles/${articleId}`)
+        const deleted = await axios.delete(`/api/blogs/${blogId}`)
         router.push('/');
     }
 
@@ -47,7 +47,7 @@ Blog.getInitialProps = async ({ query: { id }}) => {
     const res = await axios.get(`/api/blogs/${id}`)
     const data = res.data['data'];
 
-    return { article: data }
+    return { blog: data }
 }
 
 export default Blog;
