@@ -19,7 +19,7 @@ const Portfolio = (props: Props) => {
 
     const [hover, setHover] = useState(false)
     const { loading, data } = useGetUser();
-    const articles = Object.values(props).filter(el => typeof el.mainPhoto !== "undefined");
+    const articles = Object.values(props)
     debugger
         return (
             <>

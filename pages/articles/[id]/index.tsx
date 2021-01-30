@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import BaseLayout from '../../components/layouts/BaseLayout';
+import BaseLayout from '../../../components/layouts/BaseLayout';
 import Link from 'next/link';
-import { Footer } from '../../components/shared/Footer'
-import { useGetUser } from '../../actions/user'
+import { Footer } from '../../../components/shared/Footer'
+import { useGetUser } from '../../../actions/user'
 
 
 const Article = ({ article }) => {
