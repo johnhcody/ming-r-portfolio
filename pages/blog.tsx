@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import BaseLayout from '../components/layouts/BaseLayout'
 import { useGetUser } from '../actions/user'
-import Upload from '../components/shared/Upload'
+import { useRouter } from 'next/router'
 import TestUpload from '../components/shared/TestUpload'
 import TestParagraph from '../components/shared/TestParagraph'
 import { Footer } from '../components/shared/Footer'
+import axios from 'axios'
+
 
 interface Props {
     
@@ -20,6 +22,8 @@ const Blog = (props: Props) => {
     const [ paraCount, setParaCount ] = useState(1);
     const [ paragraphsArr, setParagraphsArr ] = useState([])
     const [ order, setOrder ] = useState([]);
+    const [ isSubmitting, setIsSubmitting] = useState(false);
+    const [ errors, setErrors] = useState({});
 
     const [form, setForm] = useState({
         title: '', 
@@ -31,15 +35,58 @@ const Blog = (props: Props) => {
         linkUrl: '',
         linkDescription: ''
     })
-
-
+    
+    useEffect(() => {
+        if (isSubmitting) {
+            debugger
+            if (Object.keys(errors).length === 0) {
+                createBlog();
+            } else {
+                setIsSubmitting(false);
+            }
+        }
+    }, [errors])
+    
     const handleSubmit = (e) => {
         e.preventDefault();
+        let errs = validate();
+        setErrors(errs);
+        debugger
     }
 
-    useEffect(() => {
-        
-    }, [input])
+    const validate = () => {
+        let err = {};
+
+        if (!form.title) {
+            err['title'] = "Title is required";
+        }
+
+        return err;
+    }
+
+    let router = useRouter();
+    const createBlog = () => {
+        debugger
+        axios.post('/api/blogs', {
+            title: form.title,
+            intro: form.intro,
+            description: form.description,
+            paragraphs: paragraphsArr,
+            photos: photoStrArr,
+            order: order,
+            linkUrl: form.linkUrl,
+            linkDescription: form.linkDescription
+        })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+        router.push('/');    
+    }
+
 
     const appendPhoto = () => {
         let newInput = `phot-${input.length}`;
@@ -57,6 +104,7 @@ const Blog = (props: Props) => {
     const constructOrder = (blockType) => {
         let newOrder = [...order]
         newOrder.push(blockType)
+        debugger
         setOrder(newOrder)
     }
 
@@ -87,6 +135,10 @@ const Blog = (props: Props) => {
             [e.target.name]: e.target.value 
         })
     };
+
+    const postBlog = (e) => {
+        setIsSubmitting(true);
+    }
     
     return (
         <>
@@ -115,7 +167,7 @@ const Blog = (props: Props) => {
                     })}
                     <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full" onClick={appendPhoto}>Add Photo</button>    
                     <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full outline:none" onClick={appendParagraph}>Add Paragraph</button>
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full outline:none" type="submit" > Post Blog</button>
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full outline:none" type="submit" onClick={postBlog} > Post Blog</button>
                 </form>
 
             </div>
