@@ -19,13 +19,17 @@ const Blog = (props: Props) => {
     const [ photoStrArr, setPhotoStrArr ] = useState([])
     const [ paraCount, setParaCount ] = useState(1);
     const [ paragraphsArr, setParagraphsArr ] = useState([])
+    const [ order, setOrder ] = useState([]);
 
     const [form, setForm] = useState({
         title: '', 
         intro: '', 
         description: '', 
         paragraphs: [],
-        photos: []
+        photos: [],
+        order: [],
+        linkUrl: '',
+        linkDescription: ''
     })
 
 
@@ -38,47 +42,50 @@ const Blog = (props: Props) => {
     }, [input])
 
     const appendPhoto = () => {
-        let newInput = `photo-${input.length}`;
+        let newInput = `phot-${input.length}`;
         setInput(input.concat(newInput));
-        
+        constructOrder('photo')
     }
 
     const appendParagraph = () => {
         setParaCount(paraCount + 1);
         let newInput = `para-${paraCount}`;
         setInput(input.concat(newInput));
+        constructOrder('paragraph')
     }
 
-    const handleFileUpload = (value) => {
-        setPhotoStrArr(photoStrArr.concat(value))
+    const constructOrder = (blockType) => {
+        let newOrder = [...order]
+        newOrder.push(blockType)
+        setOrder(newOrder)
+    }
+
+    const handleFileUpload = (index, value) => {
+        let newArr = [...photoStrArr];
+        newArr[index] = value;
+        setPhotoStrArr(newArr);
+        setForm({
+            ...form,
+            photos: newArr
+        })
+        
     }
 
     const handleTextInput = (index, text) => {
-        debugger
-        // setForm(form.paragraphs.map((item, j) => {
-        //     if (j === index) {
-        //         return text;
-        //     } else {
-        //         return item;
-        //     }
-        // }))
         let newArr = [...paragraphsArr];
         newArr[index] = text;
         setParagraphsArr(newArr);
         setForm({
             ...form,
             paragraphs: newArr
-        })
-        debugger
+        })  
     }
 
     const handleChange = (e) => {
-        debugger
         setForm({
             ...form,
             [e.target.name]: e.target.value 
         })
-        
     };
     
     return (
@@ -100,14 +107,15 @@ const Blog = (props: Props) => {
                     {input.map((ipt, idx) => {
                     let word = ipt.slice(0,5);
  
-                    if (word == 'photo') {
-                        return <TestUpload key={idx} concatPhotoStr={handleFileUpload}/>
+                    if (word == 'phot-') {
+                        return <TestUpload key={idx} number={ipt} concatPhotoStr={handleFileUpload}/>
                     } else if (word == 'para-'){
                         return <TestParagraph key={idx} number={ipt} addText={handleTextInput}/>
                     }
                     })}
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full" onClick={appendPhoto}>Add Photo</button>
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full" onClick={appendPhoto}>Add Photo</button>    
                     <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full outline:none" onClick={appendParagraph}>Add Paragraph</button>
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full outline:none" type="submit" > Post Blog</button>
                 </form>
 
             </div>

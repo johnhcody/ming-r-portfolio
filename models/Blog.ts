@@ -7,6 +7,7 @@ interface IBlog extends Document {
     description: string;
     paragraphs: number[];
     photos: number[];
+    order: number[];
     linkUrl: string;
     linkDescription: string;
 }
@@ -17,6 +18,7 @@ const BlogSchema: Schema = new Schema({
     description: { type: String },
     paragraphs: { type: Array },
     photos: {type: Array },
+    order: {type: Array },
     linkUrl: { type: String },
     linkDescription: { type: String }
 })
