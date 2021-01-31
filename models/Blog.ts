@@ -10,6 +10,7 @@ interface IBlog extends Document {
     order: number[];
     linkUrl: string;
     linkDescription: string;
+    mainPhoto: string;
 }
 
 const BlogSchema: Schema = new Schema({
@@ -20,7 +21,8 @@ const BlogSchema: Schema = new Schema({
     photos: {type: Array },
     order: {type: Array },
     linkUrl: { type: String },
-    linkDescription: { type: String }
+    linkDescription: { type: String },
+    mainPhoto: { type: String }
 })
 
 module.exports = mongoose.models.Blog || mongoose.model<IBlog>('Blog', BlogSchema)

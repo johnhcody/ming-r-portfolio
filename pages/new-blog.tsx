@@ -6,6 +6,7 @@ import TestUpload from '../components/shared/TestUpload'
 import TestParagraph from '../components/shared/TestParagraph'
 import { Footer } from '../components/shared/Footer'
 import axios from 'axios'
+import Upload from '../components/shared/Upload'
 
 
 interface Props {
@@ -31,6 +32,7 @@ const NewBlog = (props: Props) => {
         intro: '', 
         description: '', 
         paragraphs: [],
+        mainPhoto: '',
         photos: [],
         linkUrl: '',
         linkDescription: ''
@@ -75,7 +77,8 @@ const NewBlog = (props: Props) => {
             photos: photoStrArr,
             order: order,
             linkUrl: form.linkUrl,
-            linkDescription: form.linkDescription
+            linkDescription: form.linkDescription,
+            mainPhoto: form.mainPhoto
         })
             .then(function (response) {
                 console.log(response);
@@ -121,6 +124,14 @@ const NewBlog = (props: Props) => {
         
     }
 
+    const handleMainPhoto = (key, value) => {
+        debugger
+        setForm({
+            ...form,
+            [key]: value
+        })
+    }
+
     const handleTextInput = (index, text) => {
         let newArr = [...paragraphsArr];
         newArr[index] = text;
@@ -158,6 +169,8 @@ const NewBlog = (props: Props) => {
                         <input onChange={handleChange} className="text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0" type="text" placeholder="Paste the URL of the original article" name="linkUrl"  />
                     <label className="text-2xl pt-4 pb-2" htmlFor="linkUrl">Link Text</label>
                         <input onChange={handleChange} className="text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" type="text" placeholder="How do you want the link text to appear?" name="linkDescription"  />
+                    <span>Upload your Main Photo</span>
+                    <Upload name={"mainPhoto"} sendPhotoString={handleMainPhoto} title={"Main Photo"} />
                     {input.map((ipt, idx) => {
                     let word = ipt.slice(0,5);
  
