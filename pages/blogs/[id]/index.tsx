@@ -36,6 +36,7 @@ const Blog = ({ blog }) => {
     return (
         <>
         <BaseLayout data={data} loading={loading}>
+            <h1>Hello from the blog Index</h1>
         </BaseLayout>
         <Footer />
         </>

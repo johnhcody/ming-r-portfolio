@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
-import { useGetUser } from '../actions/user'
+import { useGetUser } from '../../actions/user'
 
 
 interface Props {
@@ -17,7 +17,7 @@ export const ArticleCard = (props: Props) => {
                 return (
                     <div className="card-wrapper">
                         <div className="img-wrapper" >
-                            <Link href={`/${article._id}`}>
+                            <Link href={`/articles/${article._id}`}>
                                 <div className="hidden-text-wrapper" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
                                     <img src={article.mainPhoto == "" ? 'https://ming-portfolio-uploads.s3.ap-northeast-2.amazonaws.com/Mingkwan-Alt.png' : article.mainPhoto} alt="" />
                                     <div className="inside">
