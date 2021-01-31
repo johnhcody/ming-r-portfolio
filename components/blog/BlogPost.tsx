@@ -13,14 +13,13 @@ interface Props {
     linkUrl: string;
     linkDescription: string;
 }
-
+  
 
 export const BlogPost = (props: Props) => {
 
     const { blog } = props;
     const [hover, setHover] = useState(false)
     const truncatedText = blog.description.length > 150 ? blog.description.slice(0, 147) + "..." : blog.description
-    debugger
                 return (
                     <div className="max-w-xs rounded overflow-hidden shadow-lg my-12">
                         <img className="w-full" src={`${blog.photos[0]}`} alt="Sunset in the mountains" />
@@ -31,7 +30,7 @@ export const BlogPost = (props: Props) => {
                         </div>
                         <div className="px-6 py-4">
                             <Link
-                            href={`/${blog._id}`}>
+                            href={`/blogs/${blog._id}`}>
                                 <button className="bg-blue-500 rounded-full font-bold text-white px-4 py-3 transition duration-300 ease-in-out hover:bg-blue-600 mr-6" >Read More</button>
                             </Link>
                         </div>

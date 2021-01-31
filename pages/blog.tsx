@@ -20,7 +20,6 @@ const Blog = (props: Props) => {
 
     const { loading, data } = useGetUser();
     const blogs = Object.values(props);
-    debugger
     return (
         <>
             <BaseLayout data={data} loading={loading}>

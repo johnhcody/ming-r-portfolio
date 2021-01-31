@@ -38,7 +38,7 @@ const NewBlog = (props: Props) => {
     
     useEffect(() => {
         if (isSubmitting) {
-            debugger
+             
             if (Object.keys(errors).length === 0) {
                 createBlog();
             } else {
@@ -51,7 +51,7 @@ const NewBlog = (props: Props) => {
         e.preventDefault();
         let errs = validate();
         setErrors(errs);
-        debugger
+         
     }
 
     const validate = () => {
@@ -66,7 +66,7 @@ const NewBlog = (props: Props) => {
 
     let router = useRouter();
     const createBlog = () => {
-        debugger
+         
         axios.post('/api/blogs', {
             title: form.title,
             intro: form.intro,
@@ -93,7 +93,7 @@ const NewBlog = (props: Props) => {
         let newInput = `phot-${photoCount}`;
         setInput(input.concat(newInput));
         constructOrder('photo')
-        debugger
+         
     }
 
     const appendParagraph = () => {
@@ -106,7 +106,7 @@ const NewBlog = (props: Props) => {
     const constructOrder = (blockType) => {
         let newOrder = [...order]
         newOrder.push(blockType)
-        debugger
+         
         setOrder(newOrder)
     }
 
