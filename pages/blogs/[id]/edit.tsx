@@ -8,6 +8,7 @@ import { Footer } from '../../../components/shared/Footer'
 import TestUpload from '../../../components/shared/BlogPhotoUpload'
 import TestParagraph from '../../../components/shared/BlogParagraphUpload'
 import EditPhoto from '../../../components/shared/EditPhoto'
+import EditParagraph from '../../../components/shared/EditPargraph'
 
 const EditBlog = ({ blog }) => {
     const [form, setForm] = useState({
@@ -63,10 +64,11 @@ const EditBlog = ({ blog }) => {
         } 
     }, [errors])
 
-    const handleTextInput = (index, text) => {
-        let newArr = [...blog.photos];
-        newArr[index] = text;
+    const handleTextInput = (index, value) => {
+        let newArr = [...blog.paragraphs];
+        newArr[index] = value;
         setParagraphsArr(newArr);
+        debugger
         setForm({
             ...form,
             paragraphs: newArr
@@ -96,11 +98,9 @@ const EditBlog = ({ blog }) => {
     }
 
     const handleFileUpload = (index, value) => {
-        debugger
         let newArr = [...photoStrArr];
         newArr[index] = value;
         setPhotoStrArr(newArr);
-        debugger
         setForm({
             ...form,
             photos: newArr
@@ -111,16 +111,22 @@ const EditBlog = ({ blog }) => {
     const editInput = () => {
         // setReady(false)
         const bodyOrder = blog.order.slice();
-        const bodyPhotos = blog.photos.slice();
-        const bodyParagraphs = blog.paragraphs.slice();
+        // const bodyPhotos = blog.photos.slice();
+        // const bodyParagraphs = blog.paragraphs.slice();
         
+        const bodyPhotos = form.photos.slice()
+        const bodyParagraphs = form.paragraphs.slice()
+
         const body = bodyOrder.map((el, idx) => {
             if (el == 'photo') {
                 // return <img className="max-w-2xl  h-auto py-4" key={idx} src={`${bodyPhotos.shift()}`} alt=""/>
                 const nextPhoto = bodyPhotos.shift()
                 return <EditPhoto source={`${nextPhoto}`} photos={blog.photos} number={"photo" + (blog.photos.indexOf(nextPhoto + 1))} editPhotoArr={handleFileUpload} />
             } else {
-                return <textarea className="w-full h-72 p-3 my-3" key={idx} value={bodyParagraphs.shift()} ></textarea>
+                const nextParagraph = bodyParagraphs.shift()
+                const index = form.paragraphs.indexOf(nextParagraph)
+                // return <textarea className="w-full h-72 p-3 my-3" key={idx} value={paragraphsArr[blog.paragraphs.indexOf(nextParagraph)]} onChange={handleTextInput(blog.paragraphs.indexOf(nextParagraph))}></textarea>
+                return <EditParagraph sendInput={handleTextInput} value={nextParagraph} idx={index}/>
             }
         })
         
