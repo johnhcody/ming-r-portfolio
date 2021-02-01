@@ -37,13 +37,11 @@ const Blog = ({ blog }) => {
         const bodyParagraphs = blog.paragraphs.slice();
 
         const body = bodyOrder.map((el, idx) => {
-            debugger
             if (el == 'photo') {
                 return <img className="max-w-2xl  h-auto py-4" key={idx} src={`${bodyPhotos.shift()}`} alt=""/>
             } else {
                 return <p className="max-w-4xl py-4" key={idx} >{bodyParagraphs.shift()}</p>
             }
-            debugger
         })
 
         return (
