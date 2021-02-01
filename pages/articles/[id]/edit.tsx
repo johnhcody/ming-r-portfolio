@@ -114,17 +114,17 @@ const EditArticle = ({ article }) => {
                 <div className="new-form-wrapper">
                 <form onSubmit={handleSubmit}>
                             <label htmlFor="title">Title</label>
-                                <input type="text" placeholder="Grab their attention!" name="title" value={form.title} onChange={handleChange} />
+                                <input type="text" className="text-center" placeholder="Grab their attention!" name="title" value={form.title} onChange={handleChange} />
                             <label htmlFor="intro">Introduction</label>
-                                <textarea placeholder="Tell us a bit about your work!  This will appear on the main page." name="intro" value={form.intro} onChange={handleChange} />
+                                <textarea className="text-center"  placeholder="Tell us a bit about your work!  This will appear on the main page." name="intro" value={form.intro} onChange={handleChange} />
                             <label htmlFor="description">Description</label>
-                                <textarea placeholder="Go into more detail about the project.  This will appear when people view the specific project." name="description" value={form.description} onChange={handleChange} />
+                                <textarea className="text-center"  placeholder="Go into more detail about the project.  This will appear when people view the specific project." name="description" value={form.description} onChange={handleChange} />
                             <label htmlFor="linkUrl">Source Link</label>
-                                <input type="text" placeholder="Paste the URL of the original article" name="linkUrl" value={form.linkUrl} onChange={handleChange} />
+                                <input className="text-center" type="text" placeholder="Paste the URL of the original article" name="linkUrl" value={form.linkUrl} onChange={handleChange} />
                             <label htmlFor="linkUrl">Link Text</label>
-                                <input type="text" placeholder="How do you want the link text to appear?" name="linkDescription" value={form.linkDescription} onChange={handleChange} />
+                                <input className="text-center" type="text" placeholder="How do you want the link text to appear?" name="linkDescription" value={form.linkDescription} onChange={handleChange} />
                             <label htmlFor="body1">First Paragraph</label>
-                                <textarea placeholder="First Paragraph" name="body1" value={form.body1} onChange={handleChange} />
+                                <textarea className="text-center"  placeholder="First Paragraph" name="body1" value={form.body1} onChange={handleChange} />
                                     <img className="w-auto h-48" src={`${form.mainPhoto}`} alt=""/>
                                         <Upload name={"mainPhoto"} sendPhotoString={handleFileUpload} title={"Changing the Main Photo"}/>
 
@@ -134,17 +134,17 @@ const EditArticle = ({ article }) => {
                                         <Upload name={"photo2"} sendPhotoString={handleFileUpload} title={"Changing the Second Photo"}/>
                             
                             <label htmlFor="body1">Third Paragraph</label>
-                                <textarea placeholder="Third Paragraph" name="body3" value={form.body3} onChange={handleChange} />
+                                <textarea className="text-center" placeholder="Third Paragraph" name="body3" value={form.body3} onChange={handleChange} />
                                     <img className="w-auto h-48" src={`${form.photo3}`} alt=""/>
                                         <Upload name={"photo3"} sendPhotoString={handleFileUpload} title={"Changing the Third Photo"}/>
                             
                             <label htmlFor="body1">Fourth Paragraph</label>
-                                <textarea placeholder="Fourth Paragraph" name="body4" value={form.body4} onChange={handleChange} />
+                                <textarea className="text-center"  placeholder="Fourth Paragraph" name="body4" value={form.body4} onChange={handleChange} />
                                 <img className="w-auto h-48" src={`${form.photo4}`} alt=""/>
                                     <Upload name={"photo4"} sendPhotoString={handleFileUpload} title={"Changing the Fourth Photo"}/>
                             
                             <label htmlFor="body1">Fifth Paragraph</label>
-                                <textarea placeholder="Fifth Paragraph" name="body5" value={form.body5} onChange={handleChange} />
+                                <textarea className="text-center"  placeholder="Fifth Paragraph" name="body5" value={form.body5} onChange={handleChange} />
                                     <img className="w-auto h-48" src={`${form.photo5}`} alt=""/>
                                         <Upload name={"photo5"} sendPhotoString={handleFileUpload} title={"Changing the Fifth Photo"}/>
                             
