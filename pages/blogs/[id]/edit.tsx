@@ -3,10 +3,7 @@ import axios from 'axios'
 import { useRouter } from 'next/router'
 import BaseLayout from '../../../components/layouts/BaseLayout'
 import { useGetUser } from '../../../actions/user'
-import  Upload  from '../../../components/shared/Upload'
 import { Footer } from '../../../components/shared/Footer'
-import TestUpload from '../../../components/shared/BlogPhotoUpload'
-import TestParagraph from '../../../components/shared/BlogParagraphUpload'
 import EditPhoto from '../../../components/shared/EditPhoto'
 import EditParagraph from '../../../components/shared/EditPargraph'
 
@@ -65,6 +62,7 @@ const EditBlog = ({ blog }) => {
     }, [errors])
 
     const handleTextInput = (index, value) => {
+
         let newArr = [...blog.paragraphs];
         newArr[index] = value;
         setParagraphsArr(newArr);
@@ -73,6 +71,7 @@ const EditBlog = ({ blog }) => {
             ...form,
             paragraphs: newArr
         })  
+
     }
 
     const updateBlog = () => {
@@ -98,14 +97,20 @@ const EditBlog = ({ blog }) => {
     }
 
     const handleFileUpload = (index, value) => {
-        let newArr = [...photoStrArr];
-        newArr[index] = value;
-        setPhotoStrArr(newArr);
-        setForm({
-            ...form,
-            photos: newArr
-        })
-        
+        if (index !== 999) { 
+            let newArr = [...photoStrArr];
+            newArr[index] = value;
+            setPhotoStrArr(newArr);
+            setForm({
+                ...form,
+                photos: newArr
+            })
+        } else {
+            setForm({
+                ...form, 
+                mainPhoto: value
+            })
+        }
     }
 
     const editInput = () => {
@@ -151,7 +156,7 @@ const EditBlog = ({ blog }) => {
                         <input onChange={handleChange} value={form.linkUrl} className="text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0" type="text" placeholder="Paste the URL of the original article" name="linkUrl"  />
                     <label className="text-2xl pt-4 pb-2" htmlFor="linkDescription">Link Text</label>
                         <input onChange={handleChange} value={form.linkDescription} className="text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" type="text" placeholder="How do you want the link text to appear?" name="linkDescription"  />
-                    <EditPhoto source={blog.mainPhoto} number={0}/>
+                    <EditPhoto source={form.mainPhoto} number={'photo-1000'} editPhotoArr={handleFileUpload} />
                     
                     {editInput()}
                     <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full" >Save Changes</button>
