@@ -38,7 +38,7 @@ const Blog = ({ blog }) => {
 
         const body = bodyOrder.map((el, idx) => {
             if (el == 'photo') {
-                return <img className="max-w-2xl  h-auto py-4" key={idx} src={`${bodyPhotos.shift()}`} alt=""/>
+                return <img className="h-auto w-auto py-4 max-w-max max-h-48" key={idx} src={`${bodyPhotos.shift()}`} alt=""/>
             } else {
                 return <p className="max-w-4xl py-4" key={idx} >{bodyParagraphs.shift()}</p>
             }
@@ -56,7 +56,7 @@ const Blog = ({ blog }) => {
         <BaseLayout data={data} loading={loading}>
             <div className="flex justify-center items-center flex-col">
                 <h1 className="text-4xl py-4">{blog.title}</h1>
-                <img className="py-4" src={`${blog.mainPhoto}`} alt=""/>
+                <img className="h-72 w-auto py-4 max-w-xs" src={`${blog.mainPhoto}`} alt=""/>
                 <h1 className="max-w-screen-md py-4">{blog.description}</h1>
                 <div className="flex justify-center flex-col">
                     {blogBody()}

@@ -124,13 +124,11 @@ const EditBlog = ({ blog }) => {
 
         const body = bodyOrder.map((el, idx) => {
             if (el == 'photo') {
-                // return <img className="max-w-2xl  h-auto py-4" key={idx} src={`${bodyPhotos.shift()}`} alt=""/>
                 const nextPhoto = bodyPhotos.shift()
                 return <EditPhoto source={`${nextPhoto}`} photos={form.photos} number={"photo" + (form.photos.indexOf(nextPhoto + 1))} editPhotoArr={handleFileUpload} />
             } else {
                 const nextParagraph = bodyParagraphs.shift()
                 const index = form.paragraphs.indexOf(nextParagraph)
-                // return <textarea className="w-full h-72 p-3 my-3" key={idx} value={paragraphsArr[blog.paragraphs.indexOf(nextParagraph)]} onChange={handleTextInput(blog.paragraphs.indexOf(nextParagraph))}></textarea>
                 return <EditParagraph sendInput={handleTextInput} value={nextParagraph} idx={index}/>
             }
         })
@@ -149,9 +147,9 @@ const EditBlog = ({ blog }) => {
                     <label className="text-2xl pt-4 pb-2" htmlFor="title">Title</label>
                         <input type="text" onChange={handleChange} value={form.title} className="text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" placeholder="Grab their attention!" name="title"  />
                     <label className="text-2xl pt-4 pb-2" htmlFor="intro">Introduction</label>
-                        <textarea onChange={handleChange} value={form.intro} className="w-72 h-24 p-3 my-3" placeholder="Tell us a bit about your work!  This will appear on the main page." name="intro"  />
+                        <textarea onChange={handleChange} value={form.intro} className="w-72 h-24 p-3 my-3 border-2 border-gray-200 rounded-md" placeholder="Tell us a bit about your work!  This will appear on the main page." name="intro"  />
                     <label className="text-2xl pt-4 pb-2" htmlFor="description">Description</label>
-                        <textarea onChange={handleChange} value={form.description} className="w-full h-72 p-3 my-3" placeholder="Go into more detail about the project.  This will appear when people view the specific project." name="description"  />
+                        <textarea onChange={handleChange} value={form.description} className="w-full h-72 p-3 my-3 border-2 border-gray-200 rounded-md" placeholder="Go into more detail about the project.  This will appear when people view the specific project." name="description"  />
                     <label className="text-2xl pt-4 pb-2" htmlFor="linkUrl">Source Link</label>
                         <input onChange={handleChange} value={form.linkUrl} className="text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0" type="text" placeholder="Paste the URL of the original article" name="linkUrl"  />
                     <label className="text-2xl pt-4 pb-2" htmlFor="linkDescription">Link Text</label>
