@@ -3,23 +3,24 @@ import Link from 'next/link'
 import { useGetUser } from '../../actions/user'
 
 
-interface Props {
-    title: string;
-    intro: string;
-    description: string;
-    paragraphs: number[];
-    photos: number[];
-    order: number[];
-    linkUrl: string;
-    linkDescription: string;
-    mainPhoto: string;
+interface BlogPostProps {
+    blog: {
+        title: string;
+        intro: string;
+        description: string;
+        paragraphs: number[];
+        photos: number[];
+        order: number[];
+        linkUrl: string;
+        linkDescription: string;
+        mainPhoto: string;
+    }
 }
   
 
-export const BlogPost = (props: Props) => {
-    debugger
+const BlogPost: React.FC<BlogPostProps> = props => {
+
     const { blog } = props;
-    const [hover, setHover] = useState(false)
     const truncatedText = blog.description.length > 150 ? blog.description.slice(0, 147) + "..." : blog.description
                 return (
                     <div className="max-w-xs rounded overflow-hidden shadow-lg my-12 mx-8">

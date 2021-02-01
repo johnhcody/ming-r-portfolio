@@ -6,14 +6,23 @@ import { useGetUser } from '../actions/user'
 import axios from 'axios'
 import BlogPost from '../components/blog/BlogPost'
 
-interface Props {
-
+interface BlogProps {
+    blogs: {
+        title: string,
+        intro: string,
+        description: string,
+        paragraphs: number[],
+        photos: number[],
+        order: number[],
+        linkUrl: string,
+        linkDescription: string,
+        mainPhoto: string,
+        _id: string
+    }[];
 }
-interface State {
 
-}
 
-const Blog = (props: Props) => {
+const Blog: React.FC<BlogProps> = props => {
 
     const engLang = useLanguage();
     const toggleLang = useLanguageUpdate();

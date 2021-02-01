@@ -3,9 +3,6 @@ import React from 'react'
 interface Props {
     
 }
-interface State {
-    
-}
 
 const DownloadCv = (props: Props) => {
 

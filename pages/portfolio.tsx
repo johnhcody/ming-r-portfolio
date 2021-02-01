@@ -8,14 +8,31 @@ import { Footer } from '../components/shared/Footer'
 import { ArticleCard } from '../components/articles/ArticleCard'
 import { useGetUser } from '../actions/user'
 
-interface Props {
-
+interface PortfolioProps {
+    articles: {
+        title: string,
+        intro: string,
+        description: string,
+        body1: string,
+        body2: string,
+        body3: string,
+        body4: string,
+        body5: string,
+        mainPhoto: string,
+        photo2: string,
+        photo3: string,
+        photo4: string,
+        photo5: string,
+        linkUrl: string,
+        linkDescription: string,
+        _id: string
+    }[];
 }
 interface State {
 
 }
 
-const Portfolio = (props: Props) => {
+const Portfolio: React.FC<PortfolioProps> = props => {
 
     const [hover, setHover] = useState(false)
     const { loading, data } = useGetUser();
@@ -63,7 +80,6 @@ const Portfolio = (props: Props) => {
 Portfolio.getInitialProps = async () => {
     const res = await axios.get('/api/articles');
     const articles = res.data['data'];
-    //console.log(articles)
     return articles;
 }
 
