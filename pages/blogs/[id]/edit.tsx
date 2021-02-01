@@ -121,7 +121,7 @@ const EditBlog = ({ blog }) => {
             if (el == 'photo') {
                 // return <img className="max-w-2xl  h-auto py-4" key={idx} src={`${bodyPhotos.shift()}`} alt=""/>
                 const nextPhoto = bodyPhotos.shift()
-                return <EditPhoto source={`${nextPhoto}`} photos={blog.photos} number={"photo" + (blog.photos.indexOf(nextPhoto + 1))} editPhotoArr={handleFileUpload} />
+                return <EditPhoto source={`${nextPhoto}`} photos={form.photos} number={"photo" + (form.photos.indexOf(nextPhoto + 1))} editPhotoArr={handleFileUpload} />
             } else {
                 const nextParagraph = bodyParagraphs.shift()
                 const index = form.paragraphs.indexOf(nextParagraph)
