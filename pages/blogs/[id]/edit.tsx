@@ -5,8 +5,9 @@ import BaseLayout from '../../../components/layouts/BaseLayout'
 import { useGetUser } from '../../../actions/user'
 import  Upload  from '../../../components/shared/Upload'
 import { Footer } from '../../../components/shared/Footer'
-import TestUpload from '../../../components/shared/TestUpload'
-import TestParagraph from '../../../components/shared/TestParagraph'
+import TestUpload from '../../../components/shared/BlogPhotoUpload'
+import TestParagraph from '../../../components/shared/BlogParagraphUpload'
+import EditPhoto from '../../../components/shared/EditPhoto'
 
 const EditBlog = ({ blog }) => {
     const [form, setForm] = useState({
@@ -20,15 +21,11 @@ const EditBlog = ({ blog }) => {
         photos: blog.photos
     });
 
-    const [ paragraphsArr, setParagraphsArr ] = useState([]);
-    const [ photoStrArr, setPhotoStrArr ] = useState([]);
+    const [ paragraphsArr, setParagraphsArr ] = useState(blog.paragraphs);
+    const [ photoStrArr, setPhotoStrArr ] = useState(blog.photos);
     const { loading, data } = useGetUser();
     const [ errors, setErrors ] = useState({});
     const [ isSubmitting, setIsSubmitting ] = useState(false);
-    const [ paraCount, setParaCount ] = useState(1);
-    const [ photoCount, setPhotoCount ] = useState(1);
-    const [ order, setOrder ] = useState(blog.order);
-    const [ ready, setReady ] = useState(true);
 
     const router = useRouter();
 
@@ -62,13 +59,11 @@ const EditBlog = ({ blog }) => {
             } else {
                 setIsSubmitting(false);
             }
-        } else if (ready) {
-            editInput();
-        }
+        } 
     }, [errors])
 
     const handleTextInput = (index, text) => {
-        let newArr = [...paragraphsArr];
+        let newArr = [...blog.photos];
         newArr[index] = text;
         setParagraphsArr(newArr);
         setForm({
@@ -111,93 +106,41 @@ const EditBlog = ({ blog }) => {
     }
 
     const editInput = () => {
-        const newArr = [...blog.order]
-        debugger
-        // for (let i = 0; i < newArr.length; i++) {
-        //     if (newArr[i] == 'photo') {
-                
-        //         setPhotoCount(prevState => prevState + 1);
-        //         let newPhotoInput = `phot-${photoCount}`;
-        //         let photoOrderCopy = order.slice();
-        //         photoOrderCopy[i] = newPhotoInput;
-        //         setOrder(photoOrderCopy)
-        //         debugger
-        //     } else if (newArr[i] = 'paragraph') {
-        //         let newParaCount = paraCount + 1;
-        //         setParaCount(newParaCount) 
-        //         let newParaInput = `para-${newParaCount}`;
-        //         let orderCopy = order.slice();
-        //         orderCopy[i] = newParaInput
-        //         setOrder(orderCopy)
-        //         debugger
-        //     }
-        // }
+        const bodyOrder = blog.order.slice();
+        const bodyPhotos = blog.photos.slice();
+        const bodyParagraphs = blog.paragraphs.slice();
 
-        for (let i = 0; i < order.length; i++) {
-            let phCount = 1;
-            let paCount = 1;
-            debugger
-            if (order[i] == 'photo') {
-                let newOrder = [...order]
-                newOrder[i] = 'phot-' + phCount;
-                setOrder(newOrder)
-                phCount += 1;
-                debugger
-            } else if (order[i] = 'paragraph') {
-                let newOrder = [...order]
-                newOrder[i] = 'para-' + paCount;
-                setOrder(newOrder)
-                paCount += 1;
-                debugger
+        const body = bodyOrder.map((el, idx) => {
+            if (el == 'photo') {
+                // return <img className="max-w-2xl  h-auto py-4" key={idx} src={`${bodyPhotos.shift()}`} alt=""/>
+                return <EditPhoto source={`${bodyPhotos.shift()}`} photos={blog.photos} number={blog.photos.indexOf(bodyPhotos.shift())} editPhotoArr={handleFileUpload} />
+            } else {
+                return <textarea className="w-full h-72 p-3 my-3" key={idx} value={bodyParagraphs.shift()} ></textarea>
             }
-        }
-        setReady(false);
-        // newArr.map((el,idx) => {
-        //     if (el == 'photo') {
-        //         debugger
-        //         setPhotoCount(photoCount + 1)
-        //         let newInput = `phot-${photoCount}`;
-        //         setOrder(order.concat(newInput))
-        //     } else if (el == 'paragraph') {
-        //         debugger
-        //         setParaCount(paraCount + 1) 
-        //         let newInput = `phot-${paraCount}`;
-        //         setOrder(order.concat(newInput))
-        //     }
-        // })
-        debugger
+        })
+
+        return (
+            <div className="flex justify-center flex-col items-center w-full" >{body}</div>
+            )
     }
 
     return (
         <>
         <BaseLayout data={data} loading={loading}>
             <div className="flex w-full justify-center">
-                <form className="flex flex-col items-center" onSubmit={handleSubmit}>
+                <form className="flex flex-col items-center w-3/4" onSubmit={handleSubmit}>
                     <h1 className="text-4xl">Edit your Blog Post</h1>
                     <label className="text-2xl pt-4 pb-2" htmlFor="title">Title</label>
                         <input type="text" onChange={handleChange} value={form.title} className="text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" placeholder="Grab their attention!" name="title"  />
                     <label className="text-2xl pt-4 pb-2" htmlFor="intro">Introduction</label>
                         <textarea onChange={handleChange} value={form.intro} className="w-72 h-24 p-3 my-3" placeholder="Tell us a bit about your work!  This will appear on the main page." name="intro"  />
                     <label className="text-2xl pt-4 pb-2" htmlFor="description">Description</label>
-                        <textarea onChange={handleChange} value={form.description} className="w-72 h-72 p-3 my-3" placeholder="Go into more detail about the project.  This will appear when people view the specific project." name="description"  />
+                        <textarea onChange={handleChange} value={form.description} className="w-full h-72 p-3 my-3" placeholder="Go into more detail about the project.  This will appear when people view the specific project." name="description"  />
                     <label className="text-2xl pt-4 pb-2" htmlFor="linkUrl">Source Link</label>
                         <input onChange={handleChange} value={form.linkUrl} className="text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0" type="text" placeholder="Paste the URL of the original article" name="linkUrl"  />
                     <label className="text-2xl pt-4 pb-2" htmlFor="linkDescription">Link Text</label>
                         <input onChange={handleChange} value={form.linkDescription} className="text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" type="text" placeholder="How do you want the link text to appear?" name="linkDescription"  />
-                        {order.map((el, idx) => {
-                    
-
-                    // let word = ipt == "photo"
-                    // as you map through the order, create a variable that matches what the TestUpload and TestParagraph are looking for, and then use state to keep track of the number (will be use later to index into the array)
-                    //useState to add to paraCount and photoCount, then display the correct text/photo from that index
-                    if (el.slice(0,4) == 'phot') {
-                        //setPhotoCount(photoCount + 1)
-                        return <TestUpload key={idx} number={el} concatPhotoStr={handleFileUpload}/>
-                    } else if (el == 'para'){
-                        //setPhotoCount(paraCount + 1)
-                        return <TestParagraph key={idx} number={el} addText={handleTextInput}/>
-                    }
-                    })}
+                    {editInput()}
                     <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full" >Save Changes</button>
                 </form>
 

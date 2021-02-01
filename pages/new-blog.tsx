@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import BaseLayout from '../components/layouts/BaseLayout'
 import { useGetUser } from '../actions/user'
 import { useRouter } from 'next/router'
-import TestUpload from '../components/shared/TestUpload'
-import TestParagraph from '../components/shared/TestParagraph'
+import BlogPhotoUpload from '../components/shared/BlogPhotoUpload'
+import BlogParagraphUpload from '../components/shared/BlogParagraphUpload'
 import { Footer } from '../components/shared/Footer'
 import axios from 'axios'
 import Upload from '../components/shared/Upload'
@@ -175,9 +175,9 @@ const NewBlog = (props: Props) => {
                     let word = ipt.slice(0,5);
  
                     if (word == 'phot-') {
-                        return <TestUpload key={idx} number={ipt} concatPhotoStr={handleFileUpload}/>
+                        return <BlogPhotoUpload key={idx} number={ipt} sendPhotoStr={handleFileUpload}/>
                     } else if (word == 'para-'){
-                        return <TestParagraph key={idx} number={ipt} addText={handleTextInput}/>
+                        return <BlogParagraphUpload key={idx} number={ipt} addText={handleTextInput}/>
                     }
                     })}
                     <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full" onClick={appendPhoto}>Add Photo</button>    

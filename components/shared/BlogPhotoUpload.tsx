@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export default function TestUpload({ number, concatPhotoStr }) {
+export default function TestUpload({ number, sendPhotoStr }) {
 
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
@@ -24,7 +24,7 @@ export default function TestUpload({ number, concatPhotoStr }) {
         if (upload.ok) {
             debugger
             console.log('Uploaded successfully!');
-            concatPhotoStr(index, `https://ming-portfolio-uploads.s3.ap-northeast-2.amazonaws.com/${filename}`)
+            sendPhotoStr(index, `https://ming-portfolio-uploads.s3.ap-northeast-2.amazonaws.com/${filename}`)
             setLoading(false);
             setSuccess(true);
         } else {
