@@ -125,27 +125,27 @@ const EditArticle = ({ article }) => {
                                 <input type="text" placeholder="How do you want the link text to appear?" name="linkDescription" value={form.linkDescription} onChange={handleChange} />
                             <label htmlFor="body1">First Paragraph</label>
                                 <textarea placeholder="First Paragraph" name="body1" value={form.body1} onChange={handleChange} />
-                                    <img src={`${form.mainPhoto}`} alt=""/>
+                                    <img className="w-auto h-48" src={`${form.mainPhoto}`} alt=""/>
                                         <Upload name={"mainPhoto"} sendPhotoString={handleFileUpload} title={"Changing the Main Photo"}/>
 
                             <label htmlFor="body1">Second Paragraph</label>
                                 <textarea placeholder="Second Paragraph" name="body2" value={form.body2} onChange={handleChange} />
-                                    <img src={`${form.photo2}`} alt=""/>
+                                    <img className="w-auto h-48" src={`${form.photo2}`} alt=""/>
                                         <Upload name={"photo2"} sendPhotoString={handleFileUpload} title={"Changing the Second Photo"}/>
                             
                             <label htmlFor="body1">Third Paragraph</label>
                                 <textarea placeholder="Third Paragraph" name="body3" value={form.body3} onChange={handleChange} />
-                                    <img src={`${form.photo3}`} alt=""/>
+                                    <img className="w-auto h-48" src={`${form.photo3}`} alt=""/>
                                         <Upload name={"photo3"} sendPhotoString={handleFileUpload} title={"Changing the Third Photo"}/>
                             
                             <label htmlFor="body1">Fourth Paragraph</label>
                                 <textarea placeholder="Fourth Paragraph" name="body4" value={form.body4} onChange={handleChange} />
-                                <img src={`${form.photo4}`} alt=""/>
+                                <img className="w-auto h-48" src={`${form.photo4}`} alt=""/>
                                     <Upload name={"photo4"} sendPhotoString={handleFileUpload} title={"Changing the Fourth Photo"}/>
                             
                             <label htmlFor="body1">Fifth Paragraph</label>
                                 <textarea placeholder="Fifth Paragraph" name="body5" value={form.body5} onChange={handleChange} />
-                                    <img src={`${form.photo5}`} alt=""/>
+                                    <img className="w-auto h-48" src={`${form.photo5}`} alt=""/>
                                         <Upload name={"photo5"} sendPhotoString={handleFileUpload} title={"Changing the Fifth Photo"}/>
                             
                             <button>Save Changes</button>

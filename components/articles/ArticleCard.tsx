@@ -30,7 +30,7 @@ export const ArticleCard = (props: Props) => {
                         <h2>{article.intro}</h2>
                         <a href={`${article.link}`} target="_blank">Check out the source</a>
                         <div className="idx-itm-btn-wrapper">
-                            {data && data.name == "john.haner.cody@gmail.com" ? <Link href={`/${article._id}/edit`}>
+                            {data && data.name == "john.haner.cody@gmail.com" ? <Link href={`/articles/${article._id}/edit`}>
                                 <button>Edit</button>
                             </Link> : null}
                             

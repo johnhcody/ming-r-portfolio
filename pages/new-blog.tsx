@@ -128,7 +128,7 @@ const NewBlog = (props: Props) => {
         debugger
         setForm({
             ...form,
-            [key]: value
+            'mainPhoto': value
         })
     }
 
