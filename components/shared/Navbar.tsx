@@ -26,7 +26,7 @@ export const NavBar = (props: Props) => {
                 Projects
                 </Link>
                 <Link
-                href="/portfolio">
+                href="/blog">
                 Blog
                 </Link>
                 <Link
@@ -51,7 +51,7 @@ export const NavBar = (props: Props) => {
                     โครงการ
                 </Link>
                 <Link
-                    href="/portfolio">
+                    href="/blog">
                     บล็อก
                 </Link>
                 <Link

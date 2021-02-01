@@ -5,7 +5,7 @@ import axios from 'axios'
 import articles from './api/articles'
 import Link from 'next/link';
 import { Footer } from '../components/shared/Footer'
-import { ArticleCard } from '../components/ArticleCard'
+import { ArticleCard } from '../components/articles/ArticleCard'
 import { useGetUser } from '../actions/user'
 
 interface Props {
@@ -19,8 +19,8 @@ const Portfolio = (props: Props) => {
 
     const [hover, setHover] = useState(false)
     const { loading, data } = useGetUser();
-    const articles = Object.values(props);
-
+    const articles = Object.values(props)
+    debugger
         return (
             <>
             <BaseLayout loading={loading} data={data}>

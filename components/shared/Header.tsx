@@ -31,6 +31,8 @@ export const Header = (props: Props) => {
         document.body.style.height = "auto"; 
     }
 
+
+
     const LogoutLink = () => <a href="/api/logout">Logout</a>
     //debugger
     return (
@@ -68,25 +70,25 @@ export const Header = (props: Props) => {
             }}>
                 {
                     engLang ? <div className="modal-link-wrapper">
-                        <Link href="/about">
-                            <a> About </a>
+                        <Link  href="/about">
+                            <a onClick={closeModal} > About </a>
                         </Link>
                         <Link href="/portfolio">
-                            <a> Articles </a>
+                            <a onClick={closeModal} > Articles </a>
                         </Link>
                         <Link href="/cv">
-                            <a> Contact </a>
+                            <a onClick={closeModal} > Contact </a>
                         </Link>
                         <a></a>
                     </div> : <div className="modal-link-wrapper">
                             <Link href="/about">
-                                <a> เกี่ยวกับมิ่งขวัญ </a>
+                                <a onClick={closeModal} > เกี่ยวกับมิ่งขวัญ </a>
                             </Link>
                             <Link href="/portfolio">
-                                <a> บทความ </a>
+                                <a onClick={closeModal} > บทความ </a>
                             </Link>
                             <Link href="/cv">
-                                <a> ติดต่อ </a>
+                                <a onClick={closeModal} > ติดต่อ </a>
                             </Link>
                             <a></a>
                         </div>
