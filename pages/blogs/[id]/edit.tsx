@@ -26,6 +26,7 @@ const EditBlog = ({ blog }) => {
     const { loading, data } = useGetUser();
     const [ errors, setErrors ] = useState({});
     const [ isSubmitting, setIsSubmitting ] = useState(false);
+    const [ ready, setReady ] = useState(true);
 
     const router = useRouter();
 
@@ -95,9 +96,11 @@ const EditBlog = ({ blog }) => {
     }
 
     const handleFileUpload = (index, value) => {
+        debugger
         let newArr = [...photoStrArr];
         newArr[index] = value;
         setPhotoStrArr(newArr);
+        debugger
         setForm({
             ...form,
             photos: newArr
@@ -106,24 +109,26 @@ const EditBlog = ({ blog }) => {
     }
 
     const editInput = () => {
+        // setReady(false)
         const bodyOrder = blog.order.slice();
         const bodyPhotos = blog.photos.slice();
         const bodyParagraphs = blog.paragraphs.slice();
-
+        
         const body = bodyOrder.map((el, idx) => {
             if (el == 'photo') {
                 // return <img className="max-w-2xl  h-auto py-4" key={idx} src={`${bodyPhotos.shift()}`} alt=""/>
-                return <EditPhoto source={`${bodyPhotos.shift()}`} photos={blog.photos} number={blog.photos.indexOf(bodyPhotos.shift())} editPhotoArr={handleFileUpload} />
+                const nextPhoto = bodyPhotos.shift()
+                return <EditPhoto source={`${nextPhoto}`} photos={blog.photos} number={"photo" + (blog.photos.indexOf(nextPhoto + 1))} editPhotoArr={handleFileUpload} />
             } else {
                 return <textarea className="w-full h-72 p-3 my-3" key={idx} value={bodyParagraphs.shift()} ></textarea>
             }
         })
-
+        
         return (
             <div className="flex justify-center flex-col items-center w-full" >{body}</div>
             )
     }
-
+    //debugger
     return (
         <>
         <BaseLayout data={data} loading={loading}>
@@ -140,6 +145,8 @@ const EditBlog = ({ blog }) => {
                         <input onChange={handleChange} value={form.linkUrl} className="text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0" type="text" placeholder="Paste the URL of the original article" name="linkUrl"  />
                     <label className="text-2xl pt-4 pb-2" htmlFor="linkDescription">Link Text</label>
                         <input onChange={handleChange} value={form.linkDescription} className="text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" type="text" placeholder="How do you want the link text to appear?" name="linkDescription"  />
+                    <EditPhoto source={blog.mainPhoto} number={0}/>
+                    
                     {editInput()}
                     <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full" >Save Changes</button>
                 </form>

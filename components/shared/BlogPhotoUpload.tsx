@@ -25,6 +25,7 @@ export default function TestUpload({ number, sendPhotoStr }) {
             debugger
             console.log('Uploaded successfully!');
             sendPhotoStr(index, `https://ming-portfolio-uploads.s3.ap-northeast-2.amazonaws.com/${filename}`)
+            debugger
             setLoading(false);
             setSuccess(true);
         } else {
@@ -33,12 +34,14 @@ export default function TestUpload({ number, sendPhotoStr }) {
         }
     };
 
+    //check out num...why is there two dashes?
     const num = number.split('-')[1];
     const index = parseInt(num) - 1;
 
     if (success) {
+        //debugger
         return (
-            <div className="upload-wrapper">
+            <div className="flex flex-col items-center justify-center w-1/4">
                 <p className="py-4" >Uploaded Successfully</p>
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
                 <circle className="path circle" fill="none" stroke="#73AF55" strokeWidth="6" strokeMiterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
@@ -47,10 +50,12 @@ export default function TestUpload({ number, sendPhotoStr }) {
             </div>
         )
     } else if (loading) {
+        //debugger
         return (
             <div className="loader"></div>
         )
     } else {
+        //debugger
         return (
             <div className="flex w-full items-center justify-center bg-grey-lighter py-4">
                 <label className="w-64 flex flex-col items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue ">

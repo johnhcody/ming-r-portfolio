@@ -13,7 +13,6 @@ const EditPhoto = (props: Props) => {
     const [willUpload, setWillUpload] = useState(false);
 
     if (!willUpload) {
-
         return (
             <div className="flex flex-col">
                 <img className="max-w-2xl  h-auto py-4"  src={`${props.source}`} alt=""/>
@@ -21,6 +20,7 @@ const EditPhoto = (props: Props) => {
             </div>
     )
     } else {
+        debugger
         return (
             <div className="flex flex-col">
                 <img className="max-w-2xl  h-auto py-4"  src={`${props.source}`} alt=""/>
