@@ -56,7 +56,6 @@ const EditArticle = ({ article }) => {
         if (!form.title) {
             err['title'] = "Title is required";
         }
-
         return err;
     }
 

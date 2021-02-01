@@ -18,6 +18,10 @@ const EditBlog = ({ blog }) => {
     });
 
     const { loading, data } = useGetUser();
+    const [errors, setErrors] = useState({});
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const router = useRouter();
 
     const handleChange = (e) => {
         setForm({
@@ -25,6 +29,53 @@ const EditBlog = ({ blog }) => {
             [e.target.name]: e.target.value
         })
     };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        let errs = validate();
+        setErrors(errs);
+        setIsSubmitting(true);
+    };
+
+    const validate = () => {
+        let err = {};
+
+        if (!form.title) {
+            err['title'] = "Title is required";
+        }
+        return err;
+    }
+
+    useEffect(() => {
+        if (isSubmitting) {
+            if (Object.keys(errors).length === 0) {
+                updateBlog();
+            } else {
+                setIsSubmitting(false);
+            }
+        }
+    }, [errors])
+
+
+    const updateBlog = () => {
+
+        axios.put(`/api/blogs/${router.query.id}`, {
+            title: form.title,
+            intro: form.intro,
+            description: form.description,
+            mainPhoto: form.mainPhoto,
+            linkUrl: form.linkUrl,
+            linkDescription: form.linkDescription
+        })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+        router.push('/');
+    }
 
     return (
         <>
@@ -53,9 +104,7 @@ const EditBlog = ({ blog }) => {
                         return <TestParagraph key={idx} number={ipt} addText={handleTextInput}/>
                     }
                     })} */}
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full" onClick={appendPhoto}>Add Photo</button>    
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full outline:none" onClick={appendParagraph}>Add Paragraph</button>
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full outline:none" type="submit" onClick={postBlog} > Post Blog</button>
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full" >Save Changes</button>
                 </form>
 
             </div>

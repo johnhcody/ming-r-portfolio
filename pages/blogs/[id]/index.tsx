@@ -64,6 +64,9 @@ const Blog = ({ blog }) => {
                     {blogBody()}
                 </div>
                 <button onClick={handleDelete} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full outline:none" >Delete</button>
+                <Link href={`/blogs/${blog._id}/edit`}>
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full outline:none" >Edit</button>
+                </Link>
             </div>
         </BaseLayout>
         <Footer />
