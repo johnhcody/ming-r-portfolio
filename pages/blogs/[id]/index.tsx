@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { NextPage } from 'next';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import BaseLayout from '../../../components/layouts/BaseLayout';
@@ -6,8 +7,23 @@ import Link from 'next/link';
 import { Footer } from '../../../components/shared/Footer'
 import { useGetUser } from '../../../actions/user'
 
+interface Props {
+    blog: {
+        title: string;
+        intro: string;
+        description: string;
+        paragraphs: number[];
+        photos: number[];
+        order: number[];
+        linkUrl: string;
+        linkDescription: string;
+        mainPhoto: string;
+        _id: string;
+    }
+}
 
-const Blog = ({ blog }) => {
+
+const Blog: NextPage<Props> = ({ blog }) => {
 
     const [isDeleting, setIsDeleting] = useState(false);
     const router = useRouter();

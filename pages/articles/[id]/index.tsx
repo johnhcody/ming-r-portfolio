@@ -1,3 +1,5 @@
+import React from 'react'
+import { NextPage } from 'next';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
@@ -6,10 +8,29 @@ import Link from 'next/link';
 import { Footer } from '../../../components/shared/Footer'
 import { useGetUser } from '../../../actions/user'
 
+interface Props {
+    article: {
+        title: string;
+        intro: string;
+        description: string;
+        body1: string;
+        body2: string;
+        body3: string;
+        body4: string;
+        body5: string;
+        mainPhoto: string;
+        photo2: string;
+        photo3: string;
+        photo4: string;
+        photo5: string;
+        linkUrl: string;
+        linkDescription: string;
+        _id: string;
+    };
+}
 
-const Article = ({ article }) => {
+const Article: NextPage<Props> = ({ article }) => {
 
-    const [confirm, setConfirm] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
     const router = useRouter();
 

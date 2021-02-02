@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { NextPage } from 'next';
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import BaseLayout from '../../../components/layouts/BaseLayout'
@@ -7,7 +8,23 @@ import { Footer } from '../../../components/shared/Footer'
 import EditPhoto from '../../../components/shared/EditPhoto'
 import EditParagraph from '../../../components/shared/EditPargraph'
 
-const EditBlog = ({ blog }) => {
+interface Props {
+    blog: {
+        title: string;
+        intro: string;
+        description: string;
+        paragraphs: number[];
+        photos: number[];
+        order: number[];
+        linkUrl: string;
+        linkDescription: string;
+        mainPhoto: string;
+        _id: string;
+    }
+}
+
+
+const EditBlog: NextPage<Props> = ({ blog }) => {
     const [form, setForm] = useState({
         title: blog.title, 
         intro: blog.intro, 

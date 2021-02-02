@@ -1,9 +1,9 @@
-import Link from 'next/link'
+import { NextPage } from 'next';
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import BaseLayout from '../../../components/layouts/BaseLayout'
-import Article from '../../../models/Article'
+// import Article from '../../../models/Article'
 import { useGetUser } from '../../../actions/user'
 import  Upload  from '../../../components/shared/Upload'
 import { Footer } from '../../../components/shared/Footer'
@@ -25,12 +25,12 @@ interface Props {
         photo5: string;
         linkUrl: string;
         linkDescription: string;
+        _id: string;
     };
 }
 
 
 const EditArticle:NextPage<Props> = ({ article }) => {
-    //debugger
     const [form, setForm] = useState({
         title: article.title, 
         intro: article.intro, 
@@ -46,7 +46,7 @@ const EditArticle:NextPage<Props> = ({ article }) => {
         photo4: article.photo4,
         photo5: article.photo5,
         linkUrl: article.linkUrl,
-        linkDescription: article.linkDescription,
+        linkDescription: article.linkDescription
 
     });
 
@@ -178,10 +178,8 @@ const EditArticle:NextPage<Props> = ({ article }) => {
 }
 
 EditArticle.getInitialProps = async ({ query: { id } }) => {
-    debugger
     const res = await axios.get(`/api/articles/${id}`)
     const article = res.data['data'];
-    debugger
     return { article: article }
 }
 
