@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
-import { useLanguage, useLanguageUpdate } from '../../context/languageContext'
+import { useLanguage } from '../../context/languageContext'
 
 
 interface Props {
-
+    fixToTop: string;
 }
 
 
@@ -12,8 +12,8 @@ const NavBar: React.FC<Props> = (props: Props) => {
     const engLang = useLanguage();
     if (engLang) {
         return (
-            <nav className="bg-white p-2 mt-0 fixed w-full z-10 top-0">
-                <div className="flex justify-around min-h-full items-center flex-col sm:flex-row">
+            <nav className={`bg-white p-2 w-full ${props.fixToTop}`} >
+                <div className={`flex justify-around min-h-full items-center flex-col sm:flex-row `}>
                     <Link
                     href="/about" ><a className="text-3xl py-2 my-2 px-4 hover:no-underline hover:bg-blue hover:text-white rounded-md">About</a>
                     </Link>

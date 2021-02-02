@@ -7,6 +7,8 @@ import { useGetUser } from '../../../actions/user'
 import Footer from '../../../components/shared/Footer'
 import EditPhoto from '../../../components/shared/EditPhoto'
 import EditParagraph from '../../../components/shared/EditPargraph'
+import NavBar from '../../../components/shared/Navbar'
+
 
 interface Props {
     blog: {
@@ -44,6 +46,20 @@ const EditBlog: NextPage<Props> = ({ blog }) => {
     const [ ready, setReady ] = useState(true);
 
     const router = useRouter();
+    const [ scrolled, setScrolled ] = useState(false);
+
+    useEffect(() => {
+
+        window.addEventListener("scroll", handleScroll);
+      }, []);
+
+      const handleScroll = () => {
+        if (window.pageYOffset > 47 && window.pageYOffset < 900) {
+            setScrolled(true)
+        } else {
+            setScrolled(false)
+        }
+    }
 
     const handleChange = (e) => {
         setForm({
@@ -152,6 +168,7 @@ const EditBlog: NextPage<Props> = ({ blog }) => {
     return (
         <>
         <BaseLayout data={data} loading={loading}>
+        {scrolled ? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
             <div className="flex w-full justify-center">
                 <form className="flex flex-col items-center w-3/4" onSubmit={handleSubmit}>
                     <h1 className="text-4xl">Edit your Blog Post</h1>

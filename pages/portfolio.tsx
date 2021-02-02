@@ -53,7 +53,7 @@ const Portfolio: NextPage<PortfolioProps> = props => {
         return (
             <>
             <BaseLayout loading={loading} data={data}>
-            {scrolled ? <NavBar /> : null}
+            {scrolled ? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
             <div className="portfolio-wrapper">
 
                 <div className="title-wrapper">

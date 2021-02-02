@@ -6,6 +6,8 @@ import BaseLayout from '../../../components/layouts/BaseLayout'
 import { useGetUser } from '../../../actions/user'
 import  Upload  from '../../../components/shared/Upload'
 import Footer from '../../../components/shared/Footer'
+import NavBar from '../../../components/shared/Navbar'
+
 
 interface Props {
     article: {
@@ -48,6 +50,21 @@ const EditArticle:NextPage<Props> = ({ article }) => {
         linkDescription: article.linkDescription
 
     });
+
+    const [ scrolled, setScrolled ] = useState(false);
+
+    useEffect(() => {
+
+        window.addEventListener("scroll", handleScroll);
+      }, []);
+
+      const handleScroll = () => {
+        if (window.pageYOffset > 47 && window.pageYOffset < 900) {
+            setScrolled(true)
+        } else {
+            setScrolled(false)
+        }
+    }
 
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [errors, setErrors] = useState({});
@@ -126,6 +143,7 @@ const EditArticle:NextPage<Props> = ({ article }) => {
 
     return (
         <BaseLayout data={data} loading={loading}>
+            {scrolled ? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
             <div className="form-container">
                 <h1>Update your Article</h1>
                 <div className="new-form-wrapper">

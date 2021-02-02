@@ -6,6 +6,7 @@ import BaseLayout from '../../../components/layouts/BaseLayout';
 import Link from 'next/link';
 import Footer from '../../../components/shared/Footer'
 import { useGetUser } from '../../../actions/user'
+import NavBar from '../../../components/shared/Navbar'
 
 interface Props {
     blog: {
@@ -27,6 +28,20 @@ const Blog: NextPage<Props> = ({ blog }) => {
 
     const [isDeleting, setIsDeleting] = useState(false);
     const router = useRouter();
+    const [ scrolled, setScrolled ] = useState(false);
+
+    useEffect(() => {
+
+        window.addEventListener("scroll", handleScroll);
+      }, []);
+
+      const handleScroll = () => {
+        if (window.pageYOffset > 47 && window.pageYOffset < 900) {
+            setScrolled(true)
+        } else {
+            setScrolled(false)
+        }
+    }
 
 
     useEffect(() => {
@@ -70,6 +85,7 @@ const Blog: NextPage<Props> = ({ blog }) => {
     return (
         <>
         <BaseLayout data={data} loading={loading}>
+        {scrolled ? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
             <div className="flex justify-center items-center flex-col">
                 <h1 className="text-4xl py-4">{blog.title}</h1>
                 <img className="h-72 w-auto py-4 max-w-xs" src={`${blog.mainPhoto}`} alt=""/>
