@@ -28,6 +28,7 @@ const BlogPhotoUpload: React.FC<Props> = ({ photoNumber, sendPhotoStr }) => {
         });
 
         if (upload.ok) {
+            debugger
             console.log('Uploaded successfully!');
             sendPhotoStr(index, `https://ming-portfolio-uploads.s3.ap-northeast-2.amazonaws.com/${filename}`)
             setLoading(false);

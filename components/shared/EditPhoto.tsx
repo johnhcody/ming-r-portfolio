@@ -19,6 +19,7 @@ const EditPhoto: React.FC<Props> = props => {
             </div>
     )
     } else {
+        // debugger
         return (
             <div className="flex flex-col">
                 <img className="h-72 w-auto py-4"  src={`${props.source}`} alt=""/>

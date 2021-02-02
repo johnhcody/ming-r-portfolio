@@ -44,7 +44,6 @@ const EditBlog: NextPage<Props> = ({ blog }) => {
     const { loading, data } = useGetUser();
     const [ errors, setErrors ] = useState({});
     const [ isSubmitting, setIsSubmitting ] = useState(false);
-    const [ ready, setReady ] = useState(true);
 
     const router = useRouter();
     const [ scrolled, setScrolled ] = useState(false);
@@ -144,6 +143,7 @@ const EditBlog: NextPage<Props> = ({ blog }) => {
     }
 
     const handleFileUpload = (index, value) => {
+        debugger
         if (index !== 999) { 
             let newArr = [...photoStrArr];
             newArr[index] = value;
@@ -182,7 +182,6 @@ const EditBlog: NextPage<Props> = ({ blog }) => {
                     <EditBody bodyOrder={blog.order} bodyParagraphs={form.paragraphs} bodyPhotos={form.photos} sendInput={handleTextInput} handleFileUpload={handleFileUpload}/>
                     <button className="focus:outline-none focus:ring focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white hover:text-red-500 rounded-full font-bold px-4 py-3 my-2 transition duration-300 ease-in-out mr-6" >Save Changes</button>
                 </form>
-
             </div>
         </BaseLayout>
         <Footer />

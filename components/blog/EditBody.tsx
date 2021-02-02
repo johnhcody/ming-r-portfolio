@@ -11,19 +11,16 @@ interface Props {
 }
 
 const EditBody: React.FC<Props> = ({ bodyOrder, bodyParagraphs, bodyPhotos, sendInput, handleFileUpload }) => {
-    debugger
     const photosArr = bodyPhotos.slice();
     const paragraphsArr = bodyParagraphs.slice();
 
     const body = bodyOrder.map((el, i) => {
         if (el == 'photo') {
-            const nextPhoto = photosArr.shift()
-            debugger
-            return <EditPhoto key={i} source={`${nextPhoto}`} photoNumber={"photo" + (bodyPhotos.indexOf(nextPhoto) + 1)} editPhotoArr={handleFileUpload} />
+            const nextPhoto = photosArr.shift()  
+            return <EditPhoto key={i} source={`${nextPhoto}`} photoNumber={"photo-" + (bodyPhotos.indexOf(nextPhoto) + 1)} editPhotoArr={handleFileUpload} />
         } else {
             const nextParagraph = paragraphsArr.shift()
             const index = bodyParagraphs.indexOf(nextParagraph)
-            debugger
             return <EditParagraph sendInput={sendInput} value={nextParagraph} key={i} idx={index}/>
         }
     })
