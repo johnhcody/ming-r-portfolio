@@ -1,6 +1,12 @@
 import React, { useState } from 'react'
 
-export default function TestUpload({ number, sendPhotoStr }) {
+interface Props {
+    photoNumber: string;
+    sendPhotoStr: Function;
+}
+
+
+const BlogPhotoUpload: React.FC<Props> = ({ photoNumber, sendPhotoStr }) => {
 
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
@@ -12,8 +18,8 @@ export default function TestUpload({ number, sendPhotoStr }) {
         const res = await fetch(`/api/upload-url?file=${filename}`);
         const { url, fields } = await res.json();
         const formData = new FormData();
-
-        Object.entries({ ...fields, file }).forEach(([key, value]) => {
+        const formArray: [string, string|File][] = Object.entries({...fields, file});
+        formArray.forEach(([key, value]) => {
             formData.append(key, value);
         });
         const upload = await fetch(url, {
@@ -22,10 +28,8 @@ export default function TestUpload({ number, sendPhotoStr }) {
         });
 
         if (upload.ok) {
-            debugger
             console.log('Uploaded successfully!');
             sendPhotoStr(index, `https://ming-portfolio-uploads.s3.ap-northeast-2.amazonaws.com/${filename}`)
-            debugger
             setLoading(false);
             setSuccess(true);
         } else {
@@ -35,11 +39,10 @@ export default function TestUpload({ number, sendPhotoStr }) {
     };
 
     //check out num...why is there two dashes?
-    const num = number.split('-')[1];
+    const num = photoNumber.split('-')[1];
     const index = parseInt(num) - 1;
 
     if (success) {
-        //debugger
         return (
             <div className="flex flex-col items-center justify-center w-1/4">
                 <p className="py-4" >Uploaded Successfully</p>
@@ -50,12 +53,10 @@ export default function TestUpload({ number, sendPhotoStr }) {
             </div>
         )
     } else if (loading) {
-        //debugger
         return (
             <div className="loader"></div>
         )
     } else {
-        //debugger
         return (
             <div className="flex w-full items-center justify-center bg-grey-lighter py-4">
                 <label className="w-64 flex flex-col items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue ">
@@ -75,3 +76,4 @@ export default function TestUpload({ number, sendPhotoStr }) {
     }
 }
     
+export default BlogPhotoUpload;

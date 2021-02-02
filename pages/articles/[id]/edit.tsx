@@ -165,8 +165,8 @@ const EditArticle:NextPage<Props> = ({ article }) => {
                             
                             <label htmlFor="body1">Fifth Paragraph</label>
                                 <textarea className="text-center"  placeholder="Fifth Paragraph" name="body5" value={form.body5} onChange={handleChange} />
-                                    <img className="w-auto h-48" src={`${form.photo5}`} alt=""/>
-                                        <Upload name={"photo5"} sendPhotoString={handleFileUpload} title={"Changing the Fifth Photo"}/>
+                                <img className="w-auto h-48" src={`${form.photo5}`} alt=""/>
+                                    <Upload name={"photo5"} sendPhotoString={handleFileUpload} title={"Changing the Fifth Photo"}/>
                             
                             <button>Save Changes</button>
                         </form>

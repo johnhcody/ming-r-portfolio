@@ -25,7 +25,7 @@ interface Props {
 }
 
 
-export const ArticleCard = (props: Props) => {
+const ArticleCard: React.FC<Props> = props => {
 
     const { article } = props;
     const [hover, setHover] = useState(false)
@@ -55,6 +55,6 @@ export const ArticleCard = (props: Props) => {
 
                     </div>
                 )
-
-    
 }
+
+export default ArticleCard;

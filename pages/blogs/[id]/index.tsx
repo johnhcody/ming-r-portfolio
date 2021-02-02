@@ -12,9 +12,9 @@ interface Props {
         title: string;
         intro: string;
         description: string;
-        paragraphs: number[];
-        photos: number[];
-        order: number[];
+        paragraphs: string[];
+        photos: string[];
+        order: string[];
         linkUrl: string;
         linkDescription: string;
         mainPhoto: string;

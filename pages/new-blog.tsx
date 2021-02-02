@@ -172,9 +172,9 @@ const NewBlog:React.FC = props => {
                     let word = ipt.slice(0,5);
  
                     if (word == 'phot-') {
-                        return <BlogPhotoUpload key={idx} number={ipt} sendPhotoStr={handleFileUpload}/>
+                        return <BlogPhotoUpload key={idx} photoNumber={ipt} sendPhotoStr={handleFileUpload}/>
                     } else if (word == 'para-'){
-                        return <BlogParagraphUpload key={idx} number={ipt} addText={handleTextInput}/>
+                        return <BlogParagraphUpload key={idx} paragraphNumber={ipt} addText={handleTextInput}/>
                     }
                     })}
                     <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full" onClick={appendPhoto}>Add Photo</button>    

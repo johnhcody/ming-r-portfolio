@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react'
 
-export default function TestParagraph({ addText, number }) {
+interface Props {
+    addText: Function;
+    paragraphNumber: string;
+}
+
+const BlogParagraphUpload: React.FC<Props> = ({ addText, paragraphNumber })=> {
 
     const [ text, setText ] = useState('');
 
@@ -13,7 +18,7 @@ export default function TestParagraph({ addText, number }) {
         setText(text => text = e.target.value);
     }
 
-    const num = number.split('-')[1];
+    const num = paragraphNumber.split('-')[1];
     const index = parseInt(num) - 1;
         return (
             <div className="">
@@ -21,6 +26,6 @@ export default function TestParagraph({ addText, number }) {
                 <textarea className="w-72 h-72 p-3 my-3" placeholder={`Body Paragraph No. ${num}`} name="body3" onChange={handleChange}/>
             </div>
         );
-    
-
 }
+
+export default BlogParagraphUpload;

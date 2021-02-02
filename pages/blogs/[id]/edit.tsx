@@ -13,9 +13,9 @@ interface Props {
         title: string;
         intro: string;
         description: string;
-        paragraphs: number[];
-        photos: number[];
-        order: number[];
+        paragraphs: string[];
+        photos: string[];
+        order: string[];
         linkUrl: string;
         linkDescription: string;
         mainPhoto: string;
@@ -131,18 +131,14 @@ const EditBlog: NextPage<Props> = ({ blog }) => {
     }
 
     const editInput = () => {
-        // setReady(false)
-        const bodyOrder = blog.order.slice();
-        // const bodyPhotos = blog.photos.slice();
-        // const bodyParagraphs = blog.paragraphs.slice();
+        const bodyOrder: string[] = blog.order.slice();
         
-        const bodyPhotos = form.photos.slice()
-        const bodyParagraphs = form.paragraphs.slice()
-
-        const body = bodyOrder.map((el, idx) => {
+        const bodyPhotos: string[] = form.photos.slice()
+        const bodyParagraphs: string[] = form.paragraphs.slice()
+        const body = bodyOrder.map((el) => {
             if (el == 'photo') {
                 const nextPhoto = bodyPhotos.shift()
-                return <EditPhoto source={`${nextPhoto}`} photos={form.photos} number={"photo" + (form.photos.indexOf(nextPhoto + 1))} editPhotoArr={handleFileUpload} />
+                return <EditPhoto source={`${nextPhoto}`} photoNumber={"photo" + (form.photos.indexOf(nextPhoto + 1))} editPhotoArr={handleFileUpload} />
             } else {
                 const nextParagraph = bodyParagraphs.shift()
                 const index = form.paragraphs.indexOf(nextParagraph)
@@ -154,7 +150,6 @@ const EditBlog: NextPage<Props> = ({ blog }) => {
             <div className="flex justify-center flex-col items-center w-full" >{body}</div>
             )
     }
-    //debugger
     return (
         <>
         <BaseLayout data={data} loading={loading}>
@@ -171,7 +166,7 @@ const EditBlog: NextPage<Props> = ({ blog }) => {
                         <input onChange={handleChange} value={form.linkUrl} className="text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0" type="text" placeholder="Paste the URL of the original article" name="linkUrl"  />
                     <label className="text-2xl pt-4 pb-2" htmlFor="linkDescription">Link Text</label>
                         <input onChange={handleChange} value={form.linkDescription} className="text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" type="text" placeholder="How do you want the link text to appear?" name="linkDescription"  />
-                    <EditPhoto source={form.mainPhoto} number={'photo-1000'} editPhotoArr={handleFileUpload} />
+                    <EditPhoto source={form.mainPhoto} photoNumber={'photo-1000'} editPhotoArr={handleFileUpload} />
                     
                     {editInput()}
                     <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full" >Save Changes</button>

@@ -3,12 +3,11 @@ import BlogPhotoUpload from '../../components/shared/BlogPhotoUpload'
 
 interface Props {
     source: string;
-    photos: number[];
-    number: number;
-    editPhotoArr: any;
+    photoNumber: string;
+    editPhotoArr: Function;
 }
 
-const EditPhoto = (props: Props) => {
+const EditPhoto: React.FC<Props> = props => {
 
     const [willUpload, setWillUpload] = useState(false);
 
@@ -24,7 +23,7 @@ const EditPhoto = (props: Props) => {
         return (
             <div className="flex flex-col">
                 <img className="h-72 w-auto py-4"  src={`${props.source}`} alt=""/>
-                <BlogPhotoUpload number={props.number} sendPhotoStr={props.editPhotoArr} />
+                <BlogPhotoUpload photoNumber={props.photoNumber} sendPhotoStr={props.editPhotoArr} />
             </div>
         )
     }
