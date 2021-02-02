@@ -8,32 +8,33 @@ interface Props {
 }
 
 
-export const NavBar = (props: Props) => {
+const NavBar: React.FC<Props> = (props: Props) => {
     const engLang = useLanguage();
     if (engLang) {
         return (
-            <div className="navbar-wrapper">
-                <Link
-                href="/about">
-                About
-                </Link>
-                <Link
-                href="/portfolio">
-                Articles
-                </Link>
-                <Link
-                href="/portfolio">
-                Projects
-                </Link>
-                <Link
-                href="/blog">
-                Blog
-                </Link>
-                <Link
-                href="/cv">
-                Contact
-                </Link>
-            </div>
+            <nav className="bg-white p-2 mt-0 fixed w-full z-10 top-0">
+                <div className="flex justify-around min-h-full items-center flex-col sm:flex-row">
+                    <Link
+                    href="/about" ><a className="text-3xl py-2 my-2 px-4 hover:no-underline hover:bg-blue hover:text-white rounded-md">About</a>
+                    </Link>
+
+                    <Link
+                    href="/portfolio"><a className="text-3xl py-2 my-2 px-4 hover:no-underline hover:bg-blue hover:text-white rounded-md">Articles</a>
+                    </Link>
+
+                    <Link
+                    href="/portfolio"><a className="text-3xl py-2 my-2 px-4 hover:no-underline hover:bg-blue hover:text-white rounded-md">Projects</a>
+                    </Link>
+
+                    <Link
+                    href="/blog"><a className="text-3xl py-2 my-2 px-4 hover:no-underline hover:bg-blue hover:text-white rounded-md">Blog</a>
+                    </Link>
+
+                    <Link
+                    href="/cv"><a className="text-3xl py-2 my-2 px-4 hover:no-underline hover:bg-blue hover:text-white rounded-md">Contact</a>
+                    </Link>
+                </div>
+            </nav>
         )
     } else {
         return (
@@ -62,3 +63,5 @@ export const NavBar = (props: Props) => {
         )
     }
 }
+
+export default NavBar;

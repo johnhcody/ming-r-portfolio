@@ -122,7 +122,6 @@ const NewBlog:React.FC = props => {
     }
 
     const handleMainPhoto = (key, value) => {
-        debugger
         setForm({
             ...form,
             'mainPhoto': value

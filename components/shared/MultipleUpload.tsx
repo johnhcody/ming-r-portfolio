@@ -29,7 +29,7 @@ export default function MultipleUpload() {
       const ReactS3Client = new S3(config);
       ReactS3Client.uploadFile(file, newFileName).then((data) => {
         if (data.status === 204) {
-            debugger
+            
             //data.location == url 
             updatePhoto(data.location)
             

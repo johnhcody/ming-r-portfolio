@@ -5,8 +5,9 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import BaseLayout from '../../../components/layouts/BaseLayout';
 import Link from 'next/link';
-import { Footer } from '../../../components/shared/Footer'
+import Footer from '../../../components/shared/Footer'
 import { useGetUser } from '../../../actions/user'
+import NavBar from '../../../components/shared/Navbar';
 
 interface Props {
     article: {
@@ -58,6 +59,7 @@ const Article: NextPage<Props> = ({ article }) => {
     return (
         <>
         <BaseLayout data={data} loading={loading}>
+            <NavBar />
             <div className="article-container">
                 <h1>{article.title}</h1>
                     <img src={article.mainPhoto == "" ? 'https://ming-portfolio-uploads.s3.ap-northeast-2.amazonaws.com/Mingkwan-Alt.png' : article.mainPhoto} alt="" />

@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 
-
-
 interface Props {
 
 }
@@ -24,4 +22,4 @@ const Footer:React.FC<Props> = (props: Props) => {
     )
 }
 
-export default Footer
+export default Footer;

@@ -7,7 +7,7 @@ interface Props {
 }
 
 
-export const IndexFooter = (props: Props) => {
+const IndexFooter:React.FC<Props> = (props: Props) => {
 
     const {data, loading} = useGetUser();
 
@@ -27,3 +27,5 @@ export const IndexFooter = (props: Props) => {
         console.log('login logic failed')
     }
 }
+
+export default IndexFooter;

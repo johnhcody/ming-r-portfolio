@@ -94,4 +94,4 @@ export const Header = (props: Props) => {
     )
 }
 
-
+export default Header;

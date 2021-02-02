@@ -30,7 +30,6 @@ const ArticleCard: React.FC<Props> = props => {
     const { article } = props;
     const [hover, setHover] = useState(false)
     const {data, loading} = useGetUser();
-    debugger
                 return (
                     <div className="card-wrapper">
                         <div className="img-wrapper" >

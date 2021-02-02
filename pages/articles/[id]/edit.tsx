@@ -120,8 +120,6 @@ const EditArticle:NextPage<Props> = ({ article }) => {
             ...form,
             [key]: value 
         })
-        debugger
-        
     }
 
     const { loading, data } = useGetUser();

@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import BaseLayout from '../components/layouts/BaseLayout'
 import { NextPage } from 'next'
 import axios from 'axios'
-import articles from './api/articles'
 import Link from 'next/link';
 import Footer from '../components/shared/Footer'
 import ArticleCard from '../components/articles/ArticleCard'
 import { useGetUser } from '../actions/user'
+import NavBar from '../components/shared/Navbar'
 
 interface PortfolioProps {
     articles: {
@@ -28,19 +28,32 @@ interface PortfolioProps {
         _id: string
     }[];
 }
-interface State {
-
-}
 
 const Portfolio: NextPage<PortfolioProps> = props => {
 
     const [hover, setHover] = useState(false)
     const { loading, data } = useGetUser();
     const articles = Object.values(props)
-    debugger
+    
+    const [ scrolled, setScrolled ] = useState(false);
+
+    useEffect(() => {
+
+        window.addEventListener("scroll", handleScroll);
+      }, []);
+
+      const handleScroll = () => {
+        if (window.pageYOffset > 47 && window.pageYOffset < 900) {
+            setScrolled(true)
+        } else {
+            setScrolled(false)
+        }
+      }
+
         return (
             <>
             <BaseLayout loading={loading} data={data}>
+            {scrolled ? <NavBar /> : null}
             <div className="portfolio-wrapper">
 
                 <div className="title-wrapper">

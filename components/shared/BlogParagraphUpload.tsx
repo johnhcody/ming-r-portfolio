@@ -10,7 +10,6 @@ const BlogParagraphUpload: React.FC<Props> = ({ addText, paragraphNumber })=> {
     const [ text, setText ] = useState('');
 
     useEffect(() => {
-        debugger
         addText(index, text)
     }, [text])
 

@@ -7,7 +7,7 @@ interface Props {
 }
 
 
-export const SplashImage = (props: Props) => {
+const SplashImage:React.FC<Props> = (props: Props) => {
 
     return (
         <div className="index-page-wrapper">
@@ -27,3 +27,5 @@ export const SplashImage = (props: Props) => {
         </div>
     )
 }
+
+export default SplashImage;

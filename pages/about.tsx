@@ -1,6 +1,6 @@
 import React from 'react'
 import BaseLayout from '../components/layouts/BaseLayout'
-import { Footer } from '../components/shared/Footer'
+import Footer from '../components/shared/Footer'
 import { useLanguage } from '../context/languageContext'
 import { useGetUser } from '../actions/user'
 

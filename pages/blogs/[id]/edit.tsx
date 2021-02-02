@@ -83,7 +83,6 @@ const EditBlog: NextPage<Props> = ({ blog }) => {
         let newArr = [...blog.paragraphs];
         newArr[index] = value;
         setParagraphsArr(newArr);
-        debugger
         setForm({
             ...form,
             paragraphs: newArr
