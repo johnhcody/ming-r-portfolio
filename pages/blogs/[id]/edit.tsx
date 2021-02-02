@@ -8,6 +8,7 @@ import Footer from '../../../components/shared/Footer'
 import EditPhoto from '../../../components/shared/EditPhoto'
 import EditParagraph from '../../../components/shared/EditPargraph'
 import NavBar from '../../../components/shared/Navbar'
+import EditBody from '../../../components/blog/EditBody';
 
 
 interface Props {
@@ -197,8 +198,8 @@ const EditBlog: NextPage<Props> = ({ blog }) => {
                     <label className="text-2xl pt-4 pb-2" htmlFor="linkDescription">Link Text</label>
                         <input onChange={handleChange} value={form.linkDescription} className="text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" type="text" placeholder="How do you want the link text to appear?" name="linkDescription"  />
                     <EditPhoto source={form.mainPhoto} photoNumber={'photo-1000'} editPhotoArr={handleFileUpload} />
-                    
-                    {editInput()}
+                    <EditBody bodyOrder={blog.order} bodyParagraphs={form.paragraphs} bodyPhotos={form.photos} sendInput={handleTextInput} handleFileUpload={handleFileUpload}/>
+                    {/* {editInput()} */}
                     <button className="focus:outline-none focus:ring focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white hover:text-red-500 rounded-full font-bold px-4 py-3 my-2 transition duration-300 ease-in-out mr-6" >Save Changes</button>
                 </form>
 

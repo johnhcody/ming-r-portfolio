@@ -7,6 +7,7 @@ import Link from 'next/link';
 import Footer from '../../../components/shared/Footer'
 import { useGetUser } from '../../../actions/user'
 import NavBar from '../../../components/shared/Navbar'
+import BlogBody from '../../../components/blog/BlogBody';
 
 interface Props {
     blog: {
@@ -76,27 +77,8 @@ const Blog: NextPage<Props> = ({ blog }) => {
         setIsDeleting(true);
     }
 
-    const blogBody = () => {
-
-        const bodyOrder = blog.order.slice();
-        const bodyPhotos = blog.photos.slice();
-        const bodyParagraphs = blog.paragraphs.slice();
-
-        const body = bodyOrder.map((el, idx) => {
-            if (el == 'photo') {
-                return <img className="py-4 max-h-full" key={idx} src={`${bodyPhotos.shift()}`} alt=""/>
-            } else {
-                return <p className="max-w-4/5 py-4" key={idx} >{bodyParagraphs.shift()}</p>
-            }
-        })
-
-        return (
-            <div className="flex justify-center flex-col items-center" >{body}</div>
-        )
-    }
-
     const { loading, data } = useGetUser();
-    debugger 
+
     return (
         <>
         <BaseLayout data={data} loading={loading}>
@@ -105,9 +87,7 @@ const Blog: NextPage<Props> = ({ blog }) => {
                 <h1 className="text-4xl py-4">{blog.title}</h1>
                 <img className="h-72 w-auto py-4 max-w-xs" src={`${blog.mainPhoto}`} alt=""/>
                 <h1 className="max-w-4/5 py-4">{blog.description}</h1>
-                <div className="flex justify-center flex-col">
-                    {blogBody()}
-                </div>
+                <BlogBody blog={blog}/>
                 {data && data.name == "john.haner.cody@gmail.com" ? 
                 <>
                     <Link href={`/blogs/${blog._id}/edit`}>
