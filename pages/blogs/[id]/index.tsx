@@ -29,17 +29,31 @@ const Blog: NextPage<Props> = ({ blog }) => {
     const [isDeleting, setIsDeleting] = useState(false);
     const router = useRouter();
     const [ scrolled, setScrolled ] = useState(false);
-
+    
     useEffect(() => {
-
+        
         window.addEventListener("scroll", handleScroll);
-      }, []);
-
-      const handleScroll = () => {
+    }, []);
+    
+    const handleScroll = () => {
         if (window.pageYOffset > 47 && window.pageYOffset < 900) {
             setScrolled(true)
         } else {
             setScrolled(false)
+        }
+    }
+    
+    const [ hidden, setHidden ] = useState(false);
+    
+    useEffect(() => {
+        window.addEventListener('resize', handleResize)
+    }, []);
+
+    const handleResize = () => {
+        if (window.innerWidth <= 700) {
+            setHidden(true);
+        } else {
+            setHidden(false)
         }
     }
 
@@ -85,8 +99,8 @@ const Blog: NextPage<Props> = ({ blog }) => {
     return (
         <>
         <BaseLayout data={data} loading={loading}>
-        {scrolled ? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
-            <div className="flex justify-center items-center flex-col">
+        {scrolled && !hidden ? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
+            <div className="flex justify-center items-center pt-24 flex-col">
                 <h1 className="text-4xl py-4">{blog.title}</h1>
                 <img className="h-72 w-auto py-4 max-w-xs" src={`${blog.mainPhoto}`} alt=""/>
                 <h1 className="max-w-4/5 py-4">{blog.description}</h1>

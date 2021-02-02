@@ -61,6 +61,20 @@ const EditBlog: NextPage<Props> = ({ blog }) => {
         }
     }
 
+    const [ hidden, setHidden ] = useState(false);
+    
+    useEffect(() => {
+        window.addEventListener('resize', handleResize)
+    }, []);
+
+    const handleResize = () => {
+        if (window.innerWidth <= 700) {
+            setHidden(true);
+        } else {
+            setHidden(false)
+        }
+    }
+
     const handleChange = (e) => {
         setForm({
             ...form,
@@ -168,7 +182,7 @@ const EditBlog: NextPage<Props> = ({ blog }) => {
     return (
         <>
         <BaseLayout data={data} loading={loading}>
-        {scrolled ? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
+        {scrolled && !hidden ? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
             <div className="flex w-full justify-center">
                 <form className="flex flex-col items-center w-3/4" onSubmit={handleSubmit}>
                     <h1 className="text-4xl">Edit your Blog Post</h1>

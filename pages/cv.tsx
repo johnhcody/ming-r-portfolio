@@ -29,11 +29,25 @@ const Cv: React.FC<Props> = props => {
         }
     }
 
+    const [ hidden, setHidden ] = useState(false);
+    
+    useEffect(() => {
+        window.addEventListener('resize', handleResize)
+    }, []);
+
+    const handleResize = () => {
+        if (window.innerWidth <= 700) {
+            setHidden(true);
+        } else {
+            setHidden(false)
+        }
+    }
+
 
         return (
             <>
             <BaseLayout loading={loading} data={data}>
-                {scrolled ? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
+                {scrolled && !hidden? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
                 <Paragraph1 />    
                 <Paragraph1 />    
                 <Paragraph1 />    

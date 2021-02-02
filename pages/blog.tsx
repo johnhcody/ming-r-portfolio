@@ -42,10 +42,24 @@ const Blog: NextPage<BlogProps> = props => {
             setScrolled(false)
         }
     }
+
+    const [ hidden, setHidden ] = useState(false);
+    
+    useEffect(() => {
+        window.addEventListener('resize', handleResize)
+    }, []);
+
+    const handleResize = () => {
+        if (window.innerWidth <= 700) {
+            setHidden(true);
+        } else {
+            setHidden(false)
+        }
+    }
     return (
         <>
             <BaseLayout data={data} loading={loading}>
-            {scrolled ? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
+            {scrolled && !hidden ? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
                 <div className="flex justify-center items-center flex-col py-12">
                     <h1 className="flex justify-center text-4xl font-sans" >Here's my Blog</h1>
                     <div className="flex flex-wrap">

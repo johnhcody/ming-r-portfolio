@@ -66,6 +66,20 @@ const EditArticle:NextPage<Props> = ({ article }) => {
         }
     }
 
+    const [ hidden, setHidden ] = useState(false);
+    
+    useEffect(() => {
+        window.addEventListener('resize', handleResize)
+    }, []);
+
+    const handleResize = () => {
+        if (window.innerWidth <= 700) {
+            setHidden(true);
+        } else {
+            setHidden(false)
+        }
+    }
+
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [errors, setErrors] = useState({});
     const router = useRouter();
@@ -143,7 +157,7 @@ const EditArticle:NextPage<Props> = ({ article }) => {
 
     return (
         <BaseLayout data={data} loading={loading}>
-            {scrolled ? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
+            {scrolled && !hidden ? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
             <div className="form-container">
                 <h1>Update your Article</h1>
                 <div className="new-form-wrapper">
