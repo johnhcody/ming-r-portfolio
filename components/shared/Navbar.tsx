@@ -40,24 +40,19 @@ const NavBar: React.FC<Props> = (props: Props) => {
         return (
             <div className="navbar-wrapper">
                 <Link
-                    href="/about">
-                    เกี่ยวกับมิ่งขวัญ
+                    href="/about"><a className="text-3xl py-2 my-2 px-4 hover:no-underline hover:bg-blue hover:text-white rounded-md">เกี่ยวกับมิ่งขวัญ</a>
                 </Link>
                 <Link
-                    href="/portfolio">
-                    บทความ
+                    href="/portfolio"><a className="text-3xl py-2 my-2 px-4 hover:no-underline hover:bg-blue hover:text-white rounded-md">บทความ</a>
                 </Link>
                 <Link
-                    href="/portfolio">
-                    โครงการ
+                    href="/portfolio"><a className="text-3xl py-2 my-2 px-4 hover:no-underline hover:bg-blue hover:text-white rounded-md">โครงการ</a>
                 </Link>
                 <Link
-                    href="/blog">
-                    บล็อก
+                    href="/blog"><a className="text-3xl py-2 my-2 px-4 hover:no-underline hover:bg-blue hover:text-white rounded-md">บล็อก</a>
                 </Link>
                 <Link
-                    href="/cv">
-                    ติดต่อ
+                    href="/cv"><a className="text-3xl py-2 my-2 px-4 hover:no-underline hover:bg-blue hover:text-white rounded-md">ติดต่อ</a>
                 </Link>
             </div> 
         )

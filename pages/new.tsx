@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import BaseLayout from '../components/layouts/BaseLayout'
 import Upload from '../components/shared/Upload'
 import { useGetUser } from '../actions/user'
+import NavBar from '../components/shared/Navbar'
 
 interface Props {
 
@@ -62,6 +63,35 @@ const NewArticle:React.FC <Props> = props => {
         return err;
     }
 
+    const [ scrolled, setScrolled ] = useState(false);
+
+    useEffect(() => {
+
+        window.addEventListener("scroll", handleScroll);
+      }, []);
+
+      const handleScroll = () => {
+        if (window.pageYOffset > 47) {
+            setScrolled(true)
+        } else {
+            setScrolled(false)
+        }
+    }
+
+    const [ hidden, setHidden ] = useState(false);
+    
+    useEffect(() => {
+        window.addEventListener('resize', handleResize)
+    }, []);
+
+    const handleResize = () => {
+        if (window.innerWidth <= 700) {
+            setHidden(true);
+        } else {
+            setHidden(false)
+        }
+    }
+
     let router = useRouter();
     const createArticle = () => {
         axios.post('/api/articles', {
@@ -110,6 +140,7 @@ const NewArticle:React.FC <Props> = props => {
     
         return (
             <BaseLayout data={data} loading={loading} >
+                {scrolled && !hidden ? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
                 <div className="form-container">
                     <h1>Create New Article for Your Portfolio</h1>
 
