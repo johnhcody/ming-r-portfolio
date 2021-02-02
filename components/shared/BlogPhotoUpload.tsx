@@ -44,11 +44,11 @@ const BlogPhotoUpload: React.FC<Props> = ({ photoNumber, sendPhotoStr }) => {
 
     if (success) {
         return (
-            <div className="flex flex-col items-center justify-center w-1/4">
-                <p className="py-4" >Uploaded Successfully</p>
-                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
-                <circle className="path circle" fill="none" stroke="#73AF55" strokeWidth="6" strokeMiterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
-                <polyline className="path check" fill="none" stroke="#73AF55" strokeWidth="6" strokeLinecap="round" strokeMiterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+            <div className="upload-wrapper">
+                <p className="py-4">Uploaded Successfully</p>
+                <svg className="ml-3" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.2 120.2">
+                <circle className="path circle" fill="none" stroke="#73AF55" strokeWidth="6" strokeMiterlimit="10" cx="45.1" cy="45.1" r="42.1"/>
+                <polyline className="path check" fill="none" stroke="#73AF55" strokeWidth="6" strokeLinecap="round" strokeMiterlimit="10" points="60.2,30.2 38.5,65.8 25.8,50.5 "/>
                 </svg>
             </div>
         )
@@ -70,6 +70,7 @@ const BlogPhotoUpload: React.FC<Props> = ({ photoNumber, sendPhotoStr }) => {
                         type="file" 
                         accept="image/png, image/jpeg" 
                         className="hidden" />
+                    {loading ? <div className="loader"></div> : null}
                 </label>
             </div>
         );   

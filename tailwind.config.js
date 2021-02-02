@@ -468,6 +468,7 @@ module.exports = {
       '5xl': '64rem',
       '6xl': '72rem',
       '7xl': '80rem',
+      '4/5': '80%',
       full: '100%',
       min: 'min-content',
       max: 'max-content',
@@ -534,6 +535,7 @@ module.exports = {
       none: ['2px solid transparent', '2px'],
       white: ['2px dotted white', '2px'],
       black: ['2px dotted black', '2px'],
+      gray: '1px solid #aaa4a4'
     },
     padding: (theme) => theme('spacing'),
     placeholderColor: (theme) => theme('colors'),
