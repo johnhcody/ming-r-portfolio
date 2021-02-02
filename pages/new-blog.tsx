@@ -4,7 +4,7 @@ import { useGetUser } from '../actions/user'
 import { useRouter } from 'next/router'
 import BlogPhotoUpload from '../components/shared/BlogPhotoUpload'
 import BlogParagraphUpload from '../components/shared/BlogParagraphUpload'
-import { Footer } from '../components/shared/Footer'
+import Footer from '../components/shared/Footer'
 import axios from 'axios'
 import Upload from '../components/shared/Upload'
 

@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useRouter } from 'next/router'
 import BaseLayout from '../../../components/layouts/BaseLayout'
 import { useGetUser } from '../../../actions/user'
-import { Footer } from '../../../components/shared/Footer'
+import Footer from '../../../components/shared/Footer'
 import EditPhoto from '../../../components/shared/EditPhoto'
 import EditParagraph from '../../../components/shared/EditPargraph'
 

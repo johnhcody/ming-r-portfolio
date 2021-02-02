@@ -7,7 +7,7 @@ interface Props {
 }
 
 
-export const Footer = (props: Props) => {
+const Footer:React.FC<Props> = (props: Props) => {
 
 
     return (
@@ -23,3 +23,5 @@ export const Footer = (props: Props) => {
         </div>
     )
 }
+
+export default Footer

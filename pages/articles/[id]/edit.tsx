@@ -3,10 +3,9 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import BaseLayout from '../../../components/layouts/BaseLayout'
-// import Article from '../../../models/Article'
 import { useGetUser } from '../../../actions/user'
 import  Upload  from '../../../components/shared/Upload'
-import { Footer } from '../../../components/shared/Footer'
+import Footer from '../../../components/shared/Footer'
 
 interface Props {
     article: {

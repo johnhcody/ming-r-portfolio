@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import BaseLayout from '../components/layouts/BaseLayout'
-import { Footer } from '../components/shared/Footer'
+import Footer from '../components/shared/Footer'
 import { useGetUser } from '../actions/user'
 import Paragraph1 from '../components/cv/Paragraph1'
 import DownloadCv from '../components/cv/DownloadCv'

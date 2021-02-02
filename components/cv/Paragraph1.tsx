@@ -3,11 +3,8 @@ import React from 'react'
 interface Props {
     
 }
-interface State {
-    
-}
 
-const Paragraph1 = (props: Props) => {
+const Paragraph1: React.FC<Props> = props => {
 
         return (
             <>

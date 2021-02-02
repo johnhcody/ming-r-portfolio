@@ -6,7 +6,7 @@ interface Props {
     idx: number;
 }
 
-const EditParagraph = (props: Props) => {
+const EditParagraph:React.FC<Props> = props => {
 
     const handleChange = (e) => {
         props.sendInput(props.idx, e.target.value)

@@ -45,7 +45,7 @@ const ArticleCard: React.FC<Props> = props => {
                         </div>
                         <h1>{article.title}</h1>
                         <h2>{article.intro}</h2>
-                        <a href={`${article.link}`} target="_blank">Check out the source</a>
+                        <a href={`${article.linkUrl}`} target="_blank">Check out the source</a>
                         <div className="idx-itm-btn-wrapper">
                             {data && data.name == "john.haner.cody@gmail.com" ? <Link href={`/articles/${article._id}/edit`}>
                                 <button>Edit</button>

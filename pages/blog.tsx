@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { NextPage } from 'next';
 import BaseLayout from '../components/layouts/BaseLayout'
-import { Footer } from '../components/shared/Footer'
+import Footer from '../components/shared/Footer'
 import { useGetUser } from '../actions/user'
 import axios from 'axios'
 import BlogPost from '../components/blog/BlogPost'

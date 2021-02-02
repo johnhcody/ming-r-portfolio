@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import BaseLayout from '../components/layouts/BaseLayout'
-import { NextPageContext } from 'next'
+import { NextPage } from 'next'
 import axios from 'axios'
 import articles from './api/articles'
 import Link from 'next/link';
-import { Footer } from '../components/shared/Footer'
+import Footer from '../components/shared/Footer'
 import ArticleCard from '../components/articles/ArticleCard'
 import { useGetUser } from '../actions/user'
 

@@ -14,6 +14,7 @@ interface BlogPostProps {
         linkUrl: string;
         linkDescription: string;
         mainPhoto: string;
+        _id: string;
     }
 }
   
