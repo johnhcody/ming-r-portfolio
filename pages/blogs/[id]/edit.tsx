@@ -160,26 +160,7 @@ const EditBlog: NextPage<Props> = ({ blog }) => {
         }
     }
 
-    const editInput = () => {
-        const bodyOrder: string[] = blog.order.slice();
-        
-        const bodyPhotos: string[] = form.photos.slice()
-        const bodyParagraphs: string[] = form.paragraphs.slice()
-        const body = bodyOrder.map((el) => {
-            if (el == 'photo') {
-                const nextPhoto = bodyPhotos.shift()
-                return <EditPhoto source={`${nextPhoto}`} photoNumber={"photo" + (form.photos.indexOf(nextPhoto + 1))} editPhotoArr={handleFileUpload} />
-            } else {
-                const nextParagraph = bodyParagraphs.shift()
-                const index = form.paragraphs.indexOf(nextParagraph)
-                return <EditParagraph sendInput={handleTextInput} value={nextParagraph} idx={index}/>
-            }
-        })
-        
-        return (
-            <div className="flex justify-center flex-col items-center w-full" >{body}</div>
-            )
-    }
+
     return (
         <>
         <BaseLayout data={data} loading={loading}>
@@ -199,7 +180,6 @@ const EditBlog: NextPage<Props> = ({ blog }) => {
                         <input onChange={handleChange} value={form.linkDescription} className="text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" type="text" placeholder="How do you want the link text to appear?" name="linkDescription"  />
                     <EditPhoto source={form.mainPhoto} photoNumber={'photo-1000'} editPhotoArr={handleFileUpload} />
                     <EditBody bodyOrder={blog.order} bodyParagraphs={form.paragraphs} bodyPhotos={form.photos} sendInput={handleTextInput} handleFileUpload={handleFileUpload}/>
-                    {/* {editInput()} */}
                     <button className="focus:outline-none focus:ring focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white hover:text-red-500 rounded-full font-bold px-4 py-3 my-2 transition duration-300 ease-in-out mr-6" >Save Changes</button>
                 </form>
 
