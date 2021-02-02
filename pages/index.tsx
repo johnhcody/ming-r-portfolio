@@ -10,7 +10,7 @@ interface Props {
 
 }
 
-const Index = (props: Props) => {
+const Index: React.FC<Props> = props => {
     
 const { data, loading } = useGetUser();
 

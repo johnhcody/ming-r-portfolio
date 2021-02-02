@@ -7,8 +7,11 @@ import BaseLayout from '../components/layouts/BaseLayout'
 import Upload from '../components/shared/Upload'
 import { useGetUser } from '../actions/user'
 
+interface Props {
 
-const NewArticle = (props: Props) => {
+}
+
+const NewArticle:React.FC <Props> = props => {
 
     const [form, setForm] = useState({
             title: '', 
@@ -34,7 +37,6 @@ const NewArticle = (props: Props) => {
 
     useEffect(() => {
         if (isSubmitting) {
-            debugger
             if (Object.keys(errors).length === 0) {
                 createArticle();
             } else {
@@ -62,7 +64,6 @@ const NewArticle = (props: Props) => {
 
     let router = useRouter();
     const createArticle = () => {
-        debugger
         axios.post('/api/articles', {
             title: form.title,
             intro: form.intro,
@@ -91,7 +92,6 @@ const NewArticle = (props: Props) => {
     }
 
     const handleChange = (e) => {
-        //debugger
         setForm({
             ...form,
             [e.target.name]: e.target.value 
@@ -103,11 +103,11 @@ const NewArticle = (props: Props) => {
         setForm({
             ...form,
             [key]: value 
-        })
-        debugger
-        
+        })        
     }
-        const { loading, data } = useGetUser();
+
+    const { loading, data } = useGetUser();
+    
         return (
             <BaseLayout data={data} loading={loading} >
                 <div className="form-container">

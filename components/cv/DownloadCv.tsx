@@ -4,7 +4,7 @@ interface Props {
     
 }
 
-const DownloadCv = (props: Props) => {
+const DownloadCv: React.FC<Props> = props => {
 
         return (
             <>

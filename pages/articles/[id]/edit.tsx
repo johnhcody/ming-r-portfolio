@@ -8,7 +8,28 @@ import { useGetUser } from '../../../actions/user'
 import  Upload  from '../../../components/shared/Upload'
 import { Footer } from '../../../components/shared/Footer'
 
-const EditArticle = ({ article }) => {
+interface Props {
+    article: {
+        title: string;
+        intro: string;
+        description: string;
+        body1: string;
+        body2: string;
+        body3: string;
+        body4: string;
+        body5: string;
+        mainPhoto: string;
+        photo2: string;
+        photo3: string;
+        photo4: string;
+        photo5: string;
+        linkUrl: string;
+        linkDescription: string;
+    };
+}
+
+
+const EditArticle:NextPage<Props> = ({ article }) => {
     //debugger
     const [form, setForm] = useState({
         title: article.title, 

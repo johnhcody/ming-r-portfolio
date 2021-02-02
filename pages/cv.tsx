@@ -9,11 +9,8 @@ import DownloadCv from '../components/cv/DownloadCv'
 interface Props {
     
 }
-interface State {
-    
-}
 
-const Cv = (props: Props) => {
+const Cv: React.FC<Props> = props => {
 
     const { loading, data } = useGetUser();
         return (

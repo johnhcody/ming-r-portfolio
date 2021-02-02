@@ -32,7 +32,7 @@ interface State {
 
 }
 
-const Portfolio: React.FC<PortfolioProps> = props => {
+const Portfolio: NextPage<PortfolioProps> = props => {
 
     const [hover, setHover] = useState(false)
     const { loading, data } = useGetUser();

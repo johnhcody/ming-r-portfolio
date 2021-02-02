@@ -22,11 +22,7 @@ interface BlogProps {
 }
 
 
-const Blog: React.FC<BlogProps> = props => {
-
-    const engLang = useLanguage();
-    const toggleLang = useLanguageUpdate();
-
+const Blog: NextPage<BlogProps> = props => {
     const { loading, data } = useGetUser();
     const blogs = Object.values(props);
     return (

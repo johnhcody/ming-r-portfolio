@@ -12,11 +12,8 @@ import Upload from '../components/shared/Upload'
 interface Props {
     
 }
-interface State {
-    
-}
 
-const NewBlog = (props: Props) => {
+const NewBlog:React.FC = props => {
     const { loading, data } = useGetUser();
     const [ input, setInput ] = useState([]);
     const [ photoStrArr, setPhotoStrArr ] = useState([])
