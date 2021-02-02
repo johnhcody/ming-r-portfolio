@@ -54,7 +54,7 @@ const EditBlog: NextPage<Props> = ({ blog }) => {
       }, []);
 
       const handleScroll = () => {
-        if (window.pageYOffset > 47 && window.pageYOffset < 900) {
+        if (window.pageYOffset > 47) {
             setScrolled(true)
         } else {
             setScrolled(false)
@@ -199,7 +199,7 @@ const EditBlog: NextPage<Props> = ({ blog }) => {
                     <EditPhoto source={form.mainPhoto} photoNumber={'photo-1000'} editPhotoArr={handleFileUpload} />
                     
                     {editInput()}
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full" >Save Changes</button>
+                    <button className="focus:outline-none focus:ring focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white hover:text-red-500 rounded-full font-bold px-4 py-3 my-2 transition duration-300 ease-in-out mr-6" >Save Changes</button>
                 </form>
 
             </div>

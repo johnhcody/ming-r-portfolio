@@ -11,7 +11,7 @@ const DownloadCv: React.FC<Props> = props => {
             
             <div className="flex justify-center py-6 text-blue-900">
                 <a href="public/CV_Mingkwan_Rattanakot 2021.pdf" download>
-                    <span className="hover:text-red-900">
+                    <span className="text-blue hover:text-yellow-500">
                     <i className="fas fa-cloud-download-alt fa-3x" ></i>
                     </span>
                 </a>

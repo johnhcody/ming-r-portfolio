@@ -14,8 +14,8 @@ const EditPhoto: React.FC<Props> = props => {
     if (!willUpload) {
         return (
             <div className="flex flex-col">
-                <img className="h-auto w-auto py-4 max-w-max max-h-48"  src={`${props.source}`} alt=""/>
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full" onClick={() => setWillUpload(true)} >Replace Photo</button>
+                <img className="h-auto w-auto py-4 max-w-max max-h-full"  src={`${props.source}`} alt=""/>
+                <button className="focus:outline-none focus:ring focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white hover:text-red-500 rounded-full font-bold px-4 py-3 transition duration-300 ease-in-out mr-6" onClick={() => setWillUpload(true)} >Replace Photo</button>
             </div>
     )
     } else {

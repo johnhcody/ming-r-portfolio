@@ -72,6 +72,9 @@ export const Header = (props: Props) => {
                         <Link href="/portfolio">
                             <a onClick={closeModal} > Articles </a>
                         </Link>
+                        <Link href="/blog">
+                            <a onClick={closeModal} > Blog </a>
+                        </Link>
                         <Link href="/cv">
                             <a onClick={closeModal} > Contact </a>
                         </Link>
@@ -82,6 +85,9 @@ export const Header = (props: Props) => {
                             </Link>
                             <Link href="/portfolio">
                                 <a onClick={closeModal} > บทความ </a>
+                            </Link>
+                            <Link href="/blog">
+                                <a onClick={closeModal} > บล็อก </a>
                             </Link>
                             <Link href="/cv">
                                 <a onClick={closeModal} > ติดต่อ </a>

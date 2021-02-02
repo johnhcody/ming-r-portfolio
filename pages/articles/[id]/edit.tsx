@@ -59,7 +59,7 @@ const EditArticle:NextPage<Props> = ({ article }) => {
       }, []);
 
       const handleScroll = () => {
-        if (window.pageYOffset > 47 && window.pageYOffset < 900) {
+        if (window.pageYOffset > 47) {
             setScrolled(true)
         } else {
             setScrolled(false)
