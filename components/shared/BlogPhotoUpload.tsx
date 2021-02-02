@@ -52,10 +52,6 @@ const BlogPhotoUpload: React.FC<Props> = ({ photoNumber, sendPhotoStr }) => {
                 </svg>
             </div>
         )
-    } else if (loading) {
-        return (
-            <div className="loader"></div>
-        )
     } else {
         return (
             <div className="flex w-full items-center justify-center bg-grey-lighter py-4">

@@ -69,9 +69,9 @@ const Blog: NextPage<Props> = ({ blog }) => {
 
         const body = bodyOrder.map((el, idx) => {
             if (el == 'photo') {
-                return <img className="h-auto w-auto py-4 max-w-max max-h-48" key={idx} src={`${bodyPhotos.shift()}`} alt=""/>
+                return <img className="py-4 max-h-full" key={idx} src={`${bodyPhotos.shift()}`} alt=""/>
             } else {
-                return <p className="max-w-4xl py-4" key={idx} >{bodyParagraphs.shift()}</p>
+                return <p className="max-w-4/5 py-4" key={idx} >{bodyParagraphs.shift()}</p>
             }
         })
 
@@ -89,14 +89,18 @@ const Blog: NextPage<Props> = ({ blog }) => {
             <div className="flex justify-center items-center flex-col">
                 <h1 className="text-4xl py-4">{blog.title}</h1>
                 <img className="h-72 w-auto py-4 max-w-xs" src={`${blog.mainPhoto}`} alt=""/>
-                <h1 className="max-w-screen-md py-4">{blog.description}</h1>
+                <h1 className="max-w-4/5 py-4">{blog.description}</h1>
                 <div className="flex justify-center flex-col">
                     {blogBody()}
                 </div>
-                <button onClick={handleDelete} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full outline:none" >Delete</button>
-                <Link href={`/blogs/${blog._id}/edit`}>
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full outline:none" >Edit</button>
-                </Link>
+                {data && data.name == "john.haner.cody@gmail.com" ? 
+                <div>
+                    <button onClick={handleDelete} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full outline:none" >Delete</button>
+                    <Link href={`/blogs/${blog._id}/edit`}>
+                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full outline:none" >Edit</button>
+                    </Link>
+                </div> : null
+                }
             </div>
         </BaseLayout>
         <Footer />

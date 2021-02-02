@@ -45,18 +45,6 @@ export default function Upload(props) {
         )
     } else {
         return (
-            // <div className="upload-wrapper">
-            //     <p id="instructions">Upload a .png or .jpg image (max 1MB).</p>
-            //     <p>{props.title}</p>
-            //     <input
-            //         onChange={uploadPhoto}
-            //         type="file"
-            //         title=" "
-            //         accept="image/png, image/jpeg"
-            //         name={`${props.name}`}
-            //     />
-            //     {loading ? <div className="loader"></div> : null}
-            // </div>
             <div className="flex w-full items-center justify-center bg-grey-lighter py-4">
                 <label className="w-64 flex flex-col items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue ">
                     <svg className="w-8 h-8" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">

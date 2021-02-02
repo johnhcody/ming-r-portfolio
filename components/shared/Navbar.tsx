@@ -13,7 +13,7 @@ const NavBar: React.FC<Props> = (props: Props) => {
     if (engLang) {
         return (
             <nav className={`bg-white p-2 w-full ${props.fixToTop}`} >
-                <div className={`flex justify-around min-h-full items-center flex-col sm:flex-row `}>
+                <div className="flex justify-around min-h-full items-center flex-col sm:flex-row">
                     <Link
                     href="/about" ><a className="text-3xl py-2 my-2 px-4 hover:no-underline hover:bg-blue hover:text-white rounded-md">About</a>
                     </Link>

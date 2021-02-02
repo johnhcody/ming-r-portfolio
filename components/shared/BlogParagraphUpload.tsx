@@ -22,7 +22,7 @@ const BlogParagraphUpload: React.FC<Props> = ({ addText, paragraphNumber })=> {
         return (
             <div className="w-full flex flex-col items-center">
                 <p className="flex">Write something for Paragraph Number {`${num}`}</p>
-                <textarea className=" w-full h-72 p-3 my-3" placeholder={`Body Paragraph No. ${num}`} name="body3" onChange={handleChange}/>
+                <textarea className="border-2 rounded-md text-center w-full h-72 p-3 my-3" placeholder={`Body Paragraph No. ${num}`} name="body3" onChange={handleChange}/>
             </div>
         );
 }

@@ -160,11 +160,11 @@ const NewBlog:React.FC = props => {
                         <textarea onChange={handleChange} className="border-2 rounded-md text-center w-full h-24 p-3 my-3" placeholder="Tell us a bit about your work!  This will appear on the main page." name="intro"  />
                     <label className="text-2xl pt-4 pb-2" htmlFor="description">Description</label>
                         <textarea onChange={handleChange} className="border-2 rounded-md text-center w-full h-72 p-3 my-3" placeholder="Go into more detail about the project.  This will appear when people view the specific project." name="description"  />
-                    <label className="text-2xl pt-4 pb-2" htmlFor="linkUrl">Source Link</label>
+                    {/* <label className="text-2xl pt-4 pb-2" htmlFor="linkUrl">Source Link</label>
                         <input onChange={handleChange} className="text-center md:w-6/12 w-4/5 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0" type="text" placeholder="Paste the URL of the original article" name="linkUrl"  />
                     <label className="text-2xl pt-4 pb-2" htmlFor="linkUrl">Link Text</label>
-                        <input onChange={handleChange} className="text-center md:w-6/12 w-4/5 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" type="text" placeholder="How do you want the link text to appear?" name="linkDescription"  />
-                    <span>Upload your Main Photo</span>
+                        <input onChange={handleChange} className="text-center md:w-6/12 w-4/5 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" type="text" placeholder="How do you want the link text to appear?" name="linkDescription"  /> */}
+                    <span className="text-xl pt-4" >Upload your Main Photo</span>
                     <Upload name={"mainPhoto"} sendPhotoString={handleMainPhoto} title={"Main Photo"} />
                     {input.map((ipt, idx) => {
                     let word = ipt.slice(0,5);
