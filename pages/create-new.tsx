@@ -58,13 +58,13 @@ const CreateNew:React.FC = props => {
 
     const validate = () => {    
         let err = {};
-
+        debugger
         if (!form.title) {
             err['title'] = "Title is required";
-        } else if (!form.type) {
+        } if (!form.type) {
             err['type'] = "Please select a project type";
         }
-
+        debugger
         return err;
     }
 
@@ -196,6 +196,7 @@ const CreateNew:React.FC = props => {
                     <button className="focus:outline-none focus:ring focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full outline:none" onClick={appendParagraph}>Add Paragraph</button>
                     <button className="focus:outline-none focus:ring focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full outline:none" type="submit" onClick={postBlog} > Post Blog</button>
                     {errors.title ? <h1>{errors.title}</h1> : null}
+                    {errors.type ? <h1>{errors.type}</h1> : null}
                 </form>
             </div>
         </BaseLayout>
