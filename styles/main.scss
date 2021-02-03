@@ -135,6 +135,7 @@
         font-size: 100px;
         font-weight: 900;
         margin-top: 58px;
+        color: white;
     }
 }
 
@@ -550,3 +551,8 @@
         }
     }
 }
+
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+  }

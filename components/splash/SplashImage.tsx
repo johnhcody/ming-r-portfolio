@@ -13,10 +13,10 @@ const SplashImage:React.FC<Props> = (props: Props) => {
         <div className="index-page-wrapper">
             <Typed
                 strings={[
-                    'I am a writer',
-                    'I am a journalist',
-                    'I am a storyteller',
-                    'I am a leader']}
+                    'Local Wisdom',
+                    'Environment',
+                    'Sustainability',
+                    'Creative Culture']}
                 typeSpeed={40}
                 backSpeed={50}
                 backDelay={1000}

@@ -39,7 +39,7 @@ export const Header = (props: Props) => {
             </Link>
             <div className="header-right-wrapper">
                 <i onClick={openModal} className="fas fa-bars"></i>
-                {/* {modalIsOpen ? null : <LanguageToggle />} */}
+                {modalIsOpen ? null : <LanguageToggle />}
                 {data && data.name == "john.haner.cody@gmail.com" ?  <LogoutLink /> : null}
 
             </div>
