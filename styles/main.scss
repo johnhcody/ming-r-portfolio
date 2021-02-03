@@ -322,7 +322,8 @@
             }
             .img-wrapper {
                 img {
-                width: auto;
+                // width: auto;
+                object-fit: cover;
                 height: 427px;
                 width: 320px;
                 }
@@ -343,7 +344,7 @@
                     margin: 0 auto;
                     left: 0;
                     right: 0;
-                    top: 40%;
+                    top: 100;
                     text-align: center;
                     width: 60%;
                     p {

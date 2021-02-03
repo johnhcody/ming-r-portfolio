@@ -62,14 +62,14 @@ const Project: NextPage<Props> = props => {
 
             <div className="flex justify-center items-center flex-col py-12">
                     <h1 className="flex justify-center text-4xl font-sans" >Projects from my Career</h1>
-                    <div className="flex flex-wrap">
+                    <div className="flex justify-center flex-wrap mx-4">
                         {projects.map(project => {
                             return <ProjectCard key={project._id} project={project} />
                         })}
                     </div>
                 </div>
                 {data && data.name == "john.haner.cody@gmail.com" ? 
-                <div className="flex justify-center pt-72">
+                <div className="flex justify-center pt-12">
                     <Link href={`/create-new`}>
                         <button className="focus:outline-none focus:ring focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white hover:text-red-500 rounded-full font-bold px-4 py-3 transition duration-300 ease-in-out mr-6" >New Project</button>
                     </Link>

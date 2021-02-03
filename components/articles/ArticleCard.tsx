@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useGetUser } from '../../actions/user'
-
+import { useRouter } from 'next/router';
+import axios from 'axios';
 
 interface Props {
     article: {
@@ -25,6 +26,24 @@ const ArticleCard: React.FC<Props> = props => {
     const { article } = props;
     const [hover, setHover] = useState(false)
     const {data, loading} = useGetUser();
+    const router = useRouter();
+    const [isDeleting, setIsDeleting] = useState(false);
+
+    const handleDelete = async () => {
+        setIsDeleting(true);
+    }
+
+    useEffect(() => {
+        if (isDeleting) {
+            deleteArticle();
+        }
+    }, [isDeleting])
+
+    const deleteArticle = async () => {
+        debugger
+        const deleted = await axios.delete(`/api/projects/${article._id}`)
+        router.push('/');
+    }
                 return (
                     <div className="card-wrapper">
                         <div className="img-wrapper" >
@@ -41,9 +60,9 @@ const ArticleCard: React.FC<Props> = props => {
                         <h2>{article.intro}</h2>
                         <a href={`${article.linkUrl}`} target="_blank">{article.linkDescription}</a>
                         <div className="idx-itm-btn-wrapper">
-                            {data && data.name == "john.haner.cody@gmail.com" ? <Link href={`/projects/${article._id}/edit`}>
+                            {data && data.name == "john.haner.cody@gmail.com" ? <><Link href={`/projects/${article._id}/edit`}>
                                 <button>Edit</button>
-                            </Link> : null}
+                            </Link><button onClick={handleDelete}>Delete</button></> : null}
                             
                         </div>
 
