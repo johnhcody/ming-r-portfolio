@@ -71,7 +71,7 @@ const CreateNew:React.FC = props => {
         if (isSubmitting) {
              
             if (Object.keys(errors).length === 0) {
-                createBlog();
+                createProject();
             } else {
                 console.log(errors)
                 setIsSubmitting(false);
@@ -83,7 +83,6 @@ const CreateNew:React.FC = props => {
         e.preventDefault();
         let errs = validate();
         setErrors(errs);
-         
     }
 
     const validate = () => {    
@@ -95,14 +94,14 @@ const CreateNew:React.FC = props => {
             err['type'] = "Please select a project type";
         }
         debugger
-        Object.values(err).length > 0 && err['message'] !== '' ? err['message'] = "See errors above" : null
+        if (Object.values(err).length > 0 && !err['message']) err['message'] = "See errors above" 
         return err;
     }
 
     let router = useRouter();
-    const createBlog = () => {
+    const createProject = () => {
          
-        axios.post(`/api/${form.type + "s"}`, {
+        axios.post(`/api/projects`, {
             title: form.title,
             intro: form.intro,
             type: form.type,
@@ -180,6 +179,7 @@ const CreateNew:React.FC = props => {
             [e.target.name]: e.target.value 
         })
         if (e.target.name == "title" && e.target.value !== '') delete errors['title']
+        if (Object.values(errors).length == 1 && errors.message) delete errors['message']
     };
 
     const postBlog = (e) => {
@@ -193,6 +193,7 @@ const CreateNew:React.FC = props => {
             'type': projectType 
         })
         if (errors['type'] && projectType) delete errors['type']
+        debugger
         if (Object.values(errors).length == 1 && errors.message) delete errors['message']
     }
 
