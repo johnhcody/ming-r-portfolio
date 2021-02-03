@@ -8,6 +8,7 @@ import Footer from '../components/shared/Footer'
 import axios from 'axios'
 import Upload from '../components/shared/Upload'
 import Dropdown from '../components/shared/Dropdown'
+import NavBar from '../components/shared/Navbar'
 
 interface Props {
     
@@ -36,6 +37,35 @@ const CreateNew:React.FC = props => {
         linkUrl: '',
         linkDescription: ''
     })
+
+    const [ scrolled, setScrolled ] = useState(false);
+
+    useEffect(() => {
+
+        window.addEventListener("scroll", handleScroll);
+      }, []);
+
+      const handleScroll = () => {
+        if (window.pageYOffset > 47) {
+            setScrolled(true)
+        } else {
+            setScrolled(false)
+        }
+    }
+
+    const [ hidden, setHidden ] = useState(false);
+    
+    useEffect(() => {
+        window.addEventListener('resize', handleResize)
+    }, []);
+
+    const handleResize = () => {
+        if (window.innerWidth <= 700) {
+            setHidden(true);
+        } else {
+            setHidden(false)
+        }
+    }
     
     useEffect(() => {
         if (isSubmitting) {
@@ -65,13 +95,14 @@ const CreateNew:React.FC = props => {
             err['type'] = "Please select a project type";
         }
         debugger
+        Object.values(err).length > 0 && err['message'] !== '' ? err['message'] = "See errors above" : null
         return err;
     }
 
     let router = useRouter();
     const createBlog = () => {
          
-        axios.post('/api/blogs', {
+        axios.post(`/api/${form.type + "s"}`, {
             title: form.title,
             intro: form.intro,
             type: form.type,
@@ -148,6 +179,7 @@ const CreateNew:React.FC = props => {
             ...form,
             [e.target.name]: e.target.value 
         })
+        if (e.target.name == "title" && e.target.value !== '') delete errors['title']
     };
 
     const postBlog = (e) => {
@@ -156,23 +188,27 @@ const CreateNew:React.FC = props => {
 
     const handleType = (projectType) => {
         debugger
-        //setType(type => type = projectType);
         setForm({
             ...form,
             'type': projectType 
         })
+        if (errors['type'] && projectType) delete errors['type']
+        if (Object.values(errors).length == 1 && errors.message) delete errors['message']
     }
 
-
+    
     return (
         <>
         <BaseLayout data={data} loading={loading}>
+            {scrolled && !hidden? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
             <div className="flex w-full justify-center">
                 <form className="flex flex-col items-center w-4/5" onSubmit={handleSubmit}>
                     <h1 className="text-4xl">Create a New Blog Post</h1>
                     <Dropdown sendType={handleType}/>
+                    {errors.type ? <h1 className="text-2xl text-red-500">{errors.type}</h1> : null }
                     <label className="text-2xl pt-4 pb-2" htmlFor="title">{form.type} Title</label>
                         <input type="text" onChange={handleChange} className="text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" placeholder="Grab their attention!" name="title"  />
+                    {errors.title ? <h1 className="text-2xl text-red-500">{errors.title}</h1> : null}
                     <label className="text-2xl pt-4 pb-2" htmlFor="intro">{form.type} Introduction</label>
                         <textarea onChange={handleChange} className="border-2 rounded-md text-center w-full h-24 p-3 my-3" placeholder="Tell us a bit about your work!  This will appear on the main page." name="intro"  />
                     <label className="text-2xl pt-4 pb-2" htmlFor="description">{form.type} Description</label>
@@ -195,8 +231,7 @@ const CreateNew:React.FC = props => {
                     <button className="focus:outline-none focus:ring focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full" onClick={appendPhoto}>Add Photo</button>    
                     <button className="focus:outline-none focus:ring focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full outline:none" onClick={appendParagraph}>Add Paragraph</button>
                     <button className="focus:outline-none focus:ring focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full outline:none" type="submit" onClick={postBlog} > Post Blog</button>
-                    {errors.title ? <h1>{errors.title}</h1> : null}
-                    {errors.type ? <h1>{errors.type}</h1> : null}
+                    {errors.message ? <h1 className="pt-2 text-red-500">{errors.message}</h1> : null}
                 </form>
             </div>
         </BaseLayout>

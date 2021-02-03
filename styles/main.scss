@@ -326,8 +326,9 @@
                 width: 320px;
                 }
             .hidden-text-wrapper {
-                position: relative;
-                display: inline-block;
+                // was causing text below image to shift on hover
+                // position: relative;
+                // display: inline-block;
                 &:hover {
                     transition: 500ms;
                     float: left;
@@ -346,7 +347,6 @@
                     width: 60%;
                     p {
                         color: white;
-                        
                     }
                 }
             }
