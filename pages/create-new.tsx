@@ -28,6 +28,7 @@ const CreateNew:React.FC = props => {
     const [form, setForm] = useState({
         title: '', 
         intro: '', 
+        type: '',
         description: '', 
         paragraphs: [],
         mainPhoto: '',
@@ -42,6 +43,7 @@ const CreateNew:React.FC = props => {
             if (Object.keys(errors).length === 0) {
                 createBlog();
             } else {
+                console.log(errors)
                 setIsSubmitting(false);
             }
         }
@@ -54,11 +56,13 @@ const CreateNew:React.FC = props => {
          
     }
 
-    const validate = () => {
+    const validate = () => {    
         let err = {};
 
         if (!form.title) {
             err['title'] = "Title is required";
+        } else if (!form.type) {
+            err['type'] = "Please select a project type";
         }
 
         return err;
@@ -70,6 +74,7 @@ const CreateNew:React.FC = props => {
         axios.post('/api/blogs', {
             title: form.title,
             intro: form.intro,
+            type: form.type,
             description: form.description,
             paragraphs: paragraphsArr,
             photos: photoStrArr,
@@ -151,7 +156,11 @@ const CreateNew:React.FC = props => {
 
     const handleType = (projectType) => {
         debugger
-        setType(type => type = projectType)
+        //setType(type => type = projectType);
+        setForm({
+            ...form,
+            'type': projectType 
+        })
     }
 
 
@@ -162,15 +171,15 @@ const CreateNew:React.FC = props => {
                 <form className="flex flex-col items-center w-4/5" onSubmit={handleSubmit}>
                     <h1 className="text-4xl">Create a New Blog Post</h1>
                     <Dropdown sendType={handleType}/>
-                    <label className="text-2xl pt-4 pb-2" htmlFor="title">{type} Title</label>
+                    <label className="text-2xl pt-4 pb-2" htmlFor="title">{form.type} Title</label>
                         <input type="text" onChange={handleChange} className="text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" placeholder="Grab their attention!" name="title"  />
-                    <label className="text-2xl pt-4 pb-2" htmlFor="intro">{type} Introduction</label>
+                    <label className="text-2xl pt-4 pb-2" htmlFor="intro">{form.type} Introduction</label>
                         <textarea onChange={handleChange} className="border-2 rounded-md text-center w-full h-24 p-3 my-3" placeholder="Tell us a bit about your work!  This will appear on the main page." name="intro"  />
-                    <label className="text-2xl pt-4 pb-2" htmlFor="description">{type} Description</label>
+                    <label className="text-2xl pt-4 pb-2" htmlFor="description">{form.type} Description</label>
                         <textarea onChange={handleChange} className="border-2 rounded-md text-center w-full h-72 p-3 my-3" placeholder="Go into more detail about the project.  This will appear when people view the specific project." name="description"  />
-                        <label className="text-2xl pt-4 pb-2" htmlFor="linkUrl">{type} Link URL</label>
+                        <label className="text-2xl pt-4 pb-2" htmlFor="linkUrl">{form.type} Link URL</label>
                     <input type="text" onChange={handleChange} className="text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" placeholder="Copy and Paste Link Address" name="linkUrl"  />
-                        <label className="text-2xl pt-4 pb-2" htmlFor="linkDescription">{type} Link Description</label>
+                        <label className="text-2xl pt-4 pb-2" htmlFor="linkDescription">{form.type} Link Description</label>
                     <input type="text" onChange={handleChange} className="text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" placeholder="Text that will appear on hyperlink" name="linkDescription"  />
                     <span className="text-2xl pt-4 pb-2" >Upload your Main Photo</span>
                     <Upload name={"mainPhoto"} sendPhotoString={handleMainPhoto} title={"Main Photo"} />
@@ -186,8 +195,8 @@ const CreateNew:React.FC = props => {
                     <button className="focus:outline-none focus:ring focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full" onClick={appendPhoto}>Add Photo</button>    
                     <button className="focus:outline-none focus:ring focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full outline:none" onClick={appendParagraph}>Add Paragraph</button>
                     <button className="focus:outline-none focus:ring focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full outline:none" type="submit" onClick={postBlog} > Post Blog</button>
+                    {errors.title ? <h1>{errors.title}</h1> : null}
                 </form>
-
             </div>
         </BaseLayout>
         <Footer />
