@@ -26,6 +26,7 @@ const CreateNew:React.FC = props => {
     const [ errors, setErrors] = useState({});
     const [ type, setType ] = useState('');
 
+
     const [form, setForm] = useState({
         title: '', 
         intro: '', 
@@ -95,6 +96,8 @@ const CreateNew:React.FC = props => {
             err['type'] = "Please select a project type";
         }
         if (Object.values(err).length > 0 && !err['message']) err['message'] = "See errors above" 
+        
+        
         return err;
     }
 
@@ -106,8 +109,8 @@ const CreateNew:React.FC = props => {
             intro: form.intro,
             type: form.type,
             description: form.description,
-            paragraphs: paragraphsArr,
-            photos: photoStrArr,
+            paragraphs: paragraphsArr.filter(el => el !== null),
+            photos: photoStrArr.filter(el => el !== null),
             order: order,
             linkUrl: form.linkUrl,
             linkDescription: form.linkDescription,
@@ -197,6 +200,43 @@ const CreateNew:React.FC = props => {
         if (Object.values(errors).length == 1 && errors.message) delete errors['message']
     }
 
+    const deleteParagraph = (inputIndex, typeIndex) => {
+
+            debugger
+            let inputCopy = [...input];
+            setInput(inputCopy.filter((el, i) => i != inputIndex && el != null))
+            let newArr = [...paragraphsArr];
+            debugger
+            // newArr.splice(typeIndex, 1)
+            // delete newArr[typeIndex];
+            // newArr = newArr.filter(el => el != null)
+            setParagraphsArr(newArr.filter((el, i) => i != typeIndex && el != null));
+            debugger
+            setForm({
+                ...form,
+                // paragraphs: paragraphsArr
+                paragraphs: newArr.filter((el, i) => i != typeIndex && el != null)
+            }) 
+            debugger
+    }
+
+    const deletePhoto = (inputIndex, typeIndex) => {
+            let inputCopy = [...input];
+            inputCopy = inputCopy.splice(inputIndex, 1)
+            
+            setInput(inputCopy)
+            let newArr = [...photoStrArr];
+
+            newArr = newArr.splice(typeIndex, 1)
+            // delete newArr[typeIndex];
+            // newArr = newArr.filter(el => el != null)
+            setPhotoStrArr(newArr);
+            setForm({
+                ...form,
+                photos: newArr
+            }) 
+    }
+
     
     return (
         <>
@@ -224,9 +264,9 @@ const CreateNew:React.FC = props => {
                     let word = ipt.slice(0,5);
  
                     if (word == 'phot-') {
-                        return <BlogPhotoUpload key={idx} photoNumber={ipt} sendPhotoStr={handleFileUpload}/>
+                        return <BlogPhotoUpload key={idx} inputIndex={idx} photoNumber={ipt} sendPhotoStr={handleFileUpload} deleteElement={deletePhoto} />
                     } else if (word == 'para-'){
-                        return <BlogParagraphUpload key={idx} paragraphNumber={ipt} addText={handleTextInput}/>
+                        return <BlogParagraphUpload key={idx} inputIndex={idx} paragraphNumber={ipt} deleteElement={deleteParagraph} addText={handleTextInput}/>
                     }
                     })}
                     <button className="focus:outline-none focus:ring focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full" onClick={appendPhoto}>Add Photo</button>    
