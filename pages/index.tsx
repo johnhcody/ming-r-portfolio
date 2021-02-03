@@ -18,7 +18,7 @@ return (
             <>
             <BaseLayout loading={loading} data={data}>
                 <SplashImage />
-                <NavBar />
+                {/* <NavBar /> */}
                 <Footer />
                 <IndexFooter />
             </BaseLayout>
