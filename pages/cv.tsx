@@ -48,6 +48,7 @@ const Cv: React.FC<Props> = props => {
             <>
             <BaseLayout loading={loading} data={data}>
                 {scrolled && !hidden? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
+                <h1 className="flex justify-center text-4xl font-sans pt-24 pb-12" >Read about my Experience</h1>
                 <Paragraph1 />    
                 <Paragraph1 />    
                 <Paragraph1 />    
