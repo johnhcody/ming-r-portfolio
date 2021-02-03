@@ -70,8 +70,8 @@ const Project: NextPage<Props> = props => {
                 </div>
                 {data && data.name == "john.haner.cody@gmail.com" ? 
                 <div className="flex justify-center py-4">
-                    <Link href={`/new-blog`}>
-                        <button className="focus:outline-none focus:ring focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white hover:text-red-500 rounded-full font-bold px-4 py-3 transition duration-300 ease-in-out mr-6" >New Blog</button>
+                    <Link href={`/create-new`}>
+                        <button className="focus:outline-none focus:ring focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white hover:text-red-500 rounded-full font-bold px-4 py-3 transition duration-300 ease-in-out mr-6" >New Project</button>
                     </Link>
                 </div> : null
                 }
@@ -84,7 +84,7 @@ const Project: NextPage<Props> = props => {
 }
 
 Project.getInitialProps = async () => {
-    const res = await axios.get('/api/projects/');
+    const res = await axios.get('/api/projects/')
     const projects = res.data['data'];
     return projects;
 }

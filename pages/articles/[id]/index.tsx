@@ -82,7 +82,7 @@ const Article: NextPage<Props> = ({ article }) => {
                 <p>{article.body5}</p>
                 { data && data.name == "john.haner.cody@gmail.com" ? 
                     <div className="idx-itm-btn-wrapper">
-                        <Link href={`/articles/${article._id}/edit`}>
+                        <Link href={`/projects/${article._id}/edit`}>
                             <button>Edit</button>
                         </Link>
                         <button onClick={handleDelete}>Delete</button>

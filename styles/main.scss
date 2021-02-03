@@ -314,6 +314,7 @@
             }
             h2 {
                 padding: 0px 0px 10px 0px;
+                max-width: fit-content;
             }
             a {
                 padding: 0px 0px 10px 0px;
@@ -556,3 +557,16 @@
 .dropdown:hover .dropdown-menu {
     display: block;
   }
+
+.wrapper{
+        display:grid;
+        height:300px;
+        place-items:center;
+        background-color: white;
+        transition: all .9s ease-in-out;
+        &:hover {
+            transform: scale(1.1);
+            transition: all .9s ease-in-out;
+            cursor: pointer;
+        }
+    }

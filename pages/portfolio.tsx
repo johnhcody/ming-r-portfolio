@@ -33,7 +33,7 @@ const Portfolio: NextPage<PortfolioProps> = props => {
 
     const [hover, setHover] = useState(false)
     const { loading, data } = useGetUser();
-    const articles = Object.values(props)
+    const articles = Object.values(props).filter(el => el.type == "Article")
     
     const [ scrolled, setScrolled ] = useState(false);
 
@@ -87,7 +87,7 @@ const Portfolio: NextPage<PortfolioProps> = props => {
                 {
                     data && data.name == "john.haner.cody@gmail.com" ?
                     <div className="new-note">
-                        <Link href={'/new'}>
+                        <Link href={'/create-new'}>
                             <button>Create a new Article</button>
                         </Link>
                     </div> : null
@@ -105,7 +105,8 @@ const Portfolio: NextPage<PortfolioProps> = props => {
 
 
 Portfolio.getInitialProps = async () => {
-    const res = await axios.get('/api/articles');
+    // const res = await axios.get('localhost:3000/api/projects');
+    const res = await axios.get('/api/projects/')
     const articles = res.data['data'];
     return articles;
 }

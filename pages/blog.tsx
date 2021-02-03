@@ -26,7 +26,7 @@ interface BlogProps {
 
 const Blog: NextPage<BlogProps> = props => {
     const { loading, data } = useGetUser();
-    const blogs = Object.values(props);
+    const blogs = Object.values(props).filter(el => el.type == "Blog");
 
     const [ scrolled, setScrolled ] = useState(false);
 
@@ -82,9 +82,15 @@ const Blog: NextPage<BlogProps> = props => {
 }
 
 Blog.getInitialProps = async () => {
-    const res = await axios.get('/api/blogs');
+    // const res = await axios.get('localhost:3000/api/projects');
+    const res = await axios.get('/api/projects/')
     const blogs = res.data['data'];
     return blogs;
 }
+// Blog.getInitialProps = async () => {
+//     const res = await axios.get('/api/blogs');
+//     const blogs = res.data['data'];
+//     return blogs;
+// }
 
 export default Blog

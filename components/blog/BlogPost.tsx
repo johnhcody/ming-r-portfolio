@@ -33,7 +33,7 @@ const BlogPost: React.FC<BlogPostProps> = props => {
                         </div>
                         <div className="px-6 py-4">
                             <Link
-                            href={`/blogs/${blog._id}`}>
+                            href={`/projects/${blog._id}`}>
                                 <button className="focus:outline-none focus:ring focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white hover:text-red-500 rounded-full font-bold px-4 py-3 transition duration-300 ease-in-out mr-6" >Read More</button>
                             </Link>
                         </div>
