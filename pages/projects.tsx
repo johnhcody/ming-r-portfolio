@@ -6,16 +6,27 @@ import BaseLayout from '../components/layouts/BaseLayout'
 import NavBar from '../components/shared/Navbar'
 import Footer from '../components/shared/Footer'
 import Link from 'next/link'
+import ProjectCard from '../components/projects/ProjectCard'
 
 interface Props {
-
+    title: string;
+    intro: string;
+    type: string;
+    description: string;
+    paragraphs: number[];
+    photos: number[];
+    order: number[];
+    linkUrl: string;
+    linkDescription: string;
+    mainPhoto: string;
 }
 
 
 const Project: NextPage<Props> = props => {
     const { loading, data } = useGetUser();
-    // const blogs = Object.values(props);
-    // filter through projects where type == project
+    debugger
+    const projects = Object.values(props).filter(el => el.type == "Project");
+    // filter through projects where type == Project
     const [ scrolled, setScrolled ] = useState(false);
 
     useEffect(() => {
@@ -52,10 +63,9 @@ const Project: NextPage<Props> = props => {
             <div className="flex justify-center items-center flex-col py-12">
                     <h1 className="flex justify-center text-4xl font-sans" >Projects from my Career</h1>
                     <div className="flex flex-wrap">
-                        {/* {blogs.map(blog => {
-                            return <BlogPost key={blog._id} blog={blog} />
-                        })} */}
-                        {/* map through projects */}
+                        {projects.map(project => {
+                            return <ProjectCard key={project._id} project={project} />
+                        })}
                     </div>
                 </div>
                 {data && data.name == "john.haner.cody@gmail.com" ? 
@@ -74,9 +84,9 @@ const Project: NextPage<Props> = props => {
 }
 
 Project.getInitialProps = async () => {
-    const res = await axios.get('/api/blogs');
-    const blogs = res.data['data'];
-    return blogs;
+    const res = await axios.get('/api/projects/');
+    const projects = res.data['data'];
+    return projects;
 }
 
 export default Project;

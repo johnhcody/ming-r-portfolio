@@ -80,6 +80,7 @@ const CreateNew:React.FC = props => {
     }, [errors])
     
     const handleSubmit = (e) => {
+        debugger
         e.preventDefault();
         let errs = validate();
         setErrors(errs);
@@ -93,7 +94,6 @@ const CreateNew:React.FC = props => {
         } if (!form.type) {
             err['type'] = "Please select a project type";
         }
-        debugger
         if (Object.values(err).length > 0 && !err['message']) err['message'] = "See errors above" 
         return err;
     }

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 
 interface Props {
-    blog: {
+    body: {
         title: string;
         intro: string;
         description: string;
@@ -16,14 +16,14 @@ interface Props {
     }
 }
 
-const BlogBody: React.FC<Props> = ({ blog }) => {
+const BlogBody: React.FC<Props> = ({ body }) => {
     
-    const [ order, setOrder ] = useState(blog.order)
+    const [ order, setOrder ] = useState(body.order)
 
-    const bodyPhotos = blog.photos.slice();
-    const bodyParagraphs = blog.paragraphs.slice();
+    const bodyPhotos = body.photos.slice();
+    const bodyParagraphs = body.paragraphs.slice();
 
-    const body = order.map((el, idx) => {
+    const contentBody = order.map((el, idx) => {
         if (el == 'photo') {
             return <img className="py-4 max-h-full" key={idx} src={`${bodyPhotos.shift()}`} alt=""/>
         } else {
@@ -32,7 +32,7 @@ const BlogBody: React.FC<Props> = ({ blog }) => {
     })
 
     return (
-        <div className="flex justify-center flex-col items-center" >{body}</div>
+        <div className="flex justify-center flex-col items-center" >{contentBody}</div>
     )
 }
 
