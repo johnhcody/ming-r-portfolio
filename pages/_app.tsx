@@ -7,9 +7,7 @@ import { PhotoProvider } from '../context/photoContext'
 
 function App({ Component, pageProps }: AppProps) {
     return  <LanguageProvider>
-                <PhotoProvider>
                     <Component {...pageProps} />
-                </PhotoProvider>
             </LanguageProvider>
 }
 

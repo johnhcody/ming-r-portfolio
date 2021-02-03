@@ -39,7 +39,7 @@ export const Header = (props: Props) => {
             </Link>
             <div className="header-right-wrapper">
                 <i onClick={openModal} className="fas fa-bars"></i>
-                {modalIsOpen ? null : <LanguageToggle />}
+                {/* {modalIsOpen ? null : <LanguageToggle />} */}
                 {data && data.name == "john.haner.cody@gmail.com" ?  <LogoutLink /> : null}
 
             </div>
@@ -74,6 +74,9 @@ export const Header = (props: Props) => {
                         </Link>
                         <Link href="/blog">
                             <a onClick={closeModal} > Blog </a>
+                        </Link>
+                        <Link href="/projects">
+                            <a onClick={closeModal} > Projects </a>
                         </Link>
                         <Link href="/cv">
                             <a onClick={closeModal} > Contact </a>
