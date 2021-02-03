@@ -23,7 +23,7 @@ const NavBar: React.FC<Props> = (props: Props) => {
                     </Link>
 
                     <Link
-                    href="/portfolio"><a className="text-3xl py-2 my-2 px-4 hover:no-underline hover:bg-blue hover:text-white rounded-md">Projects</a>
+                    href="/projects"><a className="text-3xl py-2 my-2 px-4 hover:no-underline hover:bg-blue hover:text-white rounded-md">Projects</a>
                     </Link>
 
                     <Link
@@ -38,7 +38,8 @@ const NavBar: React.FC<Props> = (props: Props) => {
         )
     } else {
         return (
-            <div className="navbar-wrapper">
+            <nav className={`bg-white p-2 w-full ${props.fixToTop}`} >
+                <div className="flex justify-around min-h-full items-center flex-row">
                 <Link
                     href="/about"><a className="text-3xl py-2 my-2 px-4 hover:no-underline hover:bg-blue hover:text-white rounded-md">เกี่ยวกับมิ่งขวัญ</a>
                 </Link>
@@ -46,7 +47,7 @@ const NavBar: React.FC<Props> = (props: Props) => {
                     href="/portfolio"><a className="text-3xl py-2 my-2 px-4 hover:no-underline hover:bg-blue hover:text-white rounded-md">บทความ</a>
                 </Link>
                 <Link
-                    href="/portfolio"><a className="text-3xl py-2 my-2 px-4 hover:no-underline hover:bg-blue hover:text-white rounded-md">โครงการ</a>
+                    href="/projects"><a className="text-3xl py-2 my-2 px-4 hover:no-underline hover:bg-blue hover:text-white rounded-md">โครงการ</a>
                 </Link>
                 <Link
                     href="/blog"><a className="text-3xl py-2 my-2 px-4 hover:no-underline hover:bg-blue hover:text-white rounded-md">บล็อก</a>
@@ -55,6 +56,7 @@ const NavBar: React.FC<Props> = (props: Props) => {
                     href="/cv"><a className="text-3xl py-2 my-2 px-4 hover:no-underline hover:bg-blue hover:text-white rounded-md">ติดต่อ</a>
                 </Link>
             </div> 
+        </nav>
         )
     }
 }

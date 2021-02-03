@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import EditPhoto from '../../components/shared/EditPhoto'
-import EditParagraph from '../../components/shared/EditPargraph'
+import EditPhoto from './EditPhoto'
+import EditParagraph from './EditPargraph'
 
 interface Props {
     bodyOrder: string[];
@@ -16,11 +16,11 @@ const EditBody: React.FC<Props> = ({ bodyOrder, bodyParagraphs, bodyPhotos, send
 
     const body = bodyOrder.map((el, i) => {
         if (el == 'photo') {
-            const nextPhoto = photosArr.shift()  
+            const nextPhoto: string = photosArr.shift()  
             return <EditPhoto key={i} source={`${nextPhoto}`} photoNumber={"photo-" + (bodyPhotos.indexOf(nextPhoto) + 1)} editPhotoArr={handleFileUpload} />
         } else {
             const nextParagraph = paragraphsArr.shift()
-            const index = bodyParagraphs.indexOf(nextParagraph)
+            const index: number = bodyParagraphs.indexOf(nextParagraph)
             return <EditParagraph sendInput={sendInput} value={nextParagraph} key={i} idx={index}/>
         }
     })

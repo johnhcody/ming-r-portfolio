@@ -8,7 +8,7 @@ import Footer from '../../../components/shared/Footer'
 import EditPhoto from '../../../components/shared/EditPhoto'
 import EditParagraph from '../../../components/shared/EditPargraph'
 import NavBar from '../../../components/shared/Navbar'
-import EditBody from '../../../components/blog/EditBody';
+import EditBody from '../../../components/shared/EditBody';
 
 
 interface Props {

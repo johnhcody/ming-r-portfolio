@@ -40,6 +40,7 @@ export const Header = (props: Props) => {
             <div className="header-right-wrapper">
                 <i onClick={openModal} className="fas fa-bars"></i>
                 {modalIsOpen ? null : <LanguageToggle />}
+                {/* <LanguageToggle /> */}
                 {data && data.name == "john.haner.cody@gmail.com" ?  <LogoutLink /> : null}
 
             </div>
@@ -91,6 +92,9 @@ export const Header = (props: Props) => {
                             </Link>
                             <Link href="/blog">
                                 <a onClick={closeModal} > บล็อก </a>
+                            </Link>
+                            <Link href="/projects">
+                                <a onClick={closeModal} > โครงการ </a>
                             </Link>
                             <Link href="/cv">
                                 <a onClick={closeModal} > ติดต่อ </a>

@@ -7,7 +7,7 @@ import Link from 'next/link';
 import Footer from '../../../components/shared/Footer'
 import { useGetUser } from '../../../actions/user'
 import NavBar from '../../../components/shared/Navbar'
-import BlogBody from '../../../components/blog/BlogBody';
+import ContentBody from '../../../components/shared/ContentBody';
 
 interface Props {
     project: {
@@ -85,9 +85,9 @@ const Project: NextPage<Props> = ({ project }) => {
         {scrolled && !hidden ? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
             <div className="flex justify-center items-center pt-24 flex-col">
                 <h1 className="text-4xl py-4">{project.title}</h1>
-                <img className="h-72 w-auto py-4 max-w-xs" src={`${project.mainPhoto}`} alt=""/>
-                <h1 className="max-w-4/5 py-4">{project.description}</h1>
-                <BlogBody body={project}/>
+                <img className="object-contain h-48 md:h-72 my-4 lg:h-96 w-full" src={`${project.mainPhoto}`} alt=""/>
+                <h1 className="text-lg max-w-4/5 py-4">{project.description}</h1>
+                <ContentBody body={project}/>
                 {data && data.name == "john.haner.cody@gmail.com" ? 
                 <>
                     <Link href={`/projects/${project._id}/edit`}>
