@@ -16,11 +16,17 @@ const SplashImage:React.FC<Props> = (props: Props) => {
                 setWidth(window.innerWidth);
             }
         useEffect(() => {
-                window.addEventListener('resize', handleWindowSizeChange);
+                window.addEventListener('load', handleWindowSizeChange);
                 return () => {
-                    window.removeEventListener('resize', handleWindowSizeChange);
+                    window.removeEventListener('load', handleWindowSizeChange);
                 }
             }, []);
+        useEffect(() => {
+            window.addEventListener('resize', handleWindowSizeChange);
+            return () => {
+                window.removeEventListener('resize', handleWindowSizeChange);
+            }
+        }, []);
 
         let isMobile: boolean = (width <= 768);
     return (

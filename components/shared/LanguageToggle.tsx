@@ -12,19 +12,9 @@ export const LanguageToggle = (props: Props) => {
     const engLang = useLanguage();
     const toggleLang = useLanguageUpdate();
 
-    useEffect(() => {
-        let cb = document.getElementById('language-toggle-switch') as HTMLInputElement
-        if (engLang) {
-            cb.checked = false;
-        } else {
-            cb.checked = true;
-        }
-    }) 
-
-
     return (
         <div className="toggle-wrapper">
-            <input type="checkbox" id="language-toggle-switch" onClick={toggleLang}/>
+            <input  checked={!engLang} type="checkbox" id="language-toggle-switch" onClick={toggleLang}/>
         </div>
     )
 }
