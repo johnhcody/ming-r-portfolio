@@ -4,7 +4,7 @@ interface Props {
     addText: Function;
     paragraphNumber: string;
     deleteElement: Function;
-    inputIndex: number;
+    inputIndex: any;
 }
 
 const BlogParagraphUpload: React.FC<Props> = ({ inputIndex, deleteElement, addText, paragraphNumber })=> {
