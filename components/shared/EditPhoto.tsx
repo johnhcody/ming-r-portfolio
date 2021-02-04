@@ -5,6 +5,7 @@ interface Props {
     source: string;
     photoNumber: string;
     editPhotoArr: Function;
+
 }
 
 const EditPhoto: React.FC<Props> = props => {
@@ -22,7 +23,7 @@ const EditPhoto: React.FC<Props> = props => {
         return (
             <div className="flex flex-col">
                 <img className="object-contain h-48 md:h-72 my-4 lg:h-96 w-full"  src={`${props.source}`} alt=""/>
-                <BlogPhotoUpload photoNumber={props.photoNumber} sendPhotoStr={props.editPhotoArr} />
+                <BlogPhotoUpload photoNumber={props.photoNumber} sendPhotoStr={props.editPhotoArr}/>
             </div>
         )
     }

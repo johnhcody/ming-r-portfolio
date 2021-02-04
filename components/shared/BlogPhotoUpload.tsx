@@ -3,8 +3,6 @@ import React, { useState } from 'react'
 interface Props {
     photoNumber: string;
     sendPhotoStr: Function;
-    inputIndex: number;
-    deleteElement: Function;
 }
 
 

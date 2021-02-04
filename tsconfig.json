@@ -22,7 +22,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "utils/dbConnect.js", "components/shared/Upload.jsx", "config/dev.js", "config/prod.js", "config/index.js"  ],
+, "utils/dbConnect.js", "components/shared/Upload.jsx", "pages/api/articles/[id].jsx", "config/dev.js", "config/prod.js", "config/index.js"  ],
   "exclude": [
     "node_modules"
   ]
