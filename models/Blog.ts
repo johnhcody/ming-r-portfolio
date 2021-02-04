@@ -25,4 +25,5 @@ const BlogSchema: Schema = new Schema({
     mainPhoto: { type: String }
 })
 
-module.exports = mongoose.models.Blog || mongoose.model<IBlog>('Blog', BlogSchema)
+const Blog = mongoose.models.Blog || mongoose.model<IBlog>('Blog', BlogSchema)
+export default Blog;

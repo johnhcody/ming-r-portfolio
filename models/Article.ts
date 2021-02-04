@@ -37,4 +37,5 @@ const ArticleSchema: Schema = new Schema({
     linkDescription: {type: String}
 })
 
-module.exports = mongoose.models.Article || mongoose.model<IArticle>('Article', ArticleSchema)
+const Article =  mongoose.models.Article || mongoose.model<IArticle>('Article', ArticleSchema);
+export default Article

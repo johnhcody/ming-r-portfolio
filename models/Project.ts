@@ -27,4 +27,5 @@ const ProjectSchema: Schema = new Schema({
     mainPhoto: { type: String }
 })
 
-module.exports = mongoose.models.Project || mongoose.model<IProject>('Project', ProjectSchema)
+const Project = mongoose.models.Project || mongoose.model<IProject>('Project', ProjectSchema)
+export default Project;
