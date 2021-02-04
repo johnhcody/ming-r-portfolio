@@ -14,7 +14,7 @@ export const LanguageToggle = (props: Props) => {
 
     return (
         <div className="toggle-wrapper">
-            <input  checked={!engLang} type="checkbox" id="language-toggle-switch" onChange={toggleLang} defaultChecked/>
+            <input  checked={!engLang} type="checkbox" id="language-toggle-switch" onChange={toggleLang}/>
         </div>
     )
 }

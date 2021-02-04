@@ -293,9 +293,9 @@ const CreateNew:React.FC = props => {
                             return <BlogParagraphUpload key={idx} inputIndex={idx} paragraphNumber={ipt} deleteElement={deleteParagraph} addText={handleTextInput}/>
                         }
                         })}
-                        <button className="focus:outline-none focus:ring focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full font-sans" onClick={appendPhoto}>Add Photo</button>    
-                        <button className="focus:outline-none focus:ring focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full outline:none font-sans" onClick={appendParagraph}>Add Paragraph</button>
-                        <button className="focus:outline-none focus:ring focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full outline:none font-sans" type="submit" onClick={postBlog} > Post {`${form.type}`}</button>
+                        <button className="focus:outline-none focus:ring font-sans focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full font-sans" onClick={appendPhoto}>Add Photo</button>    
+                        <button className="focus:outline-none focus:ring font-sans focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full outline:none font-sans" onClick={appendParagraph}>Add Paragraph</button>
+                        <button className="focus:outline-none focus:ring font-sans focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full outline:none font-sans" type="submit" onClick={postBlog} > Post {`${form.type}`}</button>
                         {errors && errors.message ? <h1 className="pt-2 text-red-500">{errors.message}</h1> : null}
                     </form>
                 </div>

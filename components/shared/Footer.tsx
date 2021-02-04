@@ -36,8 +36,8 @@ const Footer:React.FC<Props> = (props: Props) => {
                 <a href="mailto:mingkwn@gmail.com?subject=Getting%20in%20Touch"><i className="fas fa-envelope-open-text"></i></a>
             </div>
             <div className="bottom-text-wrappe flex flex-col items-center justify-center">
-                <p>	&copy; Mingkwan Rattanakot 2021 </p>
-                {!data ? <a className="text-blue" href="api/login">Admin Login</a> : data && data.name == "john.haner.cody@gmail.com" ? <a className="text-blue" href="api/logout">Logout</a> : null}
+                <p className="font-sans pt-4">	&copy; Mingkwan Rattanakot 2021 </p>
+                {!data ? <a className="text-blue font-sans " href="api/login">Admin Login</a> : data && data.name == "john.haner.cody@gmail.com" ? <a className="text-blue font-sans" href="api/logout">Logout</a> : null}
             </div>
         </div>
         </>
