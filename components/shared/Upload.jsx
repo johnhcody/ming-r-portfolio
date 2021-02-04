@@ -28,7 +28,6 @@ export default function Upload(props) {
             setSuccess(true);
         } else {
             console.error('Upload failed.');
-            document.getElementById('instructions').innerText = "It looks like there was a problem...try refreshing the page"
             setLoading(false);
         }
     };

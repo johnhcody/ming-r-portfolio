@@ -45,10 +45,10 @@ const CreateNew:React.FC = props => {
 
     const [ scrolled, setScrolled ] = useState(false);
 
-    useEffect(() => {
-        if (!data) router.push('api/login')
-        window.addEventListener("scroll", handleScroll);
-      }, []);
+    // useEffect(() => {
+    //     if (!data) router.push('api/login')
+    //     window.addEventListener("scroll", handleScroll);
+    //   }, []);
 
       const handleScroll = () => {
         if (window.pageYOffset > 47) {
@@ -249,12 +249,12 @@ const CreateNew:React.FC = props => {
     
     
 
-    if (!data) {
+    // if (!data) {
 
-        return (
-            null
-        )
-    } else {
+    //     return (
+    //         null
+    //     )
+    // } else {
 
         return (
             <>
@@ -297,7 +297,7 @@ const CreateNew:React.FC = props => {
             <Footer />
             </>
         )
-    }
+    // }
     
     
 }
