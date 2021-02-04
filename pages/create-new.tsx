@@ -23,7 +23,11 @@ const CreateNew:React.FC = props => {
     const [ paragraphsArr, setParagraphsArr ] = useState([])
     const [ order, setOrder ] = useState([]);
     const [ isSubmitting, setIsSubmitting] = useState(false);
-    const [ errors, setErrors] = useState({});
+    const [ errors, setErrors] = useState({
+        'title': '',
+        'message': '',
+        'type': ''
+    });
     const [ type, setType ] = useState('');
 
 
@@ -83,7 +87,7 @@ const CreateNew:React.FC = props => {
     const handleSubmit = (e) => {
         e.preventDefault();
         let errs = validate();
-        setErrors(errs);
+        // setErrors(errs);
     }
 
     const validate = () => {    
