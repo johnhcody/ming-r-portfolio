@@ -59,7 +59,7 @@ const Article: NextPage<Props> = ({ article }) => {
     return (
         <>
         <BaseLayout data={data} loading={loading}>
-            <NavBar />
+            <NavBar fixToTop={''}/>
             <div className="article-container">
                 <h1>{article.title}</h1>
                     <img src={article.mainPhoto == "" ? 'https://ming-portfolio-uploads.s3.ap-northeast-2.amazonaws.com/Mingkwan-Alt.png' : article.mainPhoto} alt="" />
