@@ -35,4 +35,5 @@ yarn-error.log*
 
 next.config.js
 
-config/dev.ts
+/config/dev
+config/dev.js
