@@ -1,58 +1,58 @@
-import React, { useRef } from 'react'
-import S3 from 'react-aws-s3'
-import { usePhoto, usePhotoUpdate } from '../../context/photoContext'
+// import React, { useRef } from 'react'
+// import S3 from 'react-aws-s3'
+// import { usePhoto, usePhotoUpdate } from '../../context/photoContext'
 
-export default function MultipleUpload() {
-    const fileInput = useRef();
+// export default function MultipleUpload() {
+//     const fileInput = useRef();
   
-    const photo = usePhoto();
-    const updatePhoto = usePhotoUpdate();
+//     const photo = usePhoto();
+//     const updatePhoto = usePhotoUpdate();
 
-    const config = {
-      bucketName: process.env.BUCKET_NAME,
-      region: process.env.REGION,
-      accessKeyId: process.env.ACCESS_KEY,
-      secretAccessKey: process.env.SECRET_KEY,
-    };
+//     const config = {
+//       bucketName: process.env.BUCKET_NAME,
+//       region: process.env.REGION,
+//       accessKeyId: process.env.ACCESS_KEY,
+//       secretAccessKey: process.env.SECRET_KEY,
+//     };
   
-    const handleClick = (event) => {
-      event.preventDefault();
-      let newArr = fileInput.current.files;
-      for (let i = 0; i < newArr.length; i++) {
-        handleUpload(newArr[i]);
-      }
-    };
+//     const handleClick = (event) => {
+//       event.preventDefault();
+//       let newArr = fileInput.current.files;
+//       for (let i = 0; i < newArr.length; i++) {
+//         handleUpload(newArr[i]);
+//       }
+//     };
   
-    const handleUpload = (file) => {
-      let linksArr = [];
-      let newFileName = file.name.replace(/\..+$/, "");
-      const ReactS3Client = new S3(config);
-      ReactS3Client.uploadFile(file, newFileName).then((data) => {
-        if (data.status === 204) {
+//     const handleUpload = (file) => {
+//       let linksArr = [];
+//       let newFileName = file.name.replace(/\..+$/, "");
+//       const ReactS3Client = new S3(config);
+//       ReactS3Client.uploadFile(file, newFileName).then((data) => {
+//         if (data.status === 204) {
             
-            //data.location == url 
-            updatePhoto(data.location)
+//             //data.location == url 
+//             updatePhoto(data.location)
             
-          console.log("success");
-        } else {
-          console.log("fail");
-        }
-      });
-    };
+//           console.log("success");
+//         } else {
+//           console.log("fail");
+//         }
+//       });
+//     };
   
-    return (
-      <>
-        <form className='upload-steps' onSubmit={handleClick}>
-          <label>
-            Upload file:
-            <input type='file' multiple ref={fileInput} />
-          </label>
-          <br />
-          <button type='submit'>Upload</button>
-        </form>
-      </>
-    );
-  }
+//     return (
+//       <>
+//         <form className='upload-steps' onSubmit={handleClick}>
+//           <label>
+//             Upload file:
+//             <input type='file' multiple ref={fileInput} />
+//           </label>
+//           <br />
+//           <button type='submit'>Upload</button>
+//         </form>
+//       </>
+//     );
+//   }
 
 
 // {
