@@ -30,7 +30,7 @@ export const Header = (props: Props) => {
 
 
 
-    const LogoutLink = () => <a href="/api/logout">Logout</a>
+    const LogoutLink = () => <a className="pt-2" href="/api/logout">Logout</a>
     
     return (
         <div className="header-wrapper">

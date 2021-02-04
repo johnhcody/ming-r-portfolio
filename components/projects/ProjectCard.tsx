@@ -44,7 +44,7 @@ const ProjectCard: React.FC<ProjectProps> = props => {
         router.push('/');
     }
 
-    const truncatedText = project.description.length > 150 ? project.description.slice(0, 147) + "..." : project.description
+    const truncatedText = project.description.length > 140 ? project.description.slice(0, 137) + "..." : project.description
                 return (
                     // <div className="max-w-xs rounded overflow-hidden shadow-lg my-12 mx-8">
                     //     <img className="w-full h-48" src={`${project.mainPhoto}`} alt="" />

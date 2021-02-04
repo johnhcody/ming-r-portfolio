@@ -72,7 +72,7 @@ const About: React.FC<Props> = props => {
                 {scrolled && !isMobile? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
                 <AboutParagraph />
                 </div>
-                <div className="h-40"></div>
+                <div className="h24"></div>
             </BaseLayout>
             <Footer />
             </>
