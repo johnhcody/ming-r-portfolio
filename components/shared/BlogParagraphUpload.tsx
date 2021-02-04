@@ -30,7 +30,7 @@ const BlogParagraphUpload: React.FC<Props> = ({ inputIndex, deleteElement, addTe
             <div className="w-full flex flex-col items-center">
                 <p className="flex">Write something for Paragraph Number {`${num}`}</p>
                 <textarea className="border-2 rounded-md text-center w-full h-72 p-3 my-3" placeholder={`Body Paragraph No. ${num}`} name="body3" onChange={handleChange}/>
-                <button onClick={handleDelete} className="focus:outline-none focus:ring focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full outline:none" >Delete Paragraph</button>
+                {/* <button onClick={handleDelete} className="focus:outline-none focus:ring focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full outline:none" >Delete Paragraph</button> */}
             </div>
         );
 }

@@ -20,7 +20,7 @@ return (
                 <SplashImage />
                 {/* <NavBar /> */}
                 <Footer />
-                <IndexFooter />
+                {/* <IndexFooter /> */}
             </BaseLayout>
             </>
     )

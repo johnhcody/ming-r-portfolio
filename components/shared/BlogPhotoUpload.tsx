@@ -53,7 +53,7 @@ const BlogPhotoUpload: React.FC<Props> = ({ photoNumber, sendPhotoStr }) => {
                 <polyline className="path check" fill="none" stroke="#73AF55" strokeWidth="6" strokeLinecap="round" strokeMiterlimit="10" points="60.2,30.2 38.5,65.8 25.8,50.5 "/>
                 </svg>
             </div>
-            <button onClick={handleDelete} className="focus:outline-none focus:ring focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full outline:none" >Delete Photo</button>
+            {/* <button onClick={handleDelete} className="focus:outline-none focus:ring focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full outline:none" >Delete Photo</button> */}
             </>
         )
     } else {

@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import BaseLayout from '../components/layouts/BaseLayout'
 import Footer from '../components/shared/Footer'
 import { useLanguage } from '../context/languageContext'
 import { useGetUser } from '../actions/user'
+import AboutParagraph from '../components/about/AboutParagraph'
+import NavBar from '../components/shared/Navbar'
+
+
+
 
 interface Props {
 
@@ -10,20 +15,50 @@ interface Props {
 
 const About: React.FC<Props> = props => {
 
-    const engLang = useLanguage();
 
     const { loading, data } = useGetUser();
+
+    const [ scrolled, setScrolled ] = useState(false);
+
+    useEffect(() => {
+
+        window.addEventListener("scroll", handleScroll);
+      }, []);
+
+      const handleScroll = () => {
+        if (window.pageYOffset > 47) {
+            setScrolled(true)
+        } else {
+            setScrolled(false)
+        }
+    }
+
+    const [ hidden, setHidden ] = useState(false);
+    
+    useEffect(() => {
+        window.addEventListener('resize', handleResize)
+    }, []);
+
+    const handleResize = () => {
+        if (window.innerWidth <= 700) {
+            setHidden(true);
+        } else {
+            setHidden(false)
+        }
+    }
+
+    const engLang = useLanguage();
 
     return (
         <>
             <BaseLayout data={data} loading={loading}>
-                <div className="about-wrapper">
-                    <div className="title-wrapper">
-                        <h1>About Me!</h1>
-                    </div>
-                    <div className="bio-wrapper">
-                        {engLang == false ? <p>อดีต Urban Designer ผู้รักการเดินทางสำรวจโลกกว้าง สนใจงานออกแบบเชิงพฤติกรรมมนุษย์ และยุทธศาสตร์การพัฒนาประเทศ เชื่อว่าทุกการเปลี่ยนแปลงเริ่มต้นจากน้ำหยดเล็กที่ไหลมารวมกัน</p> : <p>Former Urban Designer who loves to explore the world Interested in human behavior design And national development strategy It is believed that every change starts with a small droplet flowing together.</p>}
-                    </div>
+                <div className="flex justify-center flex-col items-center">
+                {engLang == true ? <h1 className="flex justify-center text-4xl font-sans pt-24 pb-12" >About Me</h1> : <h1 className="flex justify-center text-4xl font-sans pt-24 pb-12" >เกี่ยวกับฉัน</h1>}
+                {scrolled && !hidden? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
+                <AboutParagraph />
+                </div>
+                <div className="h-28">
+
                 </div>
             </BaseLayout>
             <Footer />
