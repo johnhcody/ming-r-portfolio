@@ -23,12 +23,12 @@ const CreateNew:React.FC = props => {
     const [ paragraphsArr, setParagraphsArr ] = useState([])
     const [ order, setOrder ] = useState([]);
     const [ isSubmitting, setIsSubmitting] = useState(false);
-    // const [ errors, setErrors] = useState({
-    //     'title': '',
-    //     'message': '',
-    //     'type': ''
-    // });
-    const [ errors, setErrors ] = useState({})
+    const [ errors, setErrors] = useState({
+        'title': '',
+        'message': '',
+        'type': ''
+    });
+    // const [ errors, setErrors ] = useState(null)
     const [ type, setType ] = useState('');
 
 
@@ -58,20 +58,6 @@ const CreateNew:React.FC = props => {
             setScrolled(false)
         }
     }
-
-    const [ hidden, setHidden ] = useState(false);
-    
-    useEffect(() => {
-        window.addEventListener('resize', handleResize)
-    }, []);
-
-    const handleResize = () => {
-        if (window.innerWidth <= 700) {
-            setHidden(true);
-        } else {
-            setHidden(false)
-        }
-    }
     
     useEffect(() => {
         if (isSubmitting) {
@@ -89,7 +75,7 @@ const CreateNew:React.FC = props => {
         debugger
         e.preventDefault();
         let errs = validate();
-        setErrors(errs);
+        // setErrors(errs);
     }
 
     const validate = () => {    
@@ -97,8 +83,10 @@ const CreateNew:React.FC = props => {
         
         if (!form.title) {
             err['title'] = "Title is required";
+            setErrors['title'] = "Title is required";
         } if (!form.type) {
             err['type'] = "Please select a project type";
+            setErrors['title'] = "Please select a project type";
         }
         if (Object.values(err).length > 0 && !err['message']) err['message'] = "See errors above" 
         
@@ -186,8 +174,8 @@ const CreateNew:React.FC = props => {
             ...form,
             [e.target.name]: e.target.value 
         })
-        if (e.target.name == "title" && e.target.value !== '') delete errors['title']
-        if (Object.values(errors).length == 1 && errors.message) delete errors['message']
+        if (e.target.name == "title" && e.target.value !== '') setErrors['title'] = '';
+        if (Object.values(errors).length == 1 && errors.message) setErrors['message'] = ''
     };
 
     const postBlog = (e) => {
@@ -200,9 +188,9 @@ const CreateNew:React.FC = props => {
             ...form,
             'type': projectType 
         })
-        if (errors && errors['type'] && projectType) delete errors['type']
+        if (errors && errors['type'] && projectType) setErrors['type'] = '';
         
-        if (Object.values(errors).length == 1 && errors.message) delete errors['message']
+        if (Object.values(errors).length == 1 && errors.message) setErrors['message'] = ''
     }
 
     const deleteParagraph = (inputIndex, typeIndex) => {
@@ -258,10 +246,26 @@ const CreateNew:React.FC = props => {
     //     )
     // } else {
 
+    const [width, setWidth] = useState(null);
+    function handleWindowSizeChange() {
+            setWidth(window.innerWidth);
+        }
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') setWidth(window.innerWidth)
+        window.addEventListener('resize', handleWindowSizeChange);
+        return () => {
+            window.removeEventListener('resize', handleWindowSizeChange);
+        }
+    }, []);
+
+        let isMobile: boolean = (width <= 768);
+    
+
         return (
             <>
             <BaseLayout data={data} loading={loading}>
-                {scrolled && !hidden? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
+                {scrolled && !isMobile? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
                 <div className="flex w-full justify-center">
                     <form className="flex flex-col items-center w-4/5" onSubmit={handleSubmit}>
                         <h1 className="text-4xl">Create a New Blog Post</h1>

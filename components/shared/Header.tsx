@@ -18,14 +18,14 @@ export const Header = (props: Props) => {
     const {data, loading} = useGetUser();
     const openModal = () => {
         setModalIsOpen(true);
-        document.body.style.overflow = "hidden"; 
-        document.body.style.height = "100%"; 
+        // document.body.style.overflow = "hidden"; 
+        // document.body.style.height = "100%"; 
     }
 
     const closeModal = () => { 
         setModalIsOpen(false);
-        document.body.style.overflow = "auto"; 
-        document.body.style.height = "auto"; 
+        // document.body.style.overflow = "auto"; 
+        // document.body.style.height = "auto"; 
     }
 
 
@@ -57,7 +57,7 @@ export const Header = (props: Props) => {
                     top: '40px',
                     left: '0px',
                     right: '0px',
-                    bottom: '40px',
+                    bottom: '0px',
                     background: '#fff',
                     border: 'none',
                     borderRadius: '4px',

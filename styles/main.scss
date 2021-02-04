@@ -429,7 +429,15 @@
         font-size: 24px;
         font-weight: 600;
     }
+    .modal-link-wrapper {
+        a {
+            padding: 12px;
+            font-size: 25px;
+        }
+    }
 }
+
+
 
 .article-container {
     font-family: $roboto-slab;

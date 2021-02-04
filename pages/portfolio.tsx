@@ -52,22 +52,37 @@ const Portfolio: NextPage<PortfolioProps> = props => {
 
       const [ hidden, setHidden ] = useState(false);
     
+    // useEffect(() => {
+    //     window.addEventListener('resize', handleResize)
+    // }, []);
+
+    // const handleResize = () => {
+    //     if (window.innerWidth <= 700) {
+    //         setHidden(true);
+    //     } else {
+    //         setHidden(false)
+    //     }
+    // }
+
+    const [width, setWidth] = useState(null);
+        function handleWindowSizeChange() {
+                setWidth(window.innerWidth);
+            }
+
     useEffect(() => {
-        window.addEventListener('resize', handleResize)
+        if (typeof window !== 'undefined') setWidth(window.innerWidth)
+        window.addEventListener('resize', handleWindowSizeChange);
+        return () => {
+            window.removeEventListener('resize', handleWindowSizeChange);
+        }
     }, []);
 
-    const handleResize = () => {
-        if (window.innerWidth <= 700) {
-            setHidden(true);
-        } else {
-            setHidden(false)
-        }
-    }
+        let isMobile: boolean = (width <= 768);
 
         return (
             <>
             <BaseLayout loading={loading} data={data}>
-            {scrolled && !hidden ? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
+            {scrolled && !isMobile ? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
             <div className="portfolio-wrapper">
 
                 <div className="title-wrapper">
@@ -86,9 +101,9 @@ const Portfolio: NextPage<PortfolioProps> = props => {
                 </div>
                 {
                     data && data.name == "john.haner.cody@gmail.com" ?
-                    <div className="new-note">
+                    <div className="new-note pb-48">
                         <Link href={'/create-new'}>
-                            <button>Create a new Article</button>
+                            <button className="">Create a new Article</button>
                         </Link>
                     </div> : null
                 }

@@ -43,23 +43,38 @@ const Blog: NextPage<BlogProps> = props => {
         }
     }
 
-    const [ hidden, setHidden ] = useState(false);
+    // const [ hidden, setHidden ] = useState(false);
     
+    // useEffect(() => {
+    //     window.addEventListener('resize', handleResize)
+    // }, []);
+
+    // const handleResize = () => {
+    //     if (window.innerWidth <= 700) {
+    //         setHidden(true);
+    //     } else {
+    //         setHidden(false)
+    //     }
+    // }
+
+    const [width, setWidth] = useState(null);
+        function handleWindowSizeChange() {
+                setWidth(window.innerWidth);
+            }
+
     useEffect(() => {
-        window.addEventListener('resize', handleResize)
+        if (typeof window !== 'undefined') setWidth(window.innerWidth)
+        window.addEventListener('resize', handleWindowSizeChange);
+        return () => {
+            window.removeEventListener('resize', handleWindowSizeChange);
+        }
     }, []);
 
-    const handleResize = () => {
-        if (window.innerWidth <= 700) {
-            setHidden(true);
-        } else {
-            setHidden(false)
-        }
-    }
+        let isMobile: boolean = (width <= 768);
     return (
         <>
             <BaseLayout data={data} loading={loading}>
-            {scrolled && !hidden ? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
+            {scrolled && !isMobile ? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
                 <div className="flex justify-center items-center flex-col py-12">
                     <h1 className="flex justify-center text-4xl font-sans" >Here's my Blog</h1>
                     <div className="flex flex-wrap">
@@ -68,13 +83,12 @@ const Blog: NextPage<BlogProps> = props => {
                         })}
                     </div>
                 </div>
-                {/* {data && data.name == "john.haner.cody@gmail.com" ?  */}
+                {data && data.name == "john.haner.cody@gmail.com" ? 
                 <div className="flex justify-center py-4">
                     <Link href={`/create-new`}>
                         <button className="focus:outline-none focus:ring focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white hover:text-red-500 rounded-full font-bold px-4 py-3 transition duration-300 ease-in-out mr-6" >New Blog</button>
                     </Link>
-                </div> 
-                {/* : null } */}
+                </div> : null }
                 </BaseLayout>
             <Footer />
             </>

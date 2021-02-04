@@ -15,13 +15,9 @@ const SplashImage:React.FC<Props> = (props: Props) => {
         function handleWindowSizeChange() {
                 setWidth(window.innerWidth);
             }
+
         useEffect(() => {
-                window.addEventListener('load', handleWindowSizeChange);
-                return () => {
-                    window.removeEventListener('load', handleWindowSizeChange);
-                }
-            }, []);
-        useEffect(() => {
+            if (typeof window !== 'undefined') setWidth(window.innerWidth)
             window.addEventListener('resize', handleWindowSizeChange);
             return () => {
                 window.removeEventListener('resize', handleWindowSizeChange);

@@ -45,19 +45,20 @@ const Project: NextPage<Props> = ({ project }) => {
         }
     }
     
-    const [ hidden, setHidden ] = useState(false);
-    
+    const [width, setWidth] = useState(null);
+        function handleWindowSizeChange() {
+                setWidth(window.innerWidth);
+            }
+
     useEffect(() => {
-        window.addEventListener('resize', handleResize)
+        if (typeof window !== 'undefined') setWidth(window.innerWidth)
+        window.addEventListener('resize', handleWindowSizeChange);
+        return () => {
+            window.removeEventListener('resize', handleWindowSizeChange);
+        }
     }, []);
 
-    const handleResize = () => {
-        if (window.innerWidth <= 700) {
-            setHidden(true);
-        } else {
-            setHidden(false)
-        }
-    }
+        let isMobile: boolean = (width <= 768);
 
 
     useEffect(() => {
@@ -82,7 +83,7 @@ const Project: NextPage<Props> = ({ project }) => {
     return (
         <>
         <BaseLayout data={data} loading={loading}>
-        {scrolled && !hidden ? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
+        {scrolled && !isMobile ? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
             <div className="flex justify-center items-center pt-24 flex-col">
                 <h1 className="text-4xl py-4">{project.title}</h1>
                 <img className="object-contain h-48 md:h-72 my-4 lg:h-96 w-full" src={`${project.mainPhoto}`} alt=""/>

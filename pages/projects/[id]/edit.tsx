@@ -61,20 +61,6 @@ const EditProject: NextPage<Props> = ({ project }) => {
         }
     }
 
-    const [ hidden, setHidden ] = useState(false);
-    
-    useEffect(() => {
-        window.addEventListener('resize', handleResize)
-    }, []);
-
-    const handleResize = () => {
-        if (window.innerWidth <= 700) {
-            setHidden(true);
-        } else {
-            setHidden(false)
-        }
-    }
-
     const handleChange = (e) => {
         setForm({
             ...form,
@@ -160,12 +146,27 @@ const EditProject: NextPage<Props> = ({ project }) => {
         }
     }
 
+    const [width, setWidth] = useState(null);
+        function handleWindowSizeChange() {
+                setWidth(window.innerWidth);
+            }
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') setWidth(window.innerWidth)
+        window.addEventListener('resize', handleWindowSizeChange);
+        return () => {
+            window.removeEventListener('resize', handleWindowSizeChange);
+        }
+    }, []);
+
+        let isMobile: boolean = (width <= 768);
+
 
     return (
         <>
         <BaseLayout data={data} loading={loading}>
-        {scrolled && !hidden ? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
-            <div className="flex w-full justify-center">
+        {scrolled && !isMobile ? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
+            <div className="flex w-full justify-center pb-48">
                 <form className="flex flex-col items-center w-3/4" onSubmit={handleSubmit}>
                     <h1 className="text-4xl">Edit your Blog Post</h1>
                     <label className="text-2xl pt-4 pb-2" htmlFor="title">Title</label>

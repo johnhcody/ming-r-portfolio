@@ -14,18 +14,20 @@ const Footer:React.FC<Props> = (props: Props) => {
         function handleWindowSizeChange() {
                 setWidth(window.innerWidth);
             }
-        useEffect(() => {
-                window.addEventListener('resize', handleWindowSizeChange);
-                return () => {
-                    window.removeEventListener('resize', handleWindowSizeChange);
-                }
-            }, []);
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') setWidth(window.innerWidth)
+        window.addEventListener('resize', handleWindowSizeChange);
+        return () => {
+            window.removeEventListener('resize', handleWindowSizeChange);
+        }
+    }, []);
 
         let isMobile: boolean = (width <= 768);
     return (
         <>
         {!isMobile ? <><div className="h-28"></div>
-        <div className="h-28"></div></> : null}
+        <div className="h-28"></div></> : <div className="h-28"></div>}
         
         <div className="footer-wrapper w-full mt-96">
             <div className="icons-wrapper">

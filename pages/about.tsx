@@ -35,17 +35,32 @@ const About: React.FC<Props> = props => {
 
     const [ hidden, setHidden ] = useState(false);
     
+    // useEffect(() => {
+    //     window.addEventListener('resize', handleResize)
+    // }, []);
+
+    // const handleResize = () => {
+    //     if (window.innerWidth <= 700) {
+    //         setHidden(true);
+    //     } else {
+    //         setHidden(false)
+    //     }
+    // }
+
+    const [width, setWidth] = useState(null);
+        function handleWindowSizeChange() {
+                setWidth(window.innerWidth);
+            }
+
     useEffect(() => {
-        window.addEventListener('resize', handleResize)
+        if (typeof window !== 'undefined') setWidth(window.innerWidth)
+        window.addEventListener('resize', handleWindowSizeChange);
+        return () => {
+            window.removeEventListener('resize', handleWindowSizeChange);
+        }
     }, []);
 
-    const handleResize = () => {
-        if (window.innerWidth <= 700) {
-            setHidden(true);
-        } else {
-            setHidden(false)
-        }
-    }
+        let isMobile: boolean = (width <= 768);
 
     const engLang = useLanguage();
 
@@ -54,7 +69,7 @@ const About: React.FC<Props> = props => {
             <BaseLayout data={data} loading={loading}>
                 <div className="flex justify-center flex-col items-center">
                 {engLang == true ? <h1 className="flex justify-center text-4xl font-sans pt-24 pb-12" >About Me</h1> : <h1 className="flex justify-center text-4xl font-sans pt-24 pb-12" >เกี่ยวกับฉัน</h1>}
-                {scrolled && !hidden? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
+                {scrolled && !isMobile? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
                 <AboutParagraph />
                 </div>
                 <div className="h-28">

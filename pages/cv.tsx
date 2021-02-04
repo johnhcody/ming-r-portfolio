@@ -29,25 +29,27 @@ const Cv: React.FC<Props> = props => {
         }
     }
 
-    const [ hidden, setHidden ] = useState(false);
-    
+
+    const [width, setWidth] = useState(null);
+        function handleWindowSizeChange() {
+                setWidth(window.innerWidth);
+            }
+
     useEffect(() => {
-        window.addEventListener('resize', handleResize)
+        if (typeof window !== 'undefined') setWidth(window.innerWidth)
+        window.addEventListener('resize', handleWindowSizeChange);
+        return () => {
+            window.removeEventListener('resize', handleWindowSizeChange);
+        }
     }, []);
 
-    const handleResize = () => {
-        if (window.innerWidth <= 700) {
-            setHidden(true);
-        } else {
-            setHidden(false)
-        }
-    }
+        let isMobile: boolean = (width <= 768);
 
 
         return (
             <>
             <BaseLayout loading={loading} data={data}>
-                {scrolled && !hidden? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
+                {scrolled && !isMobile? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
                 <h1 className="flex justify-center text-4xl font-sans pt-24 pb-12" >Read about my Experience</h1>
                 <Paragraph1 />    
                 <Paragraph1 />    

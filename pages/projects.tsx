@@ -42,23 +42,24 @@ const Project: NextPage<Props> = props => {
         }
     }
 
-    const [ hidden, setHidden ] = useState(false);
-    
+    const [width, setWidth] = useState(null);
+        function handleWindowSizeChange() {
+                setWidth(window.innerWidth);
+            }
+
     useEffect(() => {
-        window.addEventListener('resize', handleResize)
+        if (typeof window !== 'undefined') setWidth(window.innerWidth)
+        window.addEventListener('resize', handleWindowSizeChange);
+        return () => {
+            window.removeEventListener('resize', handleWindowSizeChange);
+        }
     }, []);
 
-    const handleResize = () => {
-        if (window.innerWidth <= 700) {
-            setHidden(true);
-        } else {
-            setHidden(false)
-        }
-    }
+        let isMobile: boolean = (width <= 768);
     return (
         <>
             <BaseLayout data={data} loading={loading}>
-            {scrolled && !hidden ? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
+            {scrolled && !isMobile ? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
 
             <div className="flex justify-center items-center flex-col py-12">
                     <h1 className="flex justify-center text-4xl font-sans" >Projects from my Career</h1>
