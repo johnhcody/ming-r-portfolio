@@ -184,8 +184,8 @@ const EditProject: NextPage<Props> = ({ project }) => {
                     <button className="focus:outline-none focus:ring font-sans focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white hover:text-red-500 rounded-full font-bold px-4 py-3 my-2 transition duration-300 ease-in-out mr-6" >Save Changes</button>
                 </form>
             </div>
-            
-            <div className="h-28"></div>
+
+            <div className="h-40"></div>
         </BaseLayout>
         <Footer />
         </>
