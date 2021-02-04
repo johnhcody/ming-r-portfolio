@@ -282,7 +282,7 @@ const CreateNew:React.FC = props => {
                         let word = ipt.slice(0,5);
      
                         if (word == 'phot-') {
-                            return <BlogPhotoUpload key={idx} inputIndex={idx} photoNumber={ipt} sendPhotoStr={handleFileUpload} deleteElement={deletePhoto} />
+                            return <BlogPhotoUpload key={idx} photoNumber={ipt} sendPhotoStr={handleFileUpload} />
                         } else if (word == 'para-'){
                             return <BlogParagraphUpload key={idx} inputIndex={idx} paragraphNumber={ipt} deleteElement={deleteParagraph} addText={handleTextInput}/>
                         }
