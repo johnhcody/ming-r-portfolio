@@ -84,7 +84,7 @@ const Project: NextPage<Props> = ({ project }) => {
         <>
         <BaseLayout data={data} loading={loading}>
         {scrolled && !isMobile ? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
-            <div className="flex justify-center items-center pt-24 flex-col">
+            <div className="flex justify-center items-center pt-24 flex-col font-sans">
                 <h1 className="text-4xl py-4">{project.title}</h1>
                 <img className="object-contain h-48 md:h-72 my-4 lg:h-96 w-full" src={`${project.mainPhoto}`} alt=""/>
                 <h1 className="text-lg max-w-4/5 py-4">{project.description}</h1>

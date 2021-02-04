@@ -77,7 +77,7 @@ const Project: NextPage<Props> = props => {
                 </div> : null
                 }
 
-                <div className="h-40"></div>
+                <div className="h-24"></div>
             </BaseLayout>
             <Footer />
             </>

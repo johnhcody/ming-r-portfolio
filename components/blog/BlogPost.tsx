@@ -27,7 +27,7 @@ const BlogPost: React.FC<BlogPostProps> = props => {
                     <div className="max-w-xs rounded overflow-hidden shadow-lg my-12 mx-8">
                         <img className="w-full h-48" src={`${blog.mainPhoto}`} alt="" />
                         <div className="px-6 py-4">
-                            <div className="font-bold text-xl mb-2">{blog.title}</div>
+                            <div className="font-bold text-xl mb-2 font-sans">{blog.title}</div>
                             <p className="text-grey-darker text-base">{blog.intro}</p>
                             <p className="text-grey-darker text-base pt-4">{truncatedText}</p>
                         </div>

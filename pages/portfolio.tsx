@@ -110,7 +110,7 @@ const Portfolio: NextPage<PortfolioProps> = props => {
                 
 
             </div>
-            <div className="h-24"></div>
+            <div className="h-28"></div>
 
             </BaseLayout>
             <Footer />
