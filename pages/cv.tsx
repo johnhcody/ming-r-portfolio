@@ -56,6 +56,7 @@ const Cv: React.FC<Props> = props => {
                 <Paragraph1 />    
                 <Paragraph1 />    
                 <DownloadCv />
+                <div className="h-40"></div>
             </BaseLayout>
             <Footer />
             </>

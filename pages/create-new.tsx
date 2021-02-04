@@ -299,6 +299,7 @@ const CreateNew:React.FC = props => {
                         {errors && errors.message ? <h1 className="pt-2 text-red-500">{errors.message}</h1> : null}
                     </form>
                 </div>
+                <div className="h-40"></div>
             </BaseLayout>
             <Footer />
             </>
