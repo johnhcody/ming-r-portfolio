@@ -46,20 +46,6 @@ const ProjectCard: React.FC<ProjectProps> = props => {
 
     const truncatedText = project.description.length > 140 ? project.description.slice(0, 137) + "..." : project.description
                 return (
-                    // <div className="max-w-xs rounded overflow-hidden shadow-lg my-12 mx-8">
-                    //     <img className="w-full h-48" src={`${project.mainPhoto}`} alt="" />
-                    //     <div className="px-6 py-4">
-                    //         <div className="font-bold text-xl mb-2">{project.title}</div>
-                    //         <p className="text-grey-darker text-base">{project.intro}</p>
-                    //         <p className="text-grey-darker text-base pt-4">{truncatedText}</p>
-                    //     </div>
-                    //     <div className="px-6 py-4">
-                    //         <Link
-                    //         href={`/projects/${project._id}`}>
-                    //             <button className="focus:outline-none focus:ring focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white hover:text-red-500 rounded-full font-bold px-4 py-3 transition duration-300 ease-in-out mr-6" >Read More</button>
-                    //         </Link>
-                    //     </div>
-                    // </div>
                     <>
                     <div className="flex flex-col items-center">
                     <Link href={`/projects/${project._id}`} >
@@ -70,16 +56,7 @@ const ProjectCard: React.FC<ProjectProps> = props => {
                                 <img src={`${project.mainPhoto}`} alt="" className="w-full h-80 w-auto object-cover object-center rounded-lg shadow-md"/>    
                                 
                             <div className="relative px-4 -mt-16">
-                            <div className="bg-white p-6 rounded-lg shadow-lg">
-                                {/* <div className="flex items-baseline">
-                                <span className="bg-teal-200 text-teal-800 text-xs px-2 inline-block rounded-full  uppercase font-semibold tracking-wide">
-                                New
-                                </span>
-                                <div className="ml-2 text-gray-600 uppercase text-xs font-semibold tracking-wider">
-                                2 baths  &bull; 3 rooms
-                                </div>  
-                            </div> */}
-                                
+                            <div className="bg-white p-6 rounded-lg shadow-lg">                                
                                 <h4 className="mt-1 text-xl font-semibold font-sans uppercase leading-tight truncate">{project.title}</h4>
                             
                             <div className="mt-1">
