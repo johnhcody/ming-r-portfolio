@@ -9,7 +9,6 @@ interface Props {
 const EditParagraph:React.FC<Props> = props => {
 
     const handleChange = (e) => {
-        debugger
         props.sendInput(props.idx, e.target.value)
     }
     

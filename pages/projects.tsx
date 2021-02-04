@@ -24,7 +24,7 @@ interface Props {
 
 const Project: NextPage<Props> = props => {
     const { loading, data } = useGetUser();
-    debugger
+    
     const projects = Object.values(props).filter(el => el.type == "Project");
     // filter through projects where type == Project
     const [ scrolled, setScrolled ] = useState(false);

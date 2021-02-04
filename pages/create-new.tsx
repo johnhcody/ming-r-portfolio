@@ -81,7 +81,6 @@ const CreateNew:React.FC = props => {
     }, [errors])
     
     const handleSubmit = (e) => {
-        debugger
         e.preventDefault();
         let errs = validate();
         setErrors(errs);
@@ -89,7 +88,7 @@ const CreateNew:React.FC = props => {
 
     const validate = () => {    
         let err = {};
-        debugger
+        
         if (!form.title) {
             err['title'] = "Title is required";
         } if (!form.type) {
@@ -190,34 +189,34 @@ const CreateNew:React.FC = props => {
     }
 
     const handleType = (projectType) => {
-        debugger
+        
         setForm({
             ...form,
             'type': projectType 
         })
         if (errors['type'] && projectType) delete errors['type']
-        debugger
+        
         if (Object.values(errors).length == 1 && errors.message) delete errors['message']
     }
 
     const deleteParagraph = (inputIndex, typeIndex) => {
 
-            debugger
+            
             let inputCopy = [...input];
             setInput(inputCopy.filter((el, i) => i != inputIndex && el != null))
             let newArr = [...paragraphsArr];
-            debugger
+            
             // newArr.splice(typeIndex, 1)
             // delete newArr[typeIndex];
             // newArr = newArr.filter(el => el != null)
             setParagraphsArr(newArr.filter((el, i) => i != typeIndex && el != null));
-            debugger
+            
             setForm({
                 ...form,
                 // paragraphs: paragraphsArr
                 paragraphs: newArr.filter((el, i) => i != typeIndex && el != null)
             }) 
-            debugger
+            
     }
 
     const deletePhoto = (inputIndex, typeIndex) => {

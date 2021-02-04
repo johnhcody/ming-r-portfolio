@@ -143,7 +143,7 @@ const EditBlog: NextPage<Props> = ({ blog }) => {
     }
 
     const handleFileUpload = (index, value) => {
-        debugger
+        
         if (index !== 999) { 
             let newArr = [...photoStrArr];
             newArr[index] = value;

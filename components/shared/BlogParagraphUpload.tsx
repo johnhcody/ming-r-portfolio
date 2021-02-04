@@ -20,7 +20,6 @@ const BlogParagraphUpload: React.FC<Props> = ({ inputIndex, deleteElement, addTe
     }
 
     const handleDelete = () => {
-        debugger
         deleteElement(inputIndex, index)
     }
 

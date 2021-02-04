@@ -10,7 +10,6 @@ interface Props {
 const IndexFooter:React.FC<Props> = (props: Props) => {
 
     const {data, loading} = useGetUser();
-    debugger 
     if (!data) {
         return (
             <div className="login-wrapper">

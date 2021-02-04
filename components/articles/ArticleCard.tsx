@@ -40,7 +40,6 @@ const ArticleCard: React.FC<Props> = props => {
     }, [isDeleting])
 
     const deleteArticle = async () => {
-        debugger
         const deleted = await axios.delete(`/api/projects/${article._id}`)
         router.push('/');
     }

@@ -40,7 +40,6 @@ const ProjectCard: React.FC<ProjectProps> = props => {
     const router = useRouter();
 
     const deleteArticle = async () => {
-        debugger
         const deleted = await axios.delete(`/api/projects/${project._id}`)
         router.push('/');
     }
