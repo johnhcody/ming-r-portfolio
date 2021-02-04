@@ -82,7 +82,7 @@ const Project: NextPage<Props> = props => {
             <Footer />
             </>
         )
-}
+} 
 
 Project.getInitialProps = async () => {
     const res = await axios.get('/api/projects/')
