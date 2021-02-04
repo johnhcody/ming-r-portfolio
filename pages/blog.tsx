@@ -102,10 +102,5 @@ Blog.getInitialProps = async () => {
     const blogs = res.data['data'];
     return blogs;
 }
-// Blog.getInitialProps = async () => {
-//     const res = await axios.get('/api/blogs');
-//     const blogs = res.data['data'];
-//     return blogs;
-// }
 
 export default Blog

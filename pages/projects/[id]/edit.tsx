@@ -108,7 +108,7 @@ const EditProject: NextPage<Props> = ({ project }) => {
 
     const updateBlog = () => {
 
-        axios.put(`/api/blogs/${router.query.id}`, {
+        axios.put(`/api/projects/${router.query.id}`, {
             title: form.title,
             intro: form.intro,
             description: form.description,
@@ -166,19 +166,19 @@ const EditProject: NextPage<Props> = ({ project }) => {
         <>
         <BaseLayout data={data} loading={loading}>
         {scrolled && !isMobile ? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
-            <div className="flex w-full justify-center pb-48">
-                <form className="flex flex-col items-center w-3/4" onSubmit={handleSubmit}>
+            <div className="flex w-full justify-center pb-48 font-sans">
+                <form className="flex flex-col items-center w-3/4 font-sans" onSubmit={handleSubmit}>
                     <h1 className="text-4xl">Edit your Blog Post</h1>
-                    <label className="text-2xl pt-4 pb-2" htmlFor="title">Title</label>
-                        <input type="text" onChange={handleChange} value={form.title} className="text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" placeholder="Grab their attention!" name="title"  />
-                    <label className="text-2xl pt-4 pb-2" htmlFor="intro">Introduction</label>
-                        <textarea onChange={handleChange} value={form.intro} className="w-72 h-24 p-3 my-3 border-2 border-gray-200 rounded-md" placeholder="Tell us a bit about your work!  This will appear on the main page." name="intro"  />
-                    <label className="text-2xl pt-4 pb-2" htmlFor="description">Description</label>
-                        <textarea onChange={handleChange} value={form.description} className="w-full h-72 p-3 my-3 border-2 border-gray-200 rounded-md" placeholder="Go into more detail about the project.  This will appear when people view the specific project." name="description"  />
-                    <label className="text-2xl pt-4 pb-2" htmlFor="linkUrl">Source Link</label>
-                        <input onChange={handleChange} value={form.linkUrl} className="text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0" type="text" placeholder="Paste the URL of the original article" name="linkUrl"  />
-                    <label className="text-2xl pt-4 pb-2" htmlFor="linkDescription">Link Text</label>
-                        <input onChange={handleChange} value={form.linkDescription} className="text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" type="text" placeholder="How do you want the link text to appear?" name="linkDescription"  />
+                    <label className="text-2xl pt-4 pb-2 font-sans" htmlFor="title">Title</label>
+                        <input type="text" onChange={handleChange} value={form.title} className="font-sans text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" placeholder="Grab their attention!" name="title"  />
+                    <label className="font-sans text-2xl pt-4 pb-2" htmlFor="intro">Introduction</label>
+                        <textarea onChange={handleChange} value={form.intro} className="font-sans w-72 h-24 p-3 my-3 border-2 border-gray-200 rounded-md" placeholder="Tell us a bit about your work!  This will appear on the main page." name="intro"  />
+                    <label className="font-sans text-2xl pt-4 pb-2" htmlFor="description">Description</label>
+                        <textarea onChange={handleChange} value={form.description} className="font-sans w-full h-72 p-3 my-3 border-2 border-gray-200 rounded-md" placeholder="Go into more detail about the project.  This will appear when people view the specific project." name="description"  />
+                    <label className="font-sans text-2xl pt-4 pb-2" htmlFor="linkUrl">Source Link</label>
+                        <input onChange={handleChange} value={form.linkUrl} className="font-sans text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0" type="text" placeholder="Paste the URL of the original article" name="linkUrl"  />
+                    <label className="font-sans text-2xl pt-4 pb-2" htmlFor="linkDescription">Link Text</label>
+                        <input onChange={handleChange} value={form.linkDescription} className="font-sans text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" type="text" placeholder="How do you want the link text to appear?" name="linkDescription"  />
                     <EditPhoto source={form.mainPhoto} photoNumber={'photo-1000'} editPhotoArr={handleFileUpload} />
                     <EditBody bodyOrder={project.order} bodyParagraphs={form.paragraphs} bodyPhotos={form.photos} sendInput={handleTextInput} handleFileUpload={handleFileUpload}/>
                     <button className="focus:outline-none focus:ring font-sans focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white hover:text-red-500 rounded-full font-bold px-4 py-3 my-2 transition duration-300 ease-in-out mr-6" >Save Changes</button>

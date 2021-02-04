@@ -68,7 +68,7 @@ const About: React.FC<Props> = props => {
         <>
             <BaseLayout data={data} loading={loading}>
                 <div className="flex justify-center flex-col items-center">
-                {engLang == true ? <h1 className="flex justify-center text-4xl font-sans pt-24 pb-12" >About Me</h1> : <h1 className="flex justify-center text-4xl font-sans pt-24 pb-12" >เกี่ยวกับฉัน</h1>}
+                {engLang == true ? <h1 className="flex font-sans justify-center text-4xl font-sans pt-24 pb-12" >About Me</h1> : <h1 className="flex font-sans justify-center text-4xl font-sans pt-24 pb-12" >เกี่ยวกับฉัน</h1>}
                 {scrolled && !isMobile? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
                 <AboutParagraph />
                 </div>

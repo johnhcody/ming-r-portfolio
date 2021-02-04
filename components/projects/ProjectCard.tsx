@@ -80,7 +80,7 @@ const ProjectCard: React.FC<ProjectProps> = props => {
                                 </div>  
                             </div> */}
                                 
-                                <h4 className="mt-1 text-xl font-semibold uppercase leading-tight truncate">{project.title}</h4>
+                                <h4 className="mt-1 text-xl font-semibold font-sans uppercase leading-tight truncate">{project.title}</h4>
                             
                             <div className="mt-1">
                                 <h2 className="text-gray-600 text-sm">{truncatedText}</h2>
@@ -97,7 +97,7 @@ const ProjectCard: React.FC<ProjectProps> = props => {
                     <div className="idx-itm-btn-wrapper mt-48">
                             {data && data.name == "john.haner.cody@gmail.com" ? <><Link href={`/projects/${project._id}/edit`}>
                                 <button className="focus:outline-none font-sans focus:ring focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white hover:text-red-500 rounded-full font-bold px-4 py-3 transition duration-300 ease-in-out mr-6" >Edit</button>
-                            </Link><button onClick={handleDelete} className="focus:outline-none focus:ring focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white hover:text-red-500 rounded-full font-bold px-4 py-3 transition duration-300 ease-in-out mr-6" >Delete</button></> : null}
+                            </Link><button onClick={handleDelete} className="focus:outline-none focus:ring focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white hover:text-red-500 rounded-full font-bold px-4 py-3 transition duration-300 ease-in-out font-sans mr-6" >Delete</button></> : null}
                             
                     </div>
                     </div>
