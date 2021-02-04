@@ -23,11 +23,12 @@ const CreateNew:React.FC = props => {
     const [ paragraphsArr, setParagraphsArr ] = useState([])
     const [ order, setOrder ] = useState([]);
     const [ isSubmitting, setIsSubmitting] = useState(false);
-    const [ errors, setErrors] = useState({
-        'title': '',
-        'message': '',
-        'type': ''
-    });
+    // const [ errors, setErrors] = useState({
+    //     'title': '',
+    //     'message': '',
+    //     'type': ''
+    // });
+    const [ errors, setErrors ] = useState(null)
     const [ type, setType ] = useState('');
 
 
@@ -74,17 +75,18 @@ const CreateNew:React.FC = props => {
     
     useEffect(() => {
         if (isSubmitting) {
-             
-            if (Object.keys(errors).length === 0) {
+            debugger
+            if (Object.values(errors).filter(el => el != '').length === 0) {
                 createProject();
             } else {
                 console.log(errors)
                 setIsSubmitting(false);
             }
         }
-    }, [errors])
+    })
     
     const handleSubmit = (e) => {
+        debugger
         e.preventDefault();
         let errs = validate();
         // setErrors(errs);
@@ -106,7 +108,7 @@ const CreateNew:React.FC = props => {
 
     let router = useRouter();
     const createProject = () => {
-         
+        debugger
         axios.post(`/api/projects`, {
             title: form.title,
             intro: form.intro,

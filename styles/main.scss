@@ -128,12 +128,21 @@
     h1 {
         font-size: 40px;
     }
-    .typed-text {
+    .typed-text-desktop {
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100%;
         font-size: 100px;
+        font-weight: 900;
+        color: white;
+    }
+    .typed-text-mobile {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        font-size: 30px;
         font-weight: 900;
         color: white;
     }
@@ -403,7 +412,7 @@
   100% { -webkit-transform: rotate(360deg); }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
     .articles-wrapper {
         flex-direction: column;    
     }
@@ -417,7 +426,7 @@
         justify-content: center;
         align-items: center;
         height: 100%;
-        font-size: 30px;
+        font-size: 24px;
         font-weight: 600;
     }
 }

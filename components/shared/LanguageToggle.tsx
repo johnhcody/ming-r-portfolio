@@ -17,7 +17,7 @@ export const LanguageToggle = (props: Props) => {
         if (engLang) {
             cb.checked = false;
         } else {
-            cb.checked = false;
+            cb.checked = true;
         }
     }) 
 

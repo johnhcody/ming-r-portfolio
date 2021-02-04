@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Typed from 'react-typed'
 import Image from 'next/image'
 
@@ -9,6 +9,20 @@ interface Props {
 
 const SplashImage:React.FC<Props> = (props: Props) => {
 
+
+
+        const [width, setWidth] = useState<number>(null);
+        function handleWindowSizeChange() {
+                setWidth(window.innerWidth);
+            }
+        useEffect(() => {
+                window.addEventListener('resize', handleWindowSizeChange);
+                return () => {
+                    window.removeEventListener('resize', handleWindowSizeChange);
+                }
+            }, []);
+
+        let isMobile: boolean = (width <= 768);
     return (
         <div className="index-page-wrapper">
             <Typed
@@ -20,7 +34,7 @@ const SplashImage:React.FC<Props> = (props: Props) => {
                 typeSpeed={40}
                 backSpeed={50}
                 backDelay={1000}
-                className="typed-text"
+                className={isMobile ? "typed-text-mobile" : "typed-text-desktop"}
                 loop
             />
 

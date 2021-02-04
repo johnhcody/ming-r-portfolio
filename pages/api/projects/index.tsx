@@ -9,9 +9,9 @@ export default async (req, res) => {
     switch (method) {
         case 'GET':
             try {
-                const blogs = await Project.find({});
+                const projects = await Project.find({});
 
-                res.status(200).json({success: true, data: blogs})
+                res.status(200).json({success: true, data: projects})
             } catch (error) {
                 res.status(400).json({ success: false });
             }

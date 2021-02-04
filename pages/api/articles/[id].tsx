@@ -20,14 +20,6 @@ export default async (req, res) => {
             }
             break;
         case "PUT":
-            // Article.findByIdAndUpdate({ _id: "5f85e2e36ef7e00c97ac484f" },  { color: "Green" }, (err, fruit) => {
-            //     if (err) {
-            //         console.log(err);
-            //     } else {
-            //         console.log("UPDATED FRUIT!");
-            //         console.log(fruit);
-            //     }
-            // });
             try {
                 const article = await Article.findByIdAndUpdate(id, req.body, {
                     new: true,
