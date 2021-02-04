@@ -13,10 +13,11 @@ export const LanguageToggle = (props: Props) => {
     const toggleLang = useLanguageUpdate();
 
     useEffect(() => {
+        let cb = document.getElementById('language-toggle-switch') as HTMLInputElement
         if (engLang) {
-            document.getElementById('language-toggle-switch').checked = false;
+            cb.checked = false;
         } else {
-            document.getElementById('language-toggle-switch').checked = true;
+            cb.checked = false;
         }
     }) 
 
