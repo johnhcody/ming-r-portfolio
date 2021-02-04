@@ -17,14 +17,18 @@ export default async (req, res) => {
             }
             break;
         case 'POST':
-            try {
-                const article = await Article.create(req.body);
+            // try {
+            //     const article = await Article.create(req.body);
 
-                res.status(201).json({ success: true, data: article })
-            } catch (error) {
-                res.status(400).json({ success: false });
-            }
-            break;
+            //     res.status(201).json({ success: true, data: article })
+            // } catch (error) {
+            //     res.status(400).json({ success: false });
+            // }
+            // break;
+            Article.create({ size: 'small' }, function (err, small) {
+                if (err) return console.log(err);
+                // saved!
+              });
         default:
             res.status(400).json({ success: false });
             break;
