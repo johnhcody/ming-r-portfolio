@@ -46,10 +46,10 @@ const CreateNew:React.FC = props => {
 
     const [ scrolled, setScrolled ] = useState(false);
 
-    // useEffect(() => {
-    //     if (!data) router.push('api/login')
-    //     window.addEventListener("scroll", handleScroll);
-    //   }, []);
+    useEffect(() => {
+
+        window.addEventListener("scroll", handleScroll);
+      }, []);
 
       const handleScroll = () => {
         if (window.pageYOffset > 47) {
@@ -74,23 +74,41 @@ const CreateNew:React.FC = props => {
     const handleSubmit = (e) => {
         debugger
         e.preventDefault();
-        let errs = validate();
-        // setErrors(errs);
     }
 
-    const validate = () => {    
-        let err = {};
+    const validate = (event) => {    
+        let err = {
+            'title': '',
+            'message': '',
+            'type': ''
+        };
         
-        if (!form.title) {
+        if (form.title == '') {
             err['title'] = "Title is required";
-            setErrors['title'] = "Title is required";
-        } if (!form.type) {
+        } if (form.type == '') {
             err['type'] = "Please select a project type";
-            setErrors['title'] = "Please select a project type";
+        } if (Object.values(err).length > 0 && err['message'] == '' ) {
+            err['message'] = "See errors above" 
+        } if (form.type != '' && form.title != '') {
+            err = {
+                'title': '',
+                'message': '',
+                'type': ''
+            };
+        } if (form.type != '' && form.title == '') {
+            err = {
+                'title': 'Title is required',
+                'message': 'See errors above',
+                'type': ''
+            }
+        } if (form.type == '' && form.title != '') {
+            err = {
+                'title': '',
+                'message': 'See errors above',
+                'type': 'Please select a project type'
+            }
         }
-        if (Object.values(err).length > 0 && !err['message']) err['message'] = "See errors above" 
-        
-        
+        debugger
         return err;
     }
 
@@ -170,27 +188,68 @@ const CreateNew:React.FC = props => {
     }
 
     const handleChange = (e) => {
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value 
-        })
-        if (e.target.name == "title" && e.target.value !== '') setErrors['title'] = '';
-        if (Object.values(errors).length == 1 && errors.message) setErrors['message'] = ''
+        // debugger
+        // setForm({
+        //     ...form,
+        //     [e.target.name]: e.target.value 
+        // })
+        if (e.target.name == 'title') {
+            debugger
+            let errs = validate(e)
+            setErrors(errs)
+            debugger
+            setForm({
+                ...form,
+                [e.target.name]: e.target.value 
+            })
+        } else {
+            debugger
+            setForm({
+                ...form,
+                [e.target.name]: e.target.value 
+            })
+        }
+        
+        // if (e.target.name == "title" && e.target.value !== '') setErrors['title'] = '';
+        // if (e.target.name == "title" && errors.title !== '') setErrors['title'] = '';
+        // if (e.target.name == "type" && e.target.value !== '') setErrors['type'] = '';
+        // if (e.target.name == "type" && errors.type !== '') setErrors['type'] = '';
+        // if (Object.values(errors).length == 1 && errors.message) setErrors['message'] = ''
     };
 
+    const handleErrors = () => {
+
+    }
+
     const postBlog = (e) => {
-        setIsSubmitting(true);
+        debugger
+        let errs = validate();
+        setErrors(errs)
+        debugger
+        if (Object.values(errors).filter(el => el != '').length === 0) setIsSubmitting(true);
     }
 
     const handleType = (projectType) => {
+        debugger
+        // setForm({
+        //     ...form,
+        //     'type': projectType 
+        // })
+        if (errors.message != '') {
+            let errs = validate();
+            setErrors(errs)
+            setForm({
+                ...form,
+                'type': projectType 
+            })
+        } else {
+            setForm({
+                ...form,
+                'type': projectType 
+            })
+        }
+
         
-        setForm({
-            ...form,
-            'type': projectType 
-        })
-        if (errors && errors['type'] && projectType) setErrors['type'] = '';
-        
-        if (Object.values(errors).length == 1 && errors.message) setErrors['message'] = ''
     }
 
     const deleteParagraph = (inputIndex, typeIndex) => {
@@ -229,22 +288,6 @@ const CreateNew:React.FC = props => {
                 photos: newArr
             }) 
     }
-
-    // useEffect(() => {
-    //     if (!data) {
-    //          router.push('api/login')
-    //     }
-    // }, [])
-
-    
-    
-
-    // if (!data) {
-
-    //     return (
-    //         null
-    //     )
-    // } else {
 
     const [width, setWidth] = useState(null);
     function handleWindowSizeChange() {
@@ -296,7 +339,7 @@ const CreateNew:React.FC = props => {
                         <button className="focus:outline-none focus:ring font-sans focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full" onClick={appendPhoto}>Add Photo</button>    
                         <button className="focus:outline-none focus:ring font-sans focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full outline:nones" onClick={appendParagraph}>Add Paragraph</button>
                         <button className="focus:outline-none focus:ring font-sans focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full outline:none" type="submit" onClick={postBlog} > Post {`${form.type}`}</button>
-                        {errors && errors.message ? <h1 className="pt-2 text-red-500">{errors.message}</h1> : null}
+                        {errors && errors.message != '' ? <h1 className="pt-2 text-red-500">{errors.message}</h1> : null}
                     </form>
                 </div>
                 <div className="h-24"></div>
