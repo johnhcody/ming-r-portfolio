@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^0.16.0",
+    "@tailwindcss/line-clamp": "^0.2.0",
     "@zeit/next-sass": "^1.0.1",
     "autoprefixer": "^10.2.3",
     "aws-sdk": "^2.826.0",

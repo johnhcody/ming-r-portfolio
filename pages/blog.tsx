@@ -43,20 +43,6 @@ const Blog: NextPage<BlogProps> = props => {
         }
     }
 
-    // const [ hidden, setHidden ] = useState(false);
-    
-    // useEffect(() => {
-    //     window.addEventListener('resize', handleResize)
-    // }, []);
-
-    // const handleResize = () => {
-    //     if (window.innerWidth <= 700) {
-    //         setHidden(true);
-    //     } else {
-    //         setHidden(false)
-    //     }
-    // }
-
     const [width, setWidth] = useState(null);
         function handleWindowSizeChange() {
                 setWidth(window.innerWidth);
@@ -75,8 +61,8 @@ const Blog: NextPage<BlogProps> = props => {
         <>
             <BaseLayout data={data} loading={loading}>
             {scrolled && !isMobile ? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
-                <div className="flex justify-center items-center flex-col py-12">
-                    <h1 className="flex justify-center text-4xl font-sans" >Here's my Blog</h1>
+                <div className="flex justify-center items-center flex-col">
+                    <h1 className="flex justify-center text-4xl font-sans pt-24 pb-12" >Here's my Blog</h1>
                     <div className="flex flex-wrap">
                         {blogs.map(blog => {
                             return <BlogPost key={blog._id} blog={blog} />

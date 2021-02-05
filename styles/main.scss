@@ -296,7 +296,6 @@
     align-items: center;
     font-family: $roboto-slab;
     min-height: 800px;
-    padding-top: 6rem;
     h1 {
         font-size: 30px;
         padding: 25px 0px 25px 0px;
@@ -305,6 +304,8 @@
         width: 100%;
         display: flex;
         justify-content: center;
+        padding-top: 6rem;
+        padding-bottom: 3rem;
     }
 
     .articles-wrapper {

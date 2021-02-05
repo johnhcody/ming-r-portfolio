@@ -61,8 +61,8 @@ const Project: NextPage<Props> = props => {
             <BaseLayout data={data} loading={loading}>
             {scrolled && !isMobile ? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
 
-            <div className="flex justify-center items-center flex-col py-12">
-                    <h1 className="flex justify-center text-4xl font-sans" >Projects from my Career</h1>
+            <div className="flex justify-center items-center flex-col">
+                    <h1 className="flex justify-center text-4xl font-sans pt-24 pb-12" >Projects from my Career</h1>
                     <div className="flex justify-center flex-wrap mx-4">
                         {projects.map(project => {
                             return <ProjectCard key={project._id} project={project} />

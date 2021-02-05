@@ -34,18 +34,6 @@ const About: React.FC<Props> = props => {
     }
 
     const [ hidden, setHidden ] = useState(false);
-    
-    // useEffect(() => {
-    //     window.addEventListener('resize', handleResize)
-    // }, []);
-
-    // const handleResize = () => {
-    //     if (window.innerWidth <= 700) {
-    //         setHidden(true);
-    //     } else {
-    //         setHidden(false)
-    //     }
-    // }
 
     const [width, setWidth] = useState(null);
         function handleWindowSizeChange() {
@@ -68,8 +56,8 @@ const About: React.FC<Props> = props => {
         <>
             <BaseLayout data={data} loading={loading}>
                 <div className="flex justify-center flex-col items-center">
-                {engLang == true ? <h1 className="flex font-sans justify-center text-4xl font-sans pt-24 pb-12" >About Me</h1> : <h1 className="flex font-sans justify-center text-4xl font-sans pt-24 pb-12" >เกี่ยวกับฉัน</h1>}
                 {scrolled && !isMobile? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
+                {engLang == true ? <h1 className="flex font-sans justify-center text-4xl font-sans pt-28 pb-12" >About Me</h1> : <h1 className="flex font-sans justify-center text-4xl font-sans pt-24 pb-12" >เกี่ยวกับฉัน</h1>}
                 <AboutParagraph />
                 </div>
                 <div className="h24"></div>
