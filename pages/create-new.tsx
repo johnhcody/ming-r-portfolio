@@ -15,8 +15,44 @@ interface Props {
 }
 
 const CreateNew:React.FC = props => {
+
+    // handles auth
     const { loading, data } = useGetUser();
+
+
+    // handles when to display NavBar
+    const [ scrolled, setScrolled ] = useState(false);
     
+    useEffect(() => {
+    
+        window.addEventListener("scroll", handleScroll);
+      }, []);
+    
+      const handleScroll = () => {
+        if (window.pageYOffset > 47) {
+            setScrolled(true)
+        } else {
+            setScrolled(false)
+        }
+    }
+    
+
+    // sends POST request if there are no errors
+    useEffect(() => {
+        if (isSubmitting) {
+            debugger
+            if (Object.values(errors).filter(el => el != '').length === 0) {
+                createProject();
+            } else {
+                console.log(errors)
+                setIsSubmitting(false);
+            }
+        }
+    })
+    
+
+
+    // old state management
     const [ input, setInput ] = useState([]);
     const [ photoStrArr, setPhotoStrArr ] = useState([])
     const [ paraCount, setParaCount ] = useState(1);
@@ -29,7 +65,23 @@ const CreateNew:React.FC = props => {
         'message': '',
         'type': ''
     });
+    
+    const [form, setForm] = useState({
+        title: '', 
+        intro: '', 
+        type: '',
+        description: '', 
+        paragraphs: [],
+        mainPhoto: '',
+        photos: [],
+        linkUrl: '',
+        linkDescription: ''
+    })
 
+
+
+
+    // new state management
     const initialState = {
         input: [],
         photoStrArr: [],
@@ -56,18 +108,6 @@ const CreateNew:React.FC = props => {
         }
     }
 
-    const [form, setForm] = useState({
-        title: '', 
-        intro: '', 
-        type: '',
-        description: '', 
-        paragraphs: [],
-        mainPhoto: '',
-        photos: [],
-        linkUrl: '',
-        linkDescription: ''
-    })
-
     const inputRef = useRef();
 
     const reducer = (state, action) => {
@@ -76,15 +116,42 @@ const CreateNew:React.FC = props => {
               debugger
             return {
                 ...state,
-                
-                
+                form: { ...state.form, type: action.projectType}
             }
-          case 'ADD_TITLE':
+            break;
+          case 'MODIFY_TITLE':
             debugger
             return {
                 ...state,
                 form: { ...state.form, title: action.title }
             }
+            break;
+          case 'MODIFY_INTRO':
+            debugger
+            return {
+                ...state,
+                form: { ...state.form, intro: action.intro }
+            }
+            break;
+            case 'MODIFY_DESCRIPTION':
+            debugger
+            return {
+                ...state,
+                form: { ...state.form, description: action.description }
+            }
+            break;
+            case 'MODIFY_LINK_URL':
+            return {
+                ...state,
+                form: { ...state.form, linkUrl: action.linkUrl }
+            }
+            break;
+            case 'MODIFY_LINK_DESCRIPTION':
+            return {
+                ...state,
+                form: { ...state.form, linkDescription: action.linkDescription }
+            }
+            break;
           default:
             return state;
         }
@@ -93,32 +160,6 @@ const CreateNew:React.FC = props => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
 
-    const [ scrolled, setScrolled ] = useState(false);
-
-    useEffect(() => {
-
-        window.addEventListener("scroll", handleScroll);
-      }, []);
-
-      const handleScroll = () => {
-        if (window.pageYOffset > 47) {
-            setScrolled(true)
-        } else {
-            setScrolled(false)
-        }
-    }
-    
-    useEffect(() => {
-        if (isSubmitting) {
-            debugger
-            if (Object.values(errors).filter(el => el != '').length === 0) {
-                createProject();
-            } else {
-                console.log(errors)
-                setIsSubmitting(false);
-            }
-        }
-    })
     
     const handleSubmit = (e) => {
         debugger
@@ -235,35 +276,6 @@ const CreateNew:React.FC = props => {
             paragraphs: newArr
         })  
     }
-
-    const handleChange = (e) => {
-
-        if (e.target.name == 'title') {
-            debugger
-            let errs = validate()
-            setErrors(errs)
-            debugger
-            setForm({
-                ...form,
-                [e.target.name]: e.target.value 
-            })
-        } else {
-            debugger
-            setForm({
-                ...form,
-                [e.target.name]: e.target.value 
-            })
-    }
-
-
-        
-        // if (e.target.name == "title" && e.target.value !== '') setErrors['title'] = '';
-        // if (e.target.name == "title" && errors.title !== '') setErrors['title'] = '';
-        // if (e.target.name == "type" && e.target.value !== '') setErrors['type'] = '';
-        // if (e.target.name == "type" && errors.type !== '') setErrors['type'] = '';
-        // if (Object.values(errors).length == 1 && errors.message) setErrors['message'] = ''
-    };
-
     const handleErrors = () => {
 
     }
@@ -276,36 +288,31 @@ const CreateNew:React.FC = props => {
         if (Object.values(errors).filter(el => el != '').length === 0) setIsSubmitting(true);
     }
 
-    const handleType = (projectType) => {
-        debugger
-        // setForm({
-        //     ...form,
-        //     'type': projectType 
-        // })
-        if (errors.message != '') {
-            let errs = validate();
-            setErrors(errs)
-            setForm({
-                ...form,
-                'type': projectType 
-            })
-        } else {
-            setForm({
-                ...form,
-                'type': projectType 
-            })
-        }
-
-        
-    }
-
     const addProjectType = (projectType) => {
         dispatch({ type: 'ADD_PROJECT_TYPE', projectType })
     }
 
-    const addTitle = (e) => {
-        debugger
-        dispatch({ type: 'ADD_TITLE', title: e.target.value})
+    const handleChange = (e) => {
+        switch (e.target.name) {
+            case 'title':
+                dispatch({ type: 'MODIFY_TITLE', title: e.target.value})
+                break;
+            case 'intro':
+                dispatch({ type: 'MODIFY_INTRO', intro: e.target.value})
+                break;
+            case 'description':
+                debugger
+                dispatch({ type: 'MODIFY_DESCRIPTION', description: e.target.value})
+                break;
+            case 'linkUrl':
+                dispatch({ type: 'MODIFY_LINK_URL', linkUrl: e.target.value})
+                break;
+            case 'linkDescription':
+                dispatch({ type: 'MODIFY_LINK_DESCRIPTION', linkDescription: e.target.value})
+                break;
+            default:
+                break;
+        }
     }
 
     const deleteParagraph = (inputIndex, typeIndex) => {
@@ -360,7 +367,7 @@ const CreateNew:React.FC = props => {
 
         let isMobile: boolean = (width <= 768);
     
-
+    
         return (
             <>
             <BaseLayout data={data} loading={loading}>
@@ -369,17 +376,17 @@ const CreateNew:React.FC = props => {
                     <form className="flex flex-col items-center w-4/5" onSubmit={handleSubmit}>
                         <h1 className="text-4xl">Create a New Blog Post</h1>
                         <Dropdown sendType={addProjectType}/>
-                        {errors && errors.type ? <h1 className="font-sans text-2xl text-red-500">{errors.type}</h1> : null }
-                        <label className="font-sans text-2xl pt-4 pb-2" htmlFor="title">{form.type} Title</label>
-                            <input type="text" onChange={(e) => addTitle(e)} className="font-sans text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" placeholder="Grab their attention!" name="title"  />
+                        {errors && errors.type ? <h1 className="font-sans text-2xl text-red-500">{state.errors.type}</h1> : null }
+                        <label className="font-sans text-2xl pt-4 pb-2" htmlFor="title">{state.form.type} Title</label>
+                            <input type="text" onChange={handleChange} className="font-sans text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" placeholder="Grab their attention!" name="title"  />
                         {errors && errors.title ? <h1 className="font-sans text-2xl text-red-500">{errors.title}</h1> : null}
-                        <label className="font-sans text-2xl pt-4 pb-2" htmlFor="intro">{form.type} Introduction</label>
+                        <label className="font-sans text-2xl pt-4 pb-2" htmlFor="intro">{state.form.type} Introduction</label>
                             <textarea onChange={handleChange} className="leading-normal font-sans border-2 rounded-md text-center w-full h-24 p-3 my-3" placeholder="Tell us a bit about your work!  This will appear on the main page." name="intro"  />
-                        <label className="font-sans text-2xl pt-4 pb-2" htmlFor="description">{form.type} Description</label>
+                        <label className="font-sans text-2xl pt-4 pb-2" htmlFor="description">{state.form.type} Description</label>
                             <textarea onChange={handleChange} className="leading-normal font-sans border-2 rounded-md text-center w-full h-72 p-3 my-3" placeholder="Go into more detail about the project.  This will appear when people view the specific project." name="description"  />
-                            <label className="font-sans text-2xl pt-4 pb-2" htmlFor="linkUrl">{form.type} Link URL</label>
+                            <label className="font-sans text-2xl pt-4 pb-2" htmlFor="linkUrl">{state.form.type} Link URL</label>
                         <input type="text" onChange={handleChange} className="leading-normal font-sans text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" placeholder="Copy and Paste Link Address" name="linkUrl"  />
-                            <label className="font-sans text-2xl pt-4 pb-2" htmlFor="linkDescription">{form.type} Link Description</label>
+                            <label className="font-sans text-2xl pt-4 pb-2" htmlFor="linkDescription">{state.form.type} Link Description</label>
                         <input type="text" onChange={handleChange} className="font-sans text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" placeholder="Text that will appear on hyperlink" name="linkDescription"  />
                         <span className="font-sans text-2xl pt-4 pb-2" >Upload your Main Photo</span>
                         <Upload name={"mainPhoto"} sendPhotoString={handleMainPhoto} title={"Main Photo"} />
