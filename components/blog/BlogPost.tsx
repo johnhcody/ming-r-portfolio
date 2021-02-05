@@ -28,8 +28,8 @@ const BlogPost: React.FC<BlogPostProps> = props => {
                         <img className="w-full h-48" src={`${blog.mainPhoto}`} alt="" />
                         <div className="px-6 py-4">
                             <div className="font-bold text-xl mb-2 font-sans">{blog.title}</div>
-                            <p className="text-grey-darker text-base">{blog.intro}</p>
-                            <p className="text-grey-darker text-base pt-4">{truncatedText}</p>
+                            <p className="`leading-normal font-sans text-grey-darker text-base">{blog.intro}</p>
+                            <p className="leading-normal font-sans text-grey-darker text-base pt-4">{truncatedText}</p>
                         </div>
                         <div className="px-6 py-4">
                             <Link

@@ -27,7 +27,7 @@ const BlogBody: React.FC<Props> = ({ body }) => {
         if (el == 'photo') {
             return <img className="object-contain h-48 md:h-72 my-4 lg:h-96 w-full" key={idx} src={`${bodyPhotos.shift()}`} alt=""/>
         } else {
-            return <p className="text-lg max-w-4/5 py-4" key={idx} >{bodyParagraphs.shift()}</p>
+            return <p className="leading-normal text-lg max-w-4/5 py-4" key={idx} >{bodyParagraphs.shift()}</p>
         }
     })
 

@@ -60,7 +60,7 @@ const ProjectCard: React.FC<ProjectProps> = props => {
                                 <h4 className="mt-1 text-xl font-semibold font-sans uppercase leading-tight truncate">{project.title}</h4>
                             
                             <div className="mt-1">
-                                <h2 className="text-gray-600 text-sm">{truncatedText}</h2>
+                                <h2 className="leading-normal text-gray-600 text-sm">{truncatedText}</h2>
                             </div>
                             <div className="mt-4">
                                 {/* <a className="text-sm text-gray-600" href={`${project.linkUrl}`}>{project.linkDescription}</a> */}
