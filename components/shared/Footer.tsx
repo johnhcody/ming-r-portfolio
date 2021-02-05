@@ -37,7 +37,7 @@ const Footer:React.FC<Props> = (props: Props) => {
             </div>
             <div className="bottom-text-wrappe flex flex-col items-center justify-center">
                 <p className="font-sans pt-4">	&copy; Mingkwan Rattanakot 2021 </p>
-                {!data ? <a className="text-blue font-sans " href="api/login">Admin Login</a> : data && data.name == "john.haner.cody@gmail.com" ? <a className="text-blue font-sans" href="api/logout">Logout</a> : null}
+                {!data ? <a className="text-blue font-sans opacity-0 hover:opacity-100" href="api/login">Admin Login</a> : data && data.name == "john.haner.cody@gmail.com" ? <a className="text-blue font-sans" href="api/logout">Logout</a> : null}
             </div>
         </div>
         </>

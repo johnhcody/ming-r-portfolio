@@ -43,6 +43,8 @@ const ArticleCard: React.FC<Props> = props => {
         const deleted = await axios.delete(`/api/projects/${article._id}`)
         router.push('/');
     }
+
+    const truncatedText = article.intro.slice(0,75) + "..."
                 return (
                     <div className="card-wrapper">
                         <div className="img-wrapper" >
@@ -56,7 +58,7 @@ const ArticleCard: React.FC<Props> = props => {
                             </Link>
                         </div>
                         <h1>{article.title}</h1>
-                        <h2>{article.intro}</h2>
+                        <h2 >{truncatedText}</h2>
                         <a href={`${article.linkUrl}`} target="_blank">{article.linkDescription}</a>
                         <div className="idx-itm-btn-wrapper">
                             {data && data.name == "john.haner.cody@gmail.com" ? <><Link href={`/projects/${article._id}/edit`}>

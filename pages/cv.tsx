@@ -50,13 +50,13 @@ const Cv: React.FC<Props> = props => {
             <>
             <BaseLayout loading={loading} data={data}>
                 {scrolled && !isMobile? <NavBar fixToTop={'mt-0 fixed z-10 top-0'}/> : null}
-                <h1 className="font-sans flex justify-center text-4xl font-sans pt-24 pb-12" >Read about my Experience</h1>
+                <h1 className="font-sans flex justify-center text-4xl font-sans pt-24 pb-12" >My Experience</h1>
                 <Paragraph1 />    
                 <Paragraph1 />    
                 <Paragraph1 />    
                 <Paragraph1 />    
                 <DownloadCv />
-                <div className="h24"></div>
+                <div className="h-12"></div>
             </BaseLayout>
             <Footer />
             </>
