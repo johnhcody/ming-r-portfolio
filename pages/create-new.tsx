@@ -139,9 +139,11 @@ const CreateNew:React.FC = props => {
             case 'UPLOAD_PHOTO':
             let newArr = [...state.photoStrArr];
             newArr[action.index] = action.value;
+            debugger
             return {
                 ...state,
-                form: { ...state.form, photos: newArr }
+                form: { ...state.form, photos: newArr },
+                photoStrArr: newArr
             }
             break;
             case 'APPEND_PARAGRAPH':
@@ -335,6 +337,9 @@ const CreateNew:React.FC = props => {
     //         }) 
     // }
 
+
+    // logic for mobile viewing
+
     const [width, setWidth] = useState(null);
     function handleWindowSizeChange() {
             setWidth(window.innerWidth);
@@ -379,13 +384,13 @@ const CreateNew:React.FC = props => {
                         if (word == 'phot-') {
                             return <BlogPhotoUpload key={idx} photoNumber={ipt} sendPhotoStr={handleFileUpload}  />
                         } else if (word == 'para-'){
-                            return <BlogParagraphUpload key={idx} inputIndex={idx} paragraphNumber={ipt} deleteElement={deleteParagraph} addText={handleTextInput}/>
+                            return <BlogParagraphUpload key={idx} inputIndex={idx} paragraphNumber={ipt} addText={handleTextInput}/>
                         }
                         })}
                         <button className="focus:outline-none focus:ring font-sans focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full" onClick={appendPhoto}>Add Photo</button>    
                         <button className="focus:outline-none focus:ring font-sans focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full outline:nones" onClick={appendParagraph}>Add Paragraph</button>
-                        <button className="focus:outline-none focus:ring font-sans focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full outline:none" type="submit" onClick={postBlog} > Post {`${form.type}`}</button>
-                        {errors && errors.message != '' ? <h1 className="pt-2 text-red-500">{errors.message}</h1> : null}
+                        <button className="focus:outline-none focus:ring font-sans focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full outline:none" type="submit" onClick={postBlog} > Post {`${state.form.type}`}</button>
+                        {state.errors && state.errors.message != '' ? <h1 className="pt-2 text-red-500">{state.errors.message}</h1> : null}
                     </form>
                 </div>
                 <div className="h-24"></div>
