@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useReducer, useRef } from 'react'
 import BaseLayout from '../components/layouts/BaseLayout'
 import { useGetUser } from '../actions/user'
 import { useRouter } from 'next/router'
@@ -16,6 +16,7 @@ interface Props {
 
 const CreateNew:React.FC = props => {
     const { loading, data } = useGetUser();
+    
     const [ input, setInput ] = useState([]);
     const [ photoStrArr, setPhotoStrArr ] = useState([])
     const [ paraCount, setParaCount ] = useState(1);
@@ -28,9 +29,32 @@ const CreateNew:React.FC = props => {
         'message': '',
         'type': ''
     });
-    // const [ errors, setErrors ] = useState(null)
-    const [ type, setType ] = useState('');
 
+    const initialState = {
+        input: [],
+        photoStrArr: [],
+        paraCount: 1,
+        photoCount: 1,
+        paragraphsArr: [],
+        order: [],
+        isSubmitting: false,
+        errors: {
+            'title': '',
+            'message': '',
+            'type': ''
+        },
+        form: {
+            title: '', 
+            intro: '', 
+            type: '',
+            description: '', 
+            paragraphs: [],
+            mainPhoto: '',
+            photos: [],
+            linkUrl: '',
+            linkDescription: ''
+        }
+    }
 
     const [form, setForm] = useState({
         title: '', 
@@ -43,6 +67,31 @@ const CreateNew:React.FC = props => {
         linkUrl: '',
         linkDescription: ''
     })
+
+    const inputRef = useRef();
+
+    const reducer = (state, action) => {
+        switch (action.type) {
+          case 'ADD_PROJECT_TYPE':
+              debugger
+            return {
+                ...state,
+                
+                
+            }
+          case 'ADD_TITLE':
+            debugger
+            return {
+                ...state,
+                form: { ...state.form, title: action.title }
+            }
+          default:
+            return state;
+        }
+      };
+
+    const [state, dispatch] = useReducer(reducer, initialState);
+
 
     const [ scrolled, setScrolled ] = useState(false);
 
@@ -76,7 +125,7 @@ const CreateNew:React.FC = props => {
         e.preventDefault();
     }
 
-    const validate = (event) => {    
+    const validate = () => {    
         let err = {
             'title': '',
             'message': '',
@@ -188,14 +237,10 @@ const CreateNew:React.FC = props => {
     }
 
     const handleChange = (e) => {
-        // debugger
-        // setForm({
-        //     ...form,
-        //     [e.target.name]: e.target.value 
-        // })
+
         if (e.target.name == 'title') {
             debugger
-            let errs = validate(e)
+            let errs = validate()
             setErrors(errs)
             debugger
             setForm({
@@ -208,7 +253,9 @@ const CreateNew:React.FC = props => {
                 ...form,
                 [e.target.name]: e.target.value 
             })
-        }
+    }
+
+
         
         // if (e.target.name == "title" && e.target.value !== '') setErrors['title'] = '';
         // if (e.target.name == "title" && errors.title !== '') setErrors['title'] = '';
@@ -250,6 +297,15 @@ const CreateNew:React.FC = props => {
         }
 
         
+    }
+
+    const addProjectType = (projectType) => {
+        dispatch({ type: 'ADD_PROJECT_TYPE', projectType })
+    }
+
+    const addTitle = (e) => {
+        debugger
+        dispatch({ type: 'ADD_TITLE', title: e.target.value})
     }
 
     const deleteParagraph = (inputIndex, typeIndex) => {
@@ -312,10 +368,10 @@ const CreateNew:React.FC = props => {
                 <div className="flex w-full justify-center">
                     <form className="flex flex-col items-center w-4/5" onSubmit={handleSubmit}>
                         <h1 className="text-4xl">Create a New Blog Post</h1>
-                        <Dropdown sendType={handleType}/>
+                        <Dropdown sendType={addProjectType}/>
                         {errors && errors.type ? <h1 className="font-sans text-2xl text-red-500">{errors.type}</h1> : null }
                         <label className="font-sans text-2xl pt-4 pb-2" htmlFor="title">{form.type} Title</label>
-                            <input type="text" onChange={handleChange} className="font-sans text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" placeholder="Grab their attention!" name="title"  />
+                            <input type="text" onChange={(e) => addTitle(e)} className="font-sans text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" placeholder="Grab their attention!" name="title"  />
                         {errors && errors.title ? <h1 className="font-sans text-2xl text-red-500">{errors.title}</h1> : null}
                         <label className="font-sans text-2xl pt-4 pb-2" htmlFor="intro">{form.type} Introduction</label>
                             <textarea onChange={handleChange} className="leading-normal font-sans border-2 rounded-md text-center w-full h-24 p-3 my-3" placeholder="Tell us a bit about your work!  This will appear on the main page." name="intro"  />
