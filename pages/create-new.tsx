@@ -39,7 +39,8 @@ const CreateNew:React.FC = props => {
 
     // sends POST request if there are no errors
     useEffect(() => {
-        if (state.isSubmitting) {
+        debugger
+        if (isSubmitting) {
             debugger
             if (Object.values(state.errors).filter(el => el != '').length === 0) {
                 createProject();
@@ -48,7 +49,7 @@ const CreateNew:React.FC = props => {
                 state.isSubmitting = false;
             }
         }
-    })
+    }, [])
 
     // new state management
     const initialState = {
@@ -58,7 +59,6 @@ const CreateNew:React.FC = props => {
         photoCount: 1,
         paragraphsArr: [],
         order: [],
-        isSubmitting: false,
         errors: {
             'title': '',
             'message': '',
@@ -78,9 +78,8 @@ const CreateNew:React.FC = props => {
     }
 
     const inputRef = useRef();
-    // useEffect(() => {
-    //     console.log(inputRef.current.name);
-    // });
+
+    const [isSubmitting, setIsSubmitting] = useState(false)
 
     const reducer = (state, action) => {
         debugger
@@ -139,7 +138,6 @@ const CreateNew:React.FC = props => {
             case 'UPLOAD_PHOTO':
             let newArr = [...state.photoStrArr];
             newArr[action.index] = action.value;
-            debugger
             return {
                 ...state,
                 form: { ...state.form, photos: newArr },
@@ -203,7 +201,6 @@ const CreateNew:React.FC = props => {
 
     
     const handleSubmit = (e) => {
-        debugger
         e.preventDefault();
     }
 
@@ -217,9 +214,10 @@ const CreateNew:React.FC = props => {
         if (state.form.type != '' && state.errors.type != '') {
             dispatch({ type: 'RESET_TYPE_ERROR'}) 
         } 
-
-
     }, [state.form.title, state.form.type ])
+
+
+    // checks for errors
 
     const validate = () => {    
 
@@ -231,40 +229,13 @@ const CreateNew:React.FC = props => {
         }
         if (state.form.title != '' && state.form.type != '') {
             dispatch({ type: 'RESET_ERRORS' })
+            setIsSubmitting(true)
         }
-        
-        // if (form.title == '') {
-        //     err['title'] = "Title is required";
-        // } if (form.type == '') {
-        //     err['type'] = "Please select a project type";
-        // } if (Object.values(err).length > 0 && err['message'] == '' ) {
-        //     err['message'] = "See errors above" 
-        // } if (form.type != '' && form.title != '') {
-        //     err = {
-        //         'title': '',
-        //         'message': '',
-        //         'type': ''
-        //     };
-        // } if (form.type != '' && form.title == '') {
-        //     err = {
-        //         'title': 'Title is required',
-        //         'message': 'See errors above',
-        //         'type': ''
-        //     }
-        // } if (form.type == '' && form.title != '') {
-        //     err = {
-        //         'title': '',
-        //         'message': 'See errors above',
-        //         'type': 'Please select a project type'
-        //     }
-        // }
-        // debugger
-        // return err;
+
     }
 
     let router = useRouter();
     const createProject = () => {
-        debugger
         axios.post(`/api/projects`, {
             title: state.form.title,
             intro: state.form.intro,
@@ -293,28 +264,15 @@ const CreateNew:React.FC = props => {
     }
 
     const handleFileUpload = (index, value) => {
-        // let newArr = [...photoStrArr];
-        // newArr[index] = value;
-        // setPhotoStrArr(newArr);
-        // setForm({
-        //     ...form,
-        //     photos: newArr
-        // })
         dispatch({ type: 'UPLOAD_PHOTO', index, value })
     }
-
-
 
     const handleTextInput = (index, text) => {
         dispatch({ type: 'SET_PARAGRAPH', index, text })
     }
 
     const postBlog = (e) => {
-        // debugger
         validate();
-        // setErrors(errs)
-        // debugger
-        // if (Object.values(errors).filter(el => el != '').length === 0) setIsSubmitting(true);
     }
 
 
