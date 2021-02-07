@@ -35,21 +35,6 @@ const CreateNew:React.FC = props => {
             setScrolled(false)
         }
     }
-    
-
-    // sends POST request if there are no errors
-    useEffect(() => {
-        debugger
-        if (isSubmitting) {
-            debugger
-            if (Object.values(state.errors).filter(el => el != '').length === 0) {
-                createProject();
-            } else {
-                console.log(state.errors)
-                state.isSubmitting = false;
-            }
-        }
-    }, [])
 
     // new state management
     const initialState = {
@@ -76,10 +61,6 @@ const CreateNew:React.FC = props => {
             linkDescription: ''
         }
     }
-
-    const inputRef = useRef();
-
-    const [isSubmitting, setIsSubmitting] = useState(false)
 
     const reducer = (state, action) => {
         debugger
@@ -228,8 +209,9 @@ const CreateNew:React.FC = props => {
             dispatch({ type: 'NO_TYPE_ERROR'})
         }
         if (state.form.title != '' && state.form.type != '') {
-            dispatch({ type: 'RESET_ERRORS' })
-            setIsSubmitting(true)
+            debugger
+            // dispatch({ type: 'RESET_ERRORS' })
+            createProject();
         }
 
     }
@@ -373,16 +355,16 @@ const CreateNew:React.FC = props => {
                         <Dropdown sendType={addProjectType}/>
                         {state.errors && state.errors.type ? <h1 className="font-sans text-2xl text-red-500">{state.errors.type}</h1> : null }
                         <label className="font-sans text-2xl pt-4 pb-2" htmlFor="title">{state.form.type} Title</label>
-                            <input ref={inputRef} type="text" onChange={handleChange} className="font-sans text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" placeholder="Grab their attention!" name="title"  />
+                            <input type="text" onChange={handleChange} className="font-sans text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" placeholder="Grab their attention!" name="title"  />
                         {state.errors && state.errors.title ? <h1 className="font-sans text-2xl text-red-500">{state.errors.title}</h1> : null}
                         <label className="font-sans text-2xl pt-4 pb-2" htmlFor="intro">{state.form.type} Introduction</label>
-                            <textarea ref={inputRef} onChange={handleChange} className="leading-normal font-sans border-2 rounded-md text-center w-full h-24 p-3 my-3" placeholder="Tell us a bit about your work!  This will appear on the main page." name="intro"  />
+                            <textarea onChange={handleChange} className="leading-normal font-sans border-2 rounded-md text-center w-full h-24 p-3 my-3" placeholder="Tell us a bit about your work!  This will appear on the main page." name="intro"  />
                         <label className="font-sans text-2xl pt-4 pb-2" htmlFor="description">{state.form.type} Description</label>
-                            <textarea ref={inputRef} onChange={handleChange} className="leading-normal font-sans border-2 rounded-md text-center w-full h-72 p-3 my-3" placeholder="Go into more detail about the project.  This will appear when people view the specific project." name="description"  />
+                            <textarea onChange={handleChange} className="leading-normal font-sans border-2 rounded-md text-center w-full h-72 p-3 my-3" placeholder="Go into more detail about the project.  This will appear when people view the specific project." name="description"  />
                             <label className="font-sans text-2xl pt-4 pb-2" htmlFor="linkUrl">{state.form.type} Link URL</label>
-                        <input ref={inputRef} type="text" onChange={handleChange} className="leading-normal font-sans text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" placeholder="Copy and Paste Link Address" name="linkUrl"  />
+                        <input type="text" onChange={handleChange} className="leading-normal font-sans text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" placeholder="Copy and Paste Link Address" name="linkUrl"  />
                             <label className="font-sans text-2xl pt-4 pb-2" htmlFor="linkDescription">{state.form.type} Link Description</label>
-                        <input ref={inputRef} type="text" onChange={handleChange} className="font-sans text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" placeholder="Text that will appear on hyperlink" name="linkDescription"  />
+                        <input type="text" onChange={handleChange} className="font-sans text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" placeholder="Text that will appear on hyperlink" name="linkDescription"  />
                         <span className="font-sans text-2xl pt-4 pb-2" >Upload your Main Photo</span>
                         <Upload name={"mainPhoto"} sendPhotoString={handleMainPhoto} title={"Main Photo"} />
                         {state.input.map((ipt, idx) => {
