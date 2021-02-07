@@ -78,9 +78,9 @@ const CreateNew:React.FC = props => {
     }
 
     const inputRef = useRef();
-    useEffect(() => {
-        console.log(inputRef.current.name);
-    });
+    // useEffect(() => {
+    //     console.log(inputRef.current.name);
+    // });
 
     const reducer = (state, action) => {
         debugger
@@ -164,6 +164,36 @@ const CreateNew:React.FC = props => {
                 form: { ...state.form, paragraphs: paraArr }
             }
             break;
+            case 'NO_TITLE_ERROR':
+            return {
+                ...state,
+                errors: { ...state.errors, title: 'A title is required', message: 'Please see errors above' }
+            }
+            break;
+            case 'NO_TYPE_ERROR':
+            return {
+                ...state,
+                errors: { ...state.errors, type: 'Please select a type', message: 'Please see errors above' }
+            }
+            break;
+            case 'RESET_ERRORS':
+            return {
+                ...state,
+                errors: { ...state.errors, type: '', message: '', title: '' }
+            }
+            break;
+            case 'RESET_TITLE_ERROR':
+            return {
+                ...state,
+                errors: { ...state.errors, title: '' }
+            }
+            break;
+            case 'RESET_TYPE_ERROR':
+            return {
+                ...state,
+                errors: { ...state.errors, type: '' }
+            }
+            break;
           default:
             return state;
         }
@@ -177,12 +207,31 @@ const CreateNew:React.FC = props => {
         e.preventDefault();
     }
 
+    useEffect(() => {
+        if (state.form.title != '' && state.form.type != '') {
+            dispatch({ type: 'RESET_ERRORS'})
+        }
+        if (state.form.title != '' && state.errors.title != '') {
+            dispatch({ type: 'RESET_TITLE_ERROR'}) 
+        } 
+        if (state.form.type != '' && state.errors.type != '') {
+            dispatch({ type: 'RESET_TYPE_ERROR'}) 
+        } 
+
+
+    }, [state.form.title, state.form.type ])
+
     const validate = () => {    
-        // let err = {
-        //     'title': '',
-        //     'message': '',
-        //     'type': ''
-        // };
+
+        if (state.form.title == '') {
+            dispatch({ type: 'NO_TITLE_ERROR'})
+        } 
+        if (state.form.type == '' ) {
+            dispatch({ type: 'NO_TYPE_ERROR'})
+        }
+        if (state.form.title != '' && state.form.type != '') {
+            dispatch({ type: 'RESET_ERRORS' })
+        }
         
         // if (form.title == '') {
         //     err['title'] = "Title is required";
@@ -262,7 +311,7 @@ const CreateNew:React.FC = props => {
 
     const postBlog = (e) => {
         // debugger
-        // let errs = validate();
+        validate();
         // setErrors(errs)
         // debugger
         // if (Object.values(errors).filter(el => el != '').length === 0) setIsSubmitting(true);
