@@ -342,8 +342,12 @@ const EditProject: NextPage<Props> = ({ project }) => {
                 <form className="flex flex-col items-center w-3/4 font-sans" onSubmit={handleSubmit}>
                     <h1 className="text-4xl">Edit your Blog Post</h1>
                     <Dropdown sendType={addProjectType}/>
+                    {state.errors && state.errors.type ? <h1 className="font-sans text-2xl text-red-500">{state.errors.type}</h1> : null }
+
                     <label className="text-2xl pt-4 pb-2 font-sans" htmlFor="title">{state.form.type} Title</label>
                         <input type="text" onChange={handleChange} value={state.form.title} className="font-sans text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" placeholder="Grab their attention!" name="title"  />
+                        {state.errors && state.errors.title ? <h1 className="font-sans text-2xl text-red-500">{state.errors.title}</h1> : null}
+
                     <label className="font-sans text-2xl pt-4 pb-2" htmlFor="intro">{state.form.type} Introduction</label>
                         <textarea onChange={handleChange} value={state.form.intro} className="font-sans w-72 h-24 p-3 my-3 border-2 border-gray-200 rounded-md" placeholder="Tell us a bit about your work!  This will appear on the main page." name="intro"  />
                     <label className="font-sans text-2xl pt-4 pb-2" htmlFor="description">{state.form.type} Description</label>
@@ -364,6 +368,7 @@ const EditProject: NextPage<Props> = ({ project }) => {
 
                         </div> */}
                         <button className="focus:outline-none focus:ring font-sans focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white hover:text-red-500 rounded-full font-bold px-4 py-3 my-2 transition duration-300 ease-in-out mr-6"onClick={postChanges} >Save Changes</button>
+                        {state.errors && state.errors.message != '' ? <h1 className="pt-2 text-red-500">{state.errors.message}</h1> : null}
 
 
                 </form>
