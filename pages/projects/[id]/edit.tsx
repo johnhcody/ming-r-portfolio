@@ -109,43 +109,18 @@ const EditProject: NextPage<Props> = ({ project }) => {
                 form: { ...state.form, type: action.projectType}
             }
             break;
-          case 'MODIFY_TITLE':
-            return {
-                ...state,
-                form: { ...state.form, title: action.title }
-            }
-            break;
-          case 'MODIFY_INTRO':
-            return {
-                ...state,
-                form: { ...state.form, intro: action.intro }
-            }
-            break;
-            case 'MODIFY_DESCRIPTION':
-            return {
-                ...state,
-                form: { ...state.form, description: action.description }
-            }
-            break;
-            case 'MODIFY_LINK_URL':
-            return {
-                ...state,
-                form: { ...state.form, linkUrl: action.linkUrl }
-            }
-            break;
-            case 'MODIFY_LINK_DESCRIPTION':
-            return {
-                ...state,
-                form: { ...state.form, linkDescription: action.linkDescription }
-            }
-            break;
-            case 'POST_MAIN_PHOTO':
+        case 'MODIFY_ELEMENT':
+                return {
+                    ...state,
+                    form: { ...state.form, [action.element]: action.value }
+                }
+        case 'POST_MAIN_PHOTO':
             return {
                 ...state,
                 form: { ...state.form, mainPhoto: action.mainPhoto }
             }
             break;
-            case 'APPEND_PHOTO':
+        case 'APPEND_PHOTO':
                 let photoInputNum = `phot-${state.photoCount}`
                 debugger
             return {
@@ -155,7 +130,7 @@ const EditProject: NextPage<Props> = ({ project }) => {
                 order: state.order.concat('photo')
             }
             break;
-            case 'UPLOAD_PHOTO':
+        case 'UPLOAD_PHOTO':
             let newArr = [...state.photoStrArr];
             newArr[action.index] = action.value;
             debugger
@@ -165,7 +140,7 @@ const EditProject: NextPage<Props> = ({ project }) => {
                 photoStrArr: newArr
             }
             break;
-            case 'APPEND_PARAGRAPH':
+        case 'APPEND_PARAGRAPH':
             let paraInputNum = `para-${state.paraCount}`;
             return {
                 ...state,
@@ -174,7 +149,7 @@ const EditProject: NextPage<Props> = ({ project }) => {
                 order: state.order.concat('paragraph')
             }
             break;
-            case 'SET_PARAGRAPH':
+        case 'SET_PARAGRAPH':
             let paraArr = [...state.paragraphsArr];
             paraArr[action.index] = action.text;
             return {
@@ -183,13 +158,13 @@ const EditProject: NextPage<Props> = ({ project }) => {
                 form: { ...state.form, paragraphs: paraArr }
             }
             break;
-            case 'NO_TITLE_ERROR':
+        case 'NO_TITLE_ERROR':
             return {
                 ...state,
                 errors: { ...state.errors, title: 'A title is required', message: 'Please see errors above' }
             }
             break;
-            case 'NO_TYPE_ERROR':
+        case 'NO_TYPE_ERROR':
             return {
                 ...state,
                 errors: { ...state.errors, type: 'Please select a type', message: 'Please see errors above' }
@@ -201,19 +176,19 @@ const EditProject: NextPage<Props> = ({ project }) => {
                 errors: { ...state.errors, type: '', message: '', title: '' }
             }
             break;
-            case 'RESET_TITLE_ERROR':
+        case 'RESET_TITLE_ERROR':
             return {
                 ...state,
                 errors: { ...state.errors, title: '' }
             }
             break;
-            case 'RESET_TYPE_ERROR':
+        case 'RESET_TYPE_ERROR':
             return {
                 ...state,
                 errors: { ...state.errors, type: '' }
             }
             break;
-          default:
+        default:
             return state;
         }
       };
@@ -313,27 +288,9 @@ const EditProject: NextPage<Props> = ({ project }) => {
 
         let isMobile: boolean = (width <= 768);
         
-    const handleChange = (e) => {
-            switch (e.target.name) {
-                case 'title':
-                    dispatch({ type: 'MODIFY_TITLE', title: e.target.value})
-                    break;
-                case 'intro':
-                    dispatch({ type: 'MODIFY_INTRO', intro: e.target.value})
-                    break;
-                case 'description':
-                    dispatch({ type: 'MODIFY_DESCRIPTION', description: e.target.value})
-                    break;
-                case 'linkUrl':
-                    dispatch({ type: 'MODIFY_LINK_URL', linkUrl: e.target.value})
-                    break;
-                case 'linkDescription':
-                    dispatch({ type: 'MODIFY_LINK_DESCRIPTION', linkDescription: e.target.value})
-                    break;
-                default:
-                    break;
-            }
-    }
+        const handleChange = (e) => {
+            dispatch({ type: 'MODIFY_ELEMENT', element: e.target.name, value: e.target.value})
+        }
 
     return (
         <>

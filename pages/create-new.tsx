@@ -70,43 +70,16 @@ const CreateNew:React.FC = props => {
                 ...state,
                 form: { ...state.form, type: action.projectType}
             }
-            break;
-          case 'MODIFY_TITLE':
+          case 'MODIFY_ELEMENT':
             return {
                 ...state,
-                form: { ...state.form, title: action.title }
+                form: { ...state.form, [action.element]: action.value }
             }
-            break;
-          case 'MODIFY_INTRO':
-            return {
-                ...state,
-                form: { ...state.form, intro: action.intro }
-            }
-            break;
-            case 'MODIFY_DESCRIPTION':
-            return {
-                ...state,
-                form: { ...state.form, description: action.description }
-            }
-            break;
-            case 'MODIFY_LINK_URL':
-            return {
-                ...state,
-                form: { ...state.form, linkUrl: action.linkUrl }
-            }
-            break;
-            case 'MODIFY_LINK_DESCRIPTION':
-            return {
-                ...state,
-                form: { ...state.form, linkDescription: action.linkDescription }
-            }
-            break;
             case 'POST_MAIN_PHOTO':
             return {
                 ...state,
                 form: { ...state.form, mainPhoto: action.mainPhoto }
             }
-            break;
             case 'APPEND_PHOTO':
             let photoInputNum = `phot-${state.photoCount}`
             return {
@@ -115,7 +88,6 @@ const CreateNew:React.FC = props => {
                 input: state.input.concat(photoInputNum),
                 order: state.order.concat('photo')
             }
-            break;
             case 'UPLOAD_PHOTO':
             let newArr = [...state.photoStrArr];
             newArr[action.index] = action.value;
@@ -124,7 +96,6 @@ const CreateNew:React.FC = props => {
                 form: { ...state.form, photos: newArr },
                 photoStrArr: newArr
             }
-            break;
             case 'APPEND_PARAGRAPH':
             let paraInputNum = `para-${state.paraCount}`;
             return {
@@ -133,7 +104,6 @@ const CreateNew:React.FC = props => {
                 input: state.input.concat(paraInputNum),
                 order: state.order.concat('paragraph')
             }
-            break;
             case 'SET_PARAGRAPH':
             let paraArr = [...state.paragraphsArr];
             paraArr[action.index] = action.text;
@@ -142,37 +112,31 @@ const CreateNew:React.FC = props => {
                 paragraphsArr: paraArr,
                 form: { ...state.form, paragraphs: paraArr }
             }
-            break;
             case 'NO_TITLE_ERROR':
             return {
                 ...state,
                 errors: { ...state.errors, title: 'A title is required', message: 'Please see errors above' }
             }
-            break;
             case 'NO_TYPE_ERROR':
             return {
                 ...state,
                 errors: { ...state.errors, type: 'Please select a type', message: 'Please see errors above' }
             }
-            break;
             case 'RESET_ERRORS':
             return {
                 ...state,
                 errors: { ...state.errors, type: '', message: '', title: '' }
             }
-            break;
             case 'RESET_TITLE_ERROR':
             return {
                 ...state,
                 errors: { ...state.errors, title: '' }
             }
-            break;
             case 'RESET_TYPE_ERROR':
             return {
                 ...state,
                 errors: { ...state.errors, type: '' }
             }
-            break;
           default:
             return state;
         }
@@ -265,25 +229,7 @@ const CreateNew:React.FC = props => {
     }
     
     const handleChange = (e) => {
-        switch (e.target.name) {
-            case 'title':
-                dispatch({ type: 'MODIFY_TITLE', title: e.target.value})
-                break;
-            case 'intro':
-                dispatch({ type: 'MODIFY_INTRO', intro: e.target.value})
-                break;
-            case 'description':
-                dispatch({ type: 'MODIFY_DESCRIPTION', description: e.target.value})
-                break;
-            case 'linkUrl':
-                dispatch({ type: 'MODIFY_LINK_URL', linkUrl: e.target.value})
-                break;
-            case 'linkDescription':
-                dispatch({ type: 'MODIFY_LINK_DESCRIPTION', linkDescription: e.target.value})
-                break;
-            default:
-                break;
-        }
+        dispatch({ type: 'MODIFY_ELEMENT', element: e.target.name, value: e.target.value})
     }
 
     const handleMainPhoto = (key, value) => {
@@ -293,6 +239,7 @@ const CreateNew:React.FC = props => {
     const appendPhoto = () => {
         dispatch({ type: 'APPEND_PHOTO' })    
     }
+
 
      const deleteParagraph = (inputIndex, typeIndex) => {
 
