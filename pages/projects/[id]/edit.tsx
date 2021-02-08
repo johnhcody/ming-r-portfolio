@@ -80,6 +80,7 @@ const EditProject: NextPage<Props> = ({ project }) => {
 
     useEffect(() => {
 
+        
         window.addEventListener("scroll", handleScroll);
       }, []);
 
