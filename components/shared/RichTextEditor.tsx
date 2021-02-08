@@ -5,12 +5,13 @@ import ReactQuill from 'react-quill';
 interface Props {
   placeholder: string;
   sendText: Function;
+  editedText: string;
 }
 
-const RichTextEditor: React.FC<Props> = ({ sendText, placeholder }) => {
+const RichTextEditor: React.FC<Props> = ({ sendText, placeholder, editedText }) => {
 
 
-    const [ editorHTML, setEditorHTML ] = useState('');
+    const [ editorHTML, setEditorHTML ] = useState(editedText);
 
     const handleChange = (html) => {
         setEditorHTML(editorHTML => editorHTML = html)
@@ -26,13 +27,14 @@ const RichTextEditor: React.FC<Props> = ({ sendText, placeholder }) => {
             [{'list': 'ordered'}, {'list': 'bullet'}, 
              {'indent': '-1'}, {'indent': '+1'}],
             ['link', 'image', 'video'],
-            ['clean']
+            ['clean'],
+            [{ 'align': [] }],
           ],
     }
 
     const formats = [
         'header', 'font', 'size',
-        'bold', 'italic', 'underline', 'strike', 'blockquote',
+        'bold', 'italic', 'underline', 'strike', 'blockquote', 'align',
         'list', 'bullet', 'indent',
         'link', 'image', 'video'
     ]

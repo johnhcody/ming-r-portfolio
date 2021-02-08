@@ -10,6 +10,7 @@ import EditParagraph from '../../../components/shared/EditPargraph'
 import NavBar from '../../../components/shared/Navbar'
 import EditBody from '../../../components/shared/EditBody';
 import Dropdown from '../../../components/shared/Dropdown'
+import Editor from '../../../components/shared/RichTextEditor'
 
 interface Props {
     project: {
@@ -24,7 +25,7 @@ interface Props {
         linkDescription: string;
         mainPhoto: string;
         _id: string;
-
+        text: string;
     }
 }
 
@@ -62,7 +63,8 @@ const EditProject: NextPage<Props> = ({ project }) => {
             mainPhoto: project.mainPhoto,
             photos: project.photos,
             linkUrl: project.linkUrl,
-            linkDescription: project.linkDescription
+            linkDescription: project.linkDescription,
+            text: project.text
         }
     }
 
@@ -120,6 +122,12 @@ const EditProject: NextPage<Props> = ({ project }) => {
                 form: { ...state.form, mainPhoto: action.mainPhoto }
             }
             break;
+        case 'RICH_TEXT':
+            debugger
+            return {
+                ...state,
+                form: { ...state.form, text: action.text }
+            }
         case 'APPEND_PHOTO':
                 let photoInputNum = `phot-${state.photoCount}`
                 debugger
@@ -261,7 +269,8 @@ const EditProject: NextPage<Props> = ({ project }) => {
             linkUrl: state.form.linkUrl,
             linkDescription: state.form.linkDescription,
             paragraphs: state.form.paragraphs,
-            photos: state.form.photos
+            photos: state.form.photos,
+            text: state.form.text
         })
             .then(function (response) {
                 console.log(response);
@@ -286,11 +295,15 @@ const EditProject: NextPage<Props> = ({ project }) => {
         }
     }, []);
 
-        let isMobile: boolean = (width <= 768);
-        
-        const handleChange = (e) => {
-            dispatch({ type: 'MODIFY_ELEMENT', element: e.target.name, value: e.target.value})
-        }
+    let isMobile: boolean = (width <= 768);
+    
+    const handleChange = (e) => {
+        dispatch({ type: 'MODIFY_ELEMENT', element: e.target.name, value: e.target.value})
+    }
+    const handleRichText = (value) => {
+        debugger
+        dispatch({ type: 'RICH_TEXT', text: value })
+    }
 
     return (
         <>
@@ -314,8 +327,9 @@ const EditProject: NextPage<Props> = ({ project }) => {
                         <input onChange={handleChange} value={state.form.linkUrl} className="font-sans text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0" type="text" placeholder="Paste the URL of the original article" name="linkUrl"  />
                     <label className="font-sans text-2xl pt-4 pb-2" htmlFor="linkDescription">{state.form.type} Link Text</label>
                         <input onChange={handleChange} value={state.form.linkDescription} className="font-sans text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" type="text" placeholder="How do you want the link text to appear?" name="linkDescription"  />
-                    <EditPhoto source={state.form.mainPhoto} photoNumber={'photo-1000'} editPhotoArr={handleMainPhoto} />
-                    <EditBody bodyOrder={project.order} bodyParagraphs={state.form.paragraphs} bodyPhotos={state.form.photos} sendInput={handleTextInput} handleFileUpload={handleFileUpload}/>
+                        <Editor placeholder="Create your post here" sendText={handleRichText} editedText={state.form.text}/>
+                    {/* <EditPhoto source={state.form.mainPhoto} photoNumber={'photo-1000'} editPhotoArr={handleMainPhoto} />
+                    <EditBody bodyOrder={project.order} bodyParagraphs={state.form.paragraphs} bodyPhotos={state.form.photos} sendInput={handleTextInput} handleFileUpload={handleFileUpload}/> */}
 
                         {/* <div className="pb-8 flex flex-col items-center">
                             Not working yet...
@@ -325,6 +339,7 @@ const EditProject: NextPage<Props> = ({ project }) => {
                             <button className="focus:outline-none focus:ring font-sans focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white hover:text-red-500 rounded-full font-bold px-4 py-3 my-2 transition duration-300 ease-in-out mr-6" onClick={appendParagraph}>Add Paragraph</button>
 
                         </div> */}
+                        <div className="h-24"></div>
                         <button className="focus:outline-none focus:ring font-sans focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white hover:text-red-500 rounded-full font-bold px-4 py-3 my-2 transition duration-300 ease-in-out mr-6"onClick={postChanges} >Save Changes</button>
                         {state.errors && state.errors.message != '' ? <h1 className="pt-2 text-red-500">{state.errors.message}</h1> : null}
 
