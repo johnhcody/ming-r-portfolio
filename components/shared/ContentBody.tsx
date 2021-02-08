@@ -57,19 +57,34 @@ export default class ContentBody extends Component {
     if (document) {
       this.quill = require('react-quill')
     }
+    this.state = {order: this.props.body.order}
   }
 
   render() {
       debugger
     const Quill = this.quill
+    const bodyPhotos = this.props.body.photos.slice();
+    const bodyParagraphs = this.props.body.paragraphs.slice();
     if (Quill) {
+      const contentBody = this.state.order.map((el, idx) => {
+          if (el == 'photo') {
+              return <img className="object-contain h-48 md:h-72 my-4 lg:h-96 w-full" key={idx} src={`${bodyPhotos.shift()}`} alt=""/>
+          } else {
+            return <Quill
+                key={idx}
+                theme="bubble"
+                value={bodyParagraphs.shift()}
+                readOnly={true}
+              />
+              return <p className="leading-normal text-lg max-w-4/5 py-4" key={idx} >{bodyParagraphs.shift()}</p>
+          }
+      })
       return (
-        <Quill
-          theme="bubble"
-          value={this.props.body.text}
-          readOnly={true}
-        />
+        <div className="">
+          {contentBody}
+        </div>
       )
+
     } else {
       return null
     }
