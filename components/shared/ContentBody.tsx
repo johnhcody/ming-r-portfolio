@@ -76,7 +76,6 @@ export default class ContentBody extends Component {
                 value={bodyParagraphs.shift()}
                 readOnly={true}
               />
-              return <p className="leading-normal text-lg max-w-4/5 py-4" key={idx} >{bodyParagraphs.shift()}</p>
           }
       })
       return (

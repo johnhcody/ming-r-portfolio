@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import EditPhoto from './EditPhoto'
 import EditParagraph from './EditPargraph'
+import RichTextEditor from './RichTextEditor';
 
 interface Props {
     bodyOrder: string[];
@@ -13,6 +14,11 @@ interface Props {
 const EditBody: React.FC<Props> = ({ bodyOrder, bodyParagraphs, bodyPhotos, sendInput, handleFileUpload }) => {
     const photosArr = bodyPhotos.slice();
     const paragraphsArr = bodyParagraphs.slice();
+    const indexArr = new Array(bodyParagraphs.length)
+
+    for (let i = 0; i < indexArr.length; i++) {
+        indexArr[i] = `para-${i + 1}`
+    }
 
     const body = bodyOrder.map((el, i) => {
         if (el == 'photo') {
@@ -21,7 +27,8 @@ const EditBody: React.FC<Props> = ({ bodyOrder, bodyParagraphs, bodyPhotos, send
         } else {
             const nextParagraph = paragraphsArr.shift()
             const index: number = bodyParagraphs.indexOf(nextParagraph)
-            return <EditParagraph sendInput={sendInput} value={nextParagraph} key={i} idx={index}/>
+            return <RichTextEditor paragraphNumber={indexArr.shift()} placeholder={''} sendText={sendInput} editedText={nextParagraph} key={i} inputIndex={index} />
+            // return <EditParagraph sendInput={sendInput} value={nextParagraph} key={i} idx={index}/>
         }
     })
 

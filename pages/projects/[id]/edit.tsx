@@ -327,9 +327,9 @@ const EditProject: NextPage<Props> = ({ project }) => {
                         <input onChange={handleChange} value={state.form.linkUrl} className="font-sans text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0" type="text" placeholder="Paste the URL of the original article" name="linkUrl"  />
                     <label className="font-sans text-2xl pt-4 pb-2" htmlFor="linkDescription">{state.form.type} Link Text</label>
                         <input onChange={handleChange} value={state.form.linkDescription} className="font-sans text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" type="text" placeholder="How do you want the link text to appear?" name="linkDescription"  />
-                        <Editor placeholder="Create your post here" sendText={handleRichText} editedText={state.form.text}/>
-                    {/* <EditPhoto source={state.form.mainPhoto} photoNumber={'photo-1000'} editPhotoArr={handleMainPhoto} />
-                    <EditBody bodyOrder={project.order} bodyParagraphs={state.form.paragraphs} bodyPhotos={state.form.photos} sendInput={handleTextInput} handleFileUpload={handleFileUpload}/> */}
+                        {/* <Editor placeholder="Create your post here" sendText={handleRichText} paragraphNumber={} editedText={state.form.text}/> */}
+                    <EditPhoto source={state.form.mainPhoto} photoNumber={'photo-1000'} editPhotoArr={handleMainPhoto} />
+                    <EditBody bodyOrder={project.order} bodyParagraphs={state.form.paragraphs} bodyPhotos={state.form.photos} sendInput={handleTextInput} handleFileUpload={handleFileUpload}/>
 
                         {/* <div className="pb-8 flex flex-col items-center">
                             Not working yet...
