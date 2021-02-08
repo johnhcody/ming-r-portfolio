@@ -9,12 +9,13 @@ import EditPhoto from '../../../components/shared/EditPhoto'
 import EditParagraph from '../../../components/shared/EditPargraph'
 import NavBar from '../../../components/shared/Navbar'
 import EditBody from '../../../components/shared/EditBody';
-
+import Dropdown from '../../../components/shared/Dropdown'
 
 interface Props {
     project: {
         title: string;
         intro: string;
+        type: string;
         description: string;
         paragraphs: string[];
         photos: string[];
@@ -23,6 +24,7 @@ interface Props {
         linkDescription: string;
         mainPhoto: string;
         _id: string;
+
     }
 }
 
@@ -41,26 +43,26 @@ const EditProject: NextPage<Props> = ({ project }) => {
 
     const initialState = {
         input: [],
-        photoStrArr: [],
-        paraCount: 1,
-        photoCount: 1,
-        paragraphsArr: [],
-        order: [],
+        photoStrArr: project.photos,
+        paraCount: project.paragraphs.length + 1,
+        photoCount: project.photos.length + 1,
+        paragraphsArr: project.paragraphs,
+        order: project.order,
         errors: {
             'title': '',
             'message': '',
             'type': ''
         },
         form: {
-            title: '', 
-            intro: '', 
-            type: '',
-            description: '', 
-            paragraphs: [],
-            mainPhoto: '',
-            photos: [],
-            linkUrl: '',
-            linkDescription: ''
+            title: project.title, 
+            intro: project.intro, 
+            type: project.type,
+            description: project.description, 
+            paragraphs: project.paragraphs,
+            mainPhoto: project.mainPhoto,
+            photos: project.photos,
+            linkUrl: project.linkUrl,
+            linkDescription: project.linkDescription
         }
     }
 
@@ -91,8 +93,11 @@ const EditProject: NextPage<Props> = ({ project }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        validate();
     };
+
+    const postChanges = () => {
+        validate();
+    }
 
     const reducer = (state, action) => {
         debugger
@@ -140,7 +145,8 @@ const EditProject: NextPage<Props> = ({ project }) => {
             }
             break;
             case 'APPEND_PHOTO':
-            let photoInputNum = `phot-${state.photoCount}`
+                let photoInputNum = `phot-${state.photoCount}`
+                debugger
             return {
                 ...state,
                 photoCount: state.photoCount + 1,
@@ -151,6 +157,7 @@ const EditProject: NextPage<Props> = ({ project }) => {
             case 'UPLOAD_PHOTO':
             let newArr = [...state.photoStrArr];
             newArr[action.index] = action.value;
+            debugger
             return {
                 ...state,
                 form: { ...state.form, photos: newArr },
@@ -250,7 +257,12 @@ const EditProject: NextPage<Props> = ({ project }) => {
         dispatch({ type: 'APPEND_PHOTO' })    
     } 
 
+    const handleMainPhoto = (key, value) => {
+        dispatch({ type: 'POST_MAIN_PHOTO', mainPhoto: value})
+    }
+
     const handleFileUpload = (index, value) => {
+        debugger
         dispatch({ type: 'UPLOAD_PHOTO', index, value })
     }
 
@@ -258,17 +270,22 @@ const EditProject: NextPage<Props> = ({ project }) => {
         dispatch({ type: 'SET_PARAGRAPH', index, text })
     }
 
+    const addProjectType = (projectType) => {
+        dispatch({ type: 'ADD_PROJECT_TYPE', projectType })
+    }
+
     const updateProject = () => {
 
         axios.put(`/api/projects/${router.query.id}`, {
             title: state.form.title,
             intro: state.form.intro,
+            type: state.form.type,
             description: state.form.description,
             mainPhoto: state.form.mainPhoto,
             linkUrl: state.form.linkUrl,
             linkDescription: state.form.linkDescription,
-            paragraphs: paragraphsArr,
-            photos: photoStrArr
+            paragraphs: state.form.paragraphs,
+            photos: state.form.photos
         })
             .then(function (response) {
                 console.log(response);
@@ -324,21 +341,31 @@ const EditProject: NextPage<Props> = ({ project }) => {
             <div className="flex w-full justify-center pb-48 font-sans">
                 <form className="flex flex-col items-center w-3/4 font-sans" onSubmit={handleSubmit}>
                     <h1 className="text-4xl">Edit your Blog Post</h1>
-                    <label className="text-2xl pt-4 pb-2 font-sans" htmlFor="title">Title</label>
+                    <Dropdown sendType={addProjectType}/>
+                    <label className="text-2xl pt-4 pb-2 font-sans" htmlFor="title">{state.form.type} Title</label>
                         <input type="text" onChange={handleChange} value={state.form.title} className="font-sans text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" placeholder="Grab their attention!" name="title"  />
-                    <label className="font-sans text-2xl pt-4 pb-2" htmlFor="intro">Introduction</label>
+                    <label className="font-sans text-2xl pt-4 pb-2" htmlFor="intro">{state.form.type} Introduction</label>
                         <textarea onChange={handleChange} value={state.form.intro} className="font-sans w-72 h-24 p-3 my-3 border-2 border-gray-200 rounded-md" placeholder="Tell us a bit about your work!  This will appear on the main page." name="intro"  />
-                    <label className="font-sans text-2xl pt-4 pb-2" htmlFor="description">Description</label>
+                    <label className="font-sans text-2xl pt-4 pb-2" htmlFor="description">{state.form.type} Description</label>
                         <textarea onChange={handleChange} value={state.form.description} className="font-sans w-full h-72 p-3 my-3 border-2 border-gray-200 rounded-md" placeholder="Go into more detail about the project.  This will appear when people view the specific project." name="description"  />
-                    <label className="font-sans text-2xl pt-4 pb-2" htmlFor="linkUrl">Source Link</label>
+                    <label className="font-sans text-2xl pt-4 pb-2" htmlFor="linkUrl">{state.form.type} Source Link</label>
                         <input onChange={handleChange} value={state.form.linkUrl} className="font-sans text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0" type="text" placeholder="Paste the URL of the original article" name="linkUrl"  />
-                    <label className="font-sans text-2xl pt-4 pb-2" htmlFor="linkDescription">Link Text</label>
+                    <label className="font-sans text-2xl pt-4 pb-2" htmlFor="linkDescription">{state.form.type} Link Text</label>
                         <input onChange={handleChange} value={state.form.linkDescription} className="font-sans text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" type="text" placeholder="How do you want the link text to appear?" name="linkDescription"  />
-                    <EditPhoto source={state.form.mainPhoto} photoNumber={'photo-1000'} editPhotoArr={handleFileUpload} />
+                    <EditPhoto source={state.form.mainPhoto} photoNumber={'photo-1000'} editPhotoArr={handleMainPhoto} />
                     <EditBody bodyOrder={project.order} bodyParagraphs={state.form.paragraphs} bodyPhotos={state.form.photos} sendInput={handleTextInput} handleFileUpload={handleFileUpload}/>
-                    <button className="focus:outline-none focus:ring font-sans focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full" onClick={appendPhoto}>Add Photo</button>    
-                    <button className="focus:outline-none focus:ring font-sans focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full outline:nones" onClick={appendParagraph}>Add Paragraph</button>                    
-                    <button className="focus:outline-none focus:ring font-sans focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white hover:text-red-500 rounded-full font-bold px-4 py-3 my-2 transition duration-300 ease-in-out mr-6" >Save Changes</button>
+
+                        {/* <div className="pb-8 flex flex-col items-center">
+                            Not working yet...
+                            Need to add a new slice of state to map through the 'newInput' similar to create-new page
+
+                            <button className="focus:outline-none focus:ring font-sans focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white hover:text-red-500 rounded-full font-bold px-4 py-3 my-2 transition duration-300 ease-in-out mr-6" onClick={appendPhoto} >Add Photo</button>
+                            <button className="focus:outline-none focus:ring font-sans focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white hover:text-red-500 rounded-full font-bold px-4 py-3 my-2 transition duration-300 ease-in-out mr-6" onClick={appendParagraph}>Add Paragraph</button>
+
+                        </div> */}
+                        <button className="focus:outline-none focus:ring font-sans focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white hover:text-red-500 rounded-full font-bold px-4 py-3 my-2 transition duration-300 ease-in-out mr-6"onClick={postChanges} >Save Changes</button>
+
+
                 </form>
             </div>
 

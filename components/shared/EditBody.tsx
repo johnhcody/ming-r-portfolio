@@ -26,7 +26,7 @@ const EditBody: React.FC<Props> = ({ bodyOrder, bodyParagraphs, bodyPhotos, send
     })
 
     return (
-        <div className="flex justify-center flex-col items-center w-full" >{body}</div>
+        <div className="flex justify-center flex-col items-center w-full pb-12" >{body}</div>
         )
 
 }
