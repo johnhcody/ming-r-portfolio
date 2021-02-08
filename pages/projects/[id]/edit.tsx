@@ -73,6 +73,9 @@ const EditProject: NextPage<Props> = ({ project }) => {
     const router = useRouter();
     const [ scrolled, setScrolled ] = useState(false);
 
+
+    // display navbar on scroll
+
     useEffect(() => {
 
         window.addEventListener("scroll", handleScroll);
@@ -86,38 +89,10 @@ const EditProject: NextPage<Props> = ({ project }) => {
         }
     }
 
-    const handleChange = (e) => {
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value
-        })
-    };
-
     const handleSubmit = (e) => {
         e.preventDefault();
-        let errs = validate();
-        setErrors(errs);
-        setIsSubmitting(true);
+        validate();
     };
-
-    const validate = () => {
-        let err = {};
-
-        if (!form.title) {
-            err['title'] = "Title is required";
-        }
-        return err;
-    }
-
-    useEffect(() => {
-        if (isSubmitting) {
-            if (Object.keys(errors).length === 0) {
-                updateBlog();
-            } else {
-                setIsSubmitting(false);
-            }
-        } 
-    }, [errors])
 
     const reducer = (state, action) => {
         debugger
@@ -262,16 +237,18 @@ const EditProject: NextPage<Props> = ({ project }) => {
         }
         if (state.form.title != '' && state.form.type != '') {
             debugger
-            // dispatch({ type: 'RESET_ERRORS' })
             updateProject();
         }
 
     }
 
     const appendParagraph = () => {
-
         dispatch({ type: 'APPEND_PARAGRAPH'});
     }
+    
+    const appendPhoto = () => {
+        dispatch({ type: 'APPEND_PHOTO' })    
+    } 
 
     const handleFileUpload = (index, value) => {
         dispatch({ type: 'UPLOAD_PHOTO', index, value })
@@ -317,7 +294,28 @@ const EditProject: NextPage<Props> = ({ project }) => {
     }, []);
 
         let isMobile: boolean = (width <= 768);
-
+        
+    const handleChange = (e) => {
+            switch (e.target.name) {
+                case 'title':
+                    dispatch({ type: 'MODIFY_TITLE', title: e.target.value})
+                    break;
+                case 'intro':
+                    dispatch({ type: 'MODIFY_INTRO', intro: e.target.value})
+                    break;
+                case 'description':
+                    dispatch({ type: 'MODIFY_DESCRIPTION', description: e.target.value})
+                    break;
+                case 'linkUrl':
+                    dispatch({ type: 'MODIFY_LINK_URL', linkUrl: e.target.value})
+                    break;
+                case 'linkDescription':
+                    dispatch({ type: 'MODIFY_LINK_DESCRIPTION', linkDescription: e.target.value})
+                    break;
+                default:
+                    break;
+            }
+    }
 
     return (
         <>
@@ -337,7 +335,9 @@ const EditProject: NextPage<Props> = ({ project }) => {
                     <label className="font-sans text-2xl pt-4 pb-2" htmlFor="linkDescription">Link Text</label>
                         <input onChange={handleChange} value={state.form.linkDescription} className="font-sans text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" type="text" placeholder="How do you want the link text to appear?" name="linkDescription"  />
                     <EditPhoto source={state.form.mainPhoto} photoNumber={'photo-1000'} editPhotoArr={handleFileUpload} />
-                    <EditBody bodyOrder={project.order} bodyParagraphs={state.form.paragraphs} bodyPhotos={form.photos} sendInput={handleTextInput} handleFileUpload={handleFileUpload}/>
+                    <EditBody bodyOrder={project.order} bodyParagraphs={state.form.paragraphs} bodyPhotos={state.form.photos} sendInput={handleTextInput} handleFileUpload={handleFileUpload}/>
+                    <button className="focus:outline-none focus:ring font-sans focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full" onClick={appendPhoto}>Add Photo</button>    
+                    <button className="focus:outline-none focus:ring font-sans focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full outline:nones" onClick={appendParagraph}>Add Paragraph</button>                    
                     <button className="focus:outline-none focus:ring font-sans focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white hover:text-red-500 rounded-full font-bold px-4 py-3 my-2 transition duration-300 ease-in-out mr-6" >Save Changes</button>
                 </form>
             </div>

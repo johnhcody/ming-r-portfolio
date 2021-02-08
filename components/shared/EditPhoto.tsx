@@ -21,7 +21,7 @@ const EditPhoto: React.FC<Props> = props => {
     )
     } else {
         return (
-            <div className="flex flex-col">
+            <div className="flex flex-col items-center">
                 <img className="object-contain h-48 md:h-72 my-4 lg:h-96 w-full"  src={`${props.source}`} alt=""/>
                 <BlogPhotoUpload photoNumber={props.photoNumber} sendPhotoStr={props.editPhotoArr}/>
             </div>

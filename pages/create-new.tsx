@@ -294,7 +294,7 @@ const CreateNew:React.FC = props => {
         dispatch({ type: 'APPEND_PHOTO' })    
     }
 
-    // const deleteParagraph = (inputIndex, typeIndex) => {
+     const deleteParagraph = (inputIndex, typeIndex) => {
 
             
     //         let inputCopy = [...input];
@@ -307,7 +307,7 @@ const CreateNew:React.FC = props => {
     //             paragraphs: newArr.filter((el, i) => i != typeIndex && el != null)
     //         }) 
             
-    // }
+     }
 
     // const deletePhoto = (inputIndex, typeIndex) => {
     //         let inputCopy = [...input];
@@ -373,7 +373,7 @@ const CreateNew:React.FC = props => {
                         if (word == 'phot-') {
                             return <BlogPhotoUpload key={idx} photoNumber={ipt} sendPhotoStr={handleFileUpload}  />
                         } else if (word == 'para-'){
-                            return <BlogParagraphUpload key={idx} inputIndex={idx} paragraphNumber={ipt} addText={handleTextInput}/>
+                            return <BlogParagraphUpload key={idx} inputIndex={idx} deleteElement={deleteParagraph} paragraphNumber={ipt} addText={handleTextInput}/>
                         }
                         })}
                         <button className="focus:outline-none focus:ring font-sans focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full" onClick={appendPhoto}>Add Photo</button>    
