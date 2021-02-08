@@ -39,7 +39,7 @@ const ContentBody: React.FC<Props> = ({ body }) => {
       }
     })
     return (
-      <div className="">
+      <div className="flex flex-col items-center justify-center">
         {contentBody}
       </div>
     )
