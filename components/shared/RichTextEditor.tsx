@@ -6,18 +6,22 @@ interface Props {
   placeholder: string;
   sendText: Function;
   editedText: string;
+  inputIndex: number;
+  paragraphNumber: string;
 }
 
-const RichTextEditor: React.FC<Props> = ({ sendText, placeholder, editedText }) => {
+const RichTextEditor: React.FC<Props> = ({ sendText, inputIndex, paragraphNumber, placeholder, editedText }) => {
 
 
     const [ editorHTML, setEditorHTML ] = useState(editedText);
 
     const handleChange = (html) => {
         setEditorHTML(editorHTML => editorHTML = html)
-        sendText(html)
+        sendText(index, html)
     }
 
+    const num = paragraphNumber.split('-')[1];
+    const index = parseInt(num) - 1;
 
     const modules = {
         toolbar: [
@@ -40,12 +44,16 @@ const RichTextEditor: React.FC<Props> = ({ sendText, placeholder, editedText }) 
     ]
 
     return (
+      <>
+      <div className="h-8"></div>
         <ReactQuill 
             onChange={handleChange}
             value={editorHTML}
             modules={modules}
             formats={formats}
         />
+        <div className="h-24"></div>
+        </>
     )
   
 };

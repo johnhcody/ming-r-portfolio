@@ -300,10 +300,13 @@ const CreateNew:React.FC = props => {
 
         let isMobile: boolean = (width <= 768);
     
-    const handleRichText = (value) => {
+    const handleRichText = (index, text) => {
         debugger
-        dispatch({ type: 'RICH_TEXT', text: value })
+        dispatch({ type: 'SET_PARAGRAPH', index, text })
     }
+    // const handleTextInput = (index, text) => {
+    //     dispatch({ type: 'SET_PARAGRAPH', index, text })
+    // }
 
         return (
             <>
@@ -327,20 +330,21 @@ const CreateNew:React.FC = props => {
                         <input type="text" onChange={handleChange} className="font-sans text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" placeholder="Text that will appear on hyperlink" name="linkDescription"  />
                         <span className="font-sans text-2xl pt-4 pb-2" >Upload your Main Photo</span>
                         <Upload name={"mainPhoto"} sendPhotoString={handleMainPhoto} title={"Main Photo"} />
-                        {/* {state.input.map((ipt, idx) => {
+                        {state.input.map((ipt, idx) => {
                         let word = ipt.slice(0,5);
      
-                        if (word == 'phot-') {
+                        if (word == 'phot-') { 
                             return <BlogPhotoUpload key={idx} photoNumber={ipt} sendPhotoStr={handleFileUpload}  />
                         } else if (word == 'para-'){
-                            return <BlogParagraphUpload key={idx} inputIndex={idx} deleteElement={deleteParagraph} paragraphNumber={ipt} addText={handleTextInput}/>
+                            return <RichTextEditor placeholder="Create your post here" inputIndex={idx} paragraphNumber={ipt} editedText={''} sendText={handleRichText} />
+                            // return <BlogParagraphUpload key={idx} inputIndex={idx} deleteElement={deleteParagraph} paragraphNumber={ipt} addText={handleTextInput}/>
                         }
                         })}
                         <button className="focus:outline-none focus:ring font-sans focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full" onClick={appendPhoto}>Add Photo</button>    
                         <button className="focus:outline-none focus:ring font-sans focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full outline:nones" onClick={appendParagraph}>Add Paragraph</button>
-                         */}
                         
-                        <RichTextEditor placeholder="Create your post here" sendText={handleRichText}/>
+                        
+                        {/* <RichTextEditor placeholder="Create your post here" editedText={''} sendText={handleRichText}/> */}
                         <div className="h-24"></div>
                         <button className="focus:outline-none focus:ring font-sans focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full outline:none mt" type="submit" onClick={postBlog} > Post {`${state.form.type}`}</button>
                         {state.errors && state.errors.message != '' ? <h1 className="pt-2 text-red-500">{state.errors.message}</h1> : null}
