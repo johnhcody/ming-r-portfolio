@@ -12,6 +12,7 @@ interface IProject extends Document {
     linkUrl: string;
     linkDescription: string;
     mainPhoto: string;
+    text: string;
 }
 
 const ProjectSchema: Schema = new Schema({
@@ -24,7 +25,8 @@ const ProjectSchema: Schema = new Schema({
     order: {type: Array },
     linkUrl: { type: String },
     linkDescription: { type: String },
-    mainPhoto: { type: String }
+    mainPhoto: { type: String },
+    text: {type: String}
 })
 
 module.exports = mongoose.models.Project || mongoose.model<IProject>('Project', ProjectSchema)

@@ -9,6 +9,7 @@ import axios from 'axios'
 import Upload from '../components/shared/Upload'
 import Dropdown from '../components/shared/Dropdown'
 import NavBar from '../components/shared/Navbar'
+import RichTextEditor from '../components/shared/RichTextEditor'
 
 interface Props {
     
@@ -58,29 +59,36 @@ const CreateNew:React.FC = props => {
             mainPhoto: '',
             photos: [],
             linkUrl: '',
-            linkDescription: ''
+            linkDescription: '',
+            text: ''
         }
     }
 
     const reducer = (state, action) => {
         debugger
         switch (action.type) {
-          case 'ADD_PROJECT_TYPE':
+         case 'ADD_PROJECT_TYPE':
             return {
                 ...state,
                 form: { ...state.form, type: action.projectType}
             }
-          case 'MODIFY_ELEMENT':
+        case 'MODIFY_ELEMENT':
             return {
                 ...state,
                 form: { ...state.form, [action.element]: action.value }
             }
-            case 'POST_MAIN_PHOTO':
+        case 'RICH_TEXT':
+            debugger
+            return {
+                ...state,
+                form: { ...state.form, text: action.text }
+            }
+        case 'POST_MAIN_PHOTO':
             return {
                 ...state,
                 form: { ...state.form, mainPhoto: action.mainPhoto }
             }
-            case 'APPEND_PHOTO':
+        case 'APPEND_PHOTO':
             let photoInputNum = `phot-${state.photoCount}`
             return {
                 ...state,
@@ -88,7 +96,7 @@ const CreateNew:React.FC = props => {
                 input: state.input.concat(photoInputNum),
                 order: state.order.concat('photo')
             }
-            case 'UPLOAD_PHOTO':
+        case 'UPLOAD_PHOTO':
             let newArr = [...state.photoStrArr];
             newArr[action.index] = action.value;
             return {
@@ -96,7 +104,7 @@ const CreateNew:React.FC = props => {
                 form: { ...state.form, photos: newArr },
                 photoStrArr: newArr
             }
-            case 'APPEND_PARAGRAPH':
+        case 'APPEND_PARAGRAPH':
             let paraInputNum = `para-${state.paraCount}`;
             return {
                 ...state,
@@ -104,7 +112,7 @@ const CreateNew:React.FC = props => {
                 input: state.input.concat(paraInputNum),
                 order: state.order.concat('paragraph')
             }
-            case 'SET_PARAGRAPH':
+        case 'SET_PARAGRAPH':
             let paraArr = [...state.paragraphsArr];
             paraArr[action.index] = action.text;
             return {
@@ -112,27 +120,27 @@ const CreateNew:React.FC = props => {
                 paragraphsArr: paraArr,
                 form: { ...state.form, paragraphs: paraArr }
             }
-            case 'NO_TITLE_ERROR':
+        case 'NO_TITLE_ERROR':
             return {
                 ...state,
                 errors: { ...state.errors, title: 'A title is required', message: 'Please see errors above' }
             }
-            case 'NO_TYPE_ERROR':
+        case 'NO_TYPE_ERROR':
             return {
                 ...state,
                 errors: { ...state.errors, type: 'Please select a type', message: 'Please see errors above' }
             }
-            case 'RESET_ERRORS':
+        case 'RESET_ERRORS':
             return {
                 ...state,
                 errors: { ...state.errors, type: '', message: '', title: '' }
             }
-            case 'RESET_TITLE_ERROR':
+        case 'RESET_TITLE_ERROR':
             return {
                 ...state,
                 errors: { ...state.errors, title: '' }
             }
-            case 'RESET_TYPE_ERROR':
+        case 'RESET_TYPE_ERROR':
             return {
                 ...state,
                 errors: { ...state.errors, type: '' }
@@ -192,7 +200,8 @@ const CreateNew:React.FC = props => {
             order: state.order,
             linkUrl: state.form.linkUrl,
             linkDescription: state.form.linkDescription,
-            mainPhoto: state.form.mainPhoto
+            mainPhoto: state.form.mainPhoto,
+            text: state.form.text
         })
             .then(function (response) {
                 console.log(response);
@@ -291,7 +300,11 @@ const CreateNew:React.FC = props => {
 
         let isMobile: boolean = (width <= 768);
     
-    
+    const handleRichText = (value) => {
+        debugger
+        dispatch({ type: 'RICH_TEXT', text: value })
+    }
+
         return (
             <>
             <BaseLayout data={data} loading={loading}>
@@ -314,7 +327,7 @@ const CreateNew:React.FC = props => {
                         <input type="text" onChange={handleChange} className="font-sans text-center w-72 border-b-2 focus:outline-none border-t-0 border-l-0 border-r-0 mb-4" placeholder="Text that will appear on hyperlink" name="linkDescription"  />
                         <span className="font-sans text-2xl pt-4 pb-2" >Upload your Main Photo</span>
                         <Upload name={"mainPhoto"} sendPhotoString={handleMainPhoto} title={"Main Photo"} />
-                        {state.input.map((ipt, idx) => {
+                        {/* {state.input.map((ipt, idx) => {
                         let word = ipt.slice(0,5);
      
                         if (word == 'phot-') {
@@ -325,7 +338,11 @@ const CreateNew:React.FC = props => {
                         })}
                         <button className="focus:outline-none focus:ring font-sans focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full" onClick={appendPhoto}>Add Photo</button>    
                         <button className="focus:outline-none focus:ring font-sans focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full outline:nones" onClick={appendParagraph}>Add Paragraph</button>
-                        <button className="focus:outline-none focus:ring font-sans focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full outline:none" type="submit" onClick={postBlog} > Post {`${state.form.type}`}</button>
+                         */}
+                        
+                        <RichTextEditor placeholder="Create your post here" sendText={handleRichText}/>
+                        <div className="h-24"></div>
+                        <button className="focus:outline-none focus:ring font-sans focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full outline:none mt" type="submit" onClick={postBlog} > Post {`${state.form.type}`}</button>
                         {state.errors && state.errors.message != '' ? <h1 className="pt-2 text-red-500">{state.errors.message}</h1> : null}
                     </form>
                 </div>
