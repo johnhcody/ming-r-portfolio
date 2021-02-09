@@ -13,7 +13,7 @@ export default async (req, res) => {
         case "GET":
             try {
                 const project = await Project.findById(id);
-
+                // mock Project.findById
                 !project ? res.status(400).json({ success: false }) : res.status(200).json({success: true, data: project})
             } catch (error) {
                 res.status(400).json({ success: false })

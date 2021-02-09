@@ -37,3 +37,4 @@ next.config.js
 
 /config/dev
 config/dev.js
+.env*
