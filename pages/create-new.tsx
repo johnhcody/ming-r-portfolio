@@ -137,8 +137,9 @@ const CreateNew:React.FC = props => {
     }
 
 
-     const deleteParagraph = (inputIndex, typeIndex) => {
-            // add logice to remove paragraph from
+     const deleteParagraph = (inputIndex, paraIndex, editorHTML) => {
+            // add logic to remove paragraph from
+            dispatch({ type: 'DELETE_PARAGRAPH', inputIndex, paraIndex, editorHTML })
      }
 
     // logic for mobile viewing
@@ -184,11 +185,12 @@ const CreateNew:React.FC = props => {
                         <Upload name={"mainPhoto"} sendPhotoString={handleMainPhoto} title={"Main Photo"} />
                         {state.input.map((ipt, idx) => {
                         let word = ipt.slice(0,5);
+                        let n = ipt.slice(ipt.length - 1, ipt.length)
      
                         if (word == 'phot-') { 
                             return <BlogPhotoUpload key={idx} photoNumber={ipt} sendPhotoStr={handleFileUpload}  />
                         } else if (word == 'para-'){
-                            return <RichTextEditor placeholder="Create your post here" inputIndex={idx} paragraphNumber={ipt} editedText={''} sendText={handleRichText} />
+                            return <RichTextEditor placeholder="Create your post here" inputIndex={idx} paragraphNumber={ipt} editedText={state.form.paragraphs[n]} deleteElement={deleteParagraph} sendText={handleRichText} />
                             // return <BlogParagraphUpload key={idx} inputIndex={idx} deleteElement={deleteParagraph} paragraphNumber={ipt} addText={handleTextInput}/>
                         }
                         })}

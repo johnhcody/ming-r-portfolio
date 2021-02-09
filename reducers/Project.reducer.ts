@@ -45,12 +45,43 @@ export const reducer = (state, action) => {
             order: state.order.concat('paragraph')
         }
     case 'SET_PARAGRAPH':
+        debugger
         let paraArr = [...state.paragraphsArr];
         paraArr[action.index] = action.text;
         return {
             ...state,
             paragraphsArr: paraArr,
             form: { ...state.form, paragraphs: paraArr }
+        }
+    case 'DELETE_PARAGRAPH':
+        debugger
+        let arrCopy = [...state.form.paragraphs]
+        let orderCopy = [...state.order]
+        orderCopy[action.inputIndex] = "";
+        let finalOrderCopy = orderCopy.filter(el => el != "");
+        let inputArrCopy = [...state.input];
+        let deletedInputArr = inputArrCopy.filter((el, i) => i != action.inputIndex)
+        let newArray = deletedInputArr.map(el => {
+            if (el.startsWith('para') && el.charAt(el.length - 1) > action.paraIndex && el.charAt(el.length - 1) != "1"  )   {
+                debugger
+                let num = el.charAt(el.length - 1) - 1
+                let newNum = num.toString();
+                return el.slice(0, el.length -1) + newNum
+            } else {
+                return el;
+            }
+        })
+        delete arrCopy[action.paraIndex]
+        let finalArrCopy = arrCopy.filter(el => el !== null)
+        debugger
+        //will need to modify order and paraCount        
+        return {
+            ...state,
+            paraCount: state.paraCount - 1,
+            input: newArray,
+            order: finalOrderCopy,
+            paragraphsArr: finalArrCopy,
+            form: { ...state.form, paragraphs: finalArrCopy }
         }
     case 'NO_TITLE_ERROR':
         return {
