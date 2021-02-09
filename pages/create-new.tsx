@@ -70,8 +70,6 @@ const CreateNew:React.FC = props => {
             dispatch({ type: 'NO_TYPE_ERROR'})
         }
         if (state.form.title != '' && state.form.type != '') {
-            debugger
-            // dispatch({ type: 'RESET_ERRORS' })
             createProject();
         }
 
@@ -111,10 +109,6 @@ const CreateNew:React.FC = props => {
         dispatch({ type: 'UPLOAD_PHOTO', index, value })
     }
 
-    const handleTextInput = (index, text) => {
-        dispatch({ type: 'SET_PARAGRAPH', index, text })
-    }
-
     const postBlog = (e) => {
         validate();
     }
@@ -138,39 +132,14 @@ const CreateNew:React.FC = props => {
         dispatch({ type: 'APPEND_PHOTO' })    
     }
 
+    const handleRichText = (index, text) => {
+        dispatch({ type: 'SET_PARAGRAPH', index, text })
+    }
+
 
      const deleteParagraph = (inputIndex, typeIndex) => {
-
-            
-    //         let inputCopy = [...input];
-    //         setInput(inputCopy.filter((el, i) => i != inputIndex && el != null))
-    //         let newArr = [...paragraphsArr];
-    //         setParagraphsArr(newArr.filter((el, i) => i != typeIndex && el != null));
-            
-    //         setForm({
-    //             ...form,
-    //             paragraphs: newArr.filter((el, i) => i != typeIndex && el != null)
-    //         }) 
-            
+            // add logice to remove paragraph from
      }
-
-    // const deletePhoto = (inputIndex, typeIndex) => {
-    //         let inputCopy = [...input];
-    //         inputCopy = inputCopy.splice(inputIndex, 1)
-            
-    //         setInput(inputCopy)
-    //         let newArr = [...photoStrArr];
-
-    //         newArr = newArr.splice(typeIndex, 1)
-    //         // delete newArr[typeIndex];
-    //         // newArr = newArr.filter(el => el != null)
-    //         setPhotoStrArr(newArr);
-    //         setForm({
-    //             ...form,
-    //             photos: newArr
-    //         }) 
-    // }
-
 
     // logic for mobile viewing
 
@@ -189,13 +158,7 @@ const CreateNew:React.FC = props => {
 
         let isMobile: boolean = (width <= 768);
     
-    const handleRichText = (index, text) => {
-        debugger
-        dispatch({ type: 'SET_PARAGRAPH', index, text })
-    }
-    // const handleTextInput = (index, text) => {
-    //     dispatch({ type: 'SET_PARAGRAPH', index, text })
-    // }
+
 
         return (
             <>
@@ -244,8 +207,6 @@ const CreateNew:React.FC = props => {
             <Footer />
             </>
         )
-    // }
-    
     
 }
 

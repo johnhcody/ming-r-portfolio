@@ -1,3 +1,7 @@
+import axios from 'axios'
+import { useRouter } from 'next/router'
+
+
 export const initialState = {
     input: [],
     photoStrArr: [],
