@@ -22,7 +22,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "utils/dbConnect.js", "components/shared/Upload.jsx", "pages/api/articles/[id].jsx", "config/dev.js", "config/prod.js", "config/index.js", "components/shared/RichTextEditor.tsx", "pages/api/projects/projects.test.js"  ],
+, "utils/dbConnect.js", "components/shared/Upload.jsx", "pages/api/articles/[id].jsx", "config/dev.js", "config/prod.js", "config/index.js", "components/shared/RichTextEditor.tsx", "pages/api/projects/projects.test.ts", "jest.config.js"  ],
   "exclude": [
     "node_modules"
   ]
