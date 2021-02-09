@@ -27,7 +27,7 @@ const EditBody: React.FC<Props> = ({ bodyOrder, bodyParagraphs, bodyPhotos, send
         } else {
             const nextParagraph = paragraphsArr.shift()
             const index: number = bodyParagraphs.indexOf(nextParagraph)
-            return <RichTextEditor paragraphNumber={indexArr.shift()} placeholder={''} sendText={sendInput} editedText={nextParagraph} key={i} inputIndex={index} />
+            return <RichTextEditor deleteElement={sendInput} paragraphNumber={indexArr.shift()} placeholder={''} sendText={sendInput} editedText={nextParagraph} key={i} inputIndex={index} />
         }
     })
 
