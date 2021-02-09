@@ -8,20 +8,25 @@ interface Props {
   editedText: string;
   inputIndex: number;
   paragraphNumber: string;
+  deleteElement: Function;
 }
 
-const RichTextEditor: React.FC<Props> = ({ sendText, inputIndex, paragraphNumber, placeholder, editedText }) => {
+const RichTextEditor: React.FC<Props> = ({ sendText, deleteElement, inputIndex, paragraphNumber, placeholder, editedText }) => {
 
 
     const [ editorHTML, setEditorHTML ] = useState(editedText);
 
     const handleChange = (html) => {
         setEditorHTML(editorHTML => editorHTML = html)
-        sendText(index, html)
+        sendText(paraIndex, html)
+    }
+
+    const handleDelete = () => {
+        deleteElement(inputIndex, paraIndex, editorHTML)
     }
 
     const num = paragraphNumber.split('-')[1];
-    const index = parseInt(num) - 1;
+    const paraIndex = parseInt(num) - 1;
 
     const modules = {
         toolbar: [
@@ -53,6 +58,8 @@ const RichTextEditor: React.FC<Props> = ({ sendText, inputIndex, paragraphNumber
             formats={formats}
         />
         <div className="h-24"></div>
+        {/* <button className="focus:outline-none focus:ring font-sans focus:border-gray-300 bg-blue hover:bg-yellow-500 text-white font-bold py-2 px-4 m-2 rounded-full outline:none mt" type="submit" onClick={handleDelete} > Delete Paragraph</button> */}
+
         </>
     )
   
