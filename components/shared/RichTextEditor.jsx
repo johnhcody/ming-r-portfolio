@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import ReactQuill from 'react-quill';
+//import ReactQuill from 'react-quill';
 
 // interface Props {
 //   placeholder: string;
@@ -19,27 +19,34 @@ class RichTextEditor extends React.Component {
           this.ReactQuill = require('react-quill')
         }
         this.state = {
-            editorHTML: this.props.editedText
-        }
+            editorHTML: this.props.editedText,
+            paraIndex: 0        }
       }
 
+      
+      
+      //const [ editorHTML, setEditorHTML ] = useState(editedText);
+      
+      handleChange = (html) => {
+          // this.props.setEditorHTML(editorHTML => editorHTML = html)
+          this.setState({editorHTML: html})
+          this.props.sendText(this.state.paraIndex, html)
+        }
+        
+        handleDelete = () => {
+            this.props.deleteElement(this.props.inputIndex, this.state.paraIndex, editorHTML)
+        }
 
-    //const [ editorHTML, setEditorHTML ] = useState(editedText);
-
-    handleChange = (html) => {
-        this.props.setEditorHTML(editorHTML => editorHTML = html)
-        this.props.sendText(paraIndex, html)
-    }
-
-    handleDelete = () => {
-        this.props.deleteElement(inputIndex, paraIndex, editorHTML)
-    }
-
-    render() {
+        componentDidMount = () => {
+            const num = this.props.paragraphNumber.split('-')[1];
+            const paraIdx = parseInt(num) - 1;
+            this.setState({paraIndex: paraIdx})
+        }
+        
+        render() {
+        const { sendText, inputIndex, paragraphNumber, deleteElement, placeholder, editorText } = this.props;
         const ReactQuill = this.ReactQuill;
         if (typeof window !== 'undefined' && ReactQuill) {
-        const num = this.props.paragraphNumber.split('-')[1];
-        const paraIndex = parseInt(num) - 1;
 
         const modules = {
             toolbar: [
@@ -63,8 +70,8 @@ class RichTextEditor extends React.Component {
             <>
             <div className="h-8"></div>
             <ReactQuill 
-                onChange={handleChange}
-                value={editorHTML}
+                onChange={this.handleChange}
+                value={this.state.editorHTML || ''}
                 modules={modules}
                 formats={formats}
             />

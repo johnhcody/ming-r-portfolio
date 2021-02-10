@@ -37,7 +37,7 @@ class ContentBody extends Component {
           return (
           <div className="content-quill-wrapper">
   
-            <Quill
+            <ReactQuill
               key={idx}
               theme="bubble"
               value={bodyParagraphs.shift()}

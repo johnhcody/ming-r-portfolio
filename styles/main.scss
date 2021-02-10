@@ -598,5 +598,6 @@
 .content-quill-wrapper {
     display: flex;
     justify-content: center;
-    max-width: 80%;
+    min-width: 80vw;
+    max-width: 80vw;
 }
